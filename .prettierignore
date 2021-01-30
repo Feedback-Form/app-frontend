@@ -5,4 +5,5 @@
 **/package-lock.json
 **/.eslintrc.js
 **/tsconfig.json
-**/craco.config.json
+**/craco.config.js
+**/.prettierrc
