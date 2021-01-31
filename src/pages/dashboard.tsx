@@ -7,6 +7,8 @@ import OutputTextfield from '../components/outputtexfield';
 import AudioDropzone from '../components/audiodropzone';
 import Sidebar from '../components/sidebar';
 import Documents from '../components/documents';
+
+import Summarize from '../components/summarize';
 const Dashboard: FC = (): ReactElement => {
 	// const [maxWords, setMaxWords] = useState(300);
 
@@ -15,12 +17,10 @@ const Dashboard: FC = (): ReactElement => {
 	return (
 		<section className="h-screen w-full flex overflow-hidden font-scrptai">
 			<Sidebar />
-			<main className="flex-1 flex flex-col  bg-white text-gray-900  items-center justify-center space-y-5">
-				{/* <SummarySettings /> */}
-				{/* <InputTextfield /> */}
-				{/* <OutputTextfield /> */}
+			<Summarize />
+			{/* <main className="flex-1 flex flex-col  bg-white text-gray-900  items-center justify-center space-y-1 ">
 				<Documents />
-			</main>
+			</main> */}
 		</section>
 	);
 };
