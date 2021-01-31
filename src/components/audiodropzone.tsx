@@ -58,7 +58,7 @@ const AudioDropzone: FC = (): ReactElement => {
 			</div>
 			<div className="flex justify-between w-3/4 items-center">
 				<button className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200">
-					Next step
+					Transcribe
 				</button>
 			</div>
 		</>
