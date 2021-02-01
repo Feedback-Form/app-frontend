@@ -7,13 +7,17 @@ import OutputTextfield from '../components/outputtexfield';
 import AudioDropzone from '../components/audiodropzone';
 import Sidebar from '../components/sidebar';
 import Documents from '../components/documents';
-
 import Summarize from '../components/summarize';
+
+import { useUserData } from '../hooks/userContext';
+
 const Dashboard: FC = (): ReactElement => {
 	// const [maxWords, setMaxWords] = useState(300);
-
+	const { userPlan } = useUserData();
 	// const [words, wordCount, handleWordChange, resetWords] = useWordState('');
-
+	console.log('userDataContext:', {
+		plan: userPlan,
+	});
 	return (
 		<section className="h-screen w-full flex overflow-hidden font-scrptai">
 			<Sidebar />

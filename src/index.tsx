@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './animations.css';
 import reportWebVitals from './reportWebVitals';
-import Dashboard from './pages/dashboard';
-
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes/routes';
 ReactDOM.render(
 	<React.StrictMode>
-		<Dashboard />
+		<BrowserRouter>
+			<Routes />
+		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root'),
 );

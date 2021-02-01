@@ -13,6 +13,7 @@ const Summarize: FC = (): ReactElement => {
 	const [summaryLength, setLength] = useState('short');
 	const [summaryType, setType] = useState(0);
 	const [summaryTone, setTone] = useState(0);
+	const [outputText, setOutputText] = useState('');
 
 	console.log('parent:', { text: inputText, summaryLength: summaryLength });
 
@@ -23,10 +24,12 @@ const Summarize: FC = (): ReactElement => {
 				summaryLength,
 				summaryType,
 				summaryTone,
+				outputText,
 				setInputText,
 				setLength,
 				setType,
 				setTone,
+				setOutputText,
 			}}
 		>
 			<main className="flex-1 flex flex-col  bg-white text-gray-900  items-center justify-evenly space-y-10">

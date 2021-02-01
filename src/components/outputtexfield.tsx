@@ -1,8 +1,10 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useWordState } from '../hooks/hooks';
+import { useText } from '../hooks/summaryContext';
 
 const OutputTextfield: FC = (): ReactElement => {
-	const [words, wordCount, handleWordChange, resetWords] = useWordState('summary summary summary');
+	const { outputText, setOutputText } = useText();
+	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(outputText);
 
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4">
@@ -11,8 +13,10 @@ const OutputTextfield: FC = (): ReactElement => {
 			</div>
 			<div className="w-3/4 h-3/4 shadow-md rounded-md  ">
 				<textarea
-					value={words}
-					onChange={handleWordChange}
+					value={fullText}
+					onChange={e => {
+						handleWordChange(e), setOutputText(fullText);
+					}}
 					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
 						focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
 						"
