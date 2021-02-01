@@ -1,13 +1,44 @@
-.alert-enter {
-	transform: 'translateX(-100%)';
+/* CSSTransition classes  */
+.menu-primary-enter {
+	position: absolute;
+	transform: translateX(-100%);
 }
-.alert-enter-active {
-	transform: 'translateX(0)';
-	transition: '300ms ease-in';
+.menu-primary-enter-active {
+	transform: translateX(0%);
+	transition: all 250ms ease;
 }
-.alert-exit {
+.menu-primary-exit {
+	position: absolute;
 }
-.alert-exit-active {
-	transform: 'translateX(100%)';
-	transition: '300ms ease-out';
+.menu-primary-exit-active {
+	transform: translateX(-100%);
+	transition: all 250ms ease;
+}
+
+.menu-secondary-enter {
+	transform: translateX(100%);
+}
+.menu-secondary-enter-active {
+	transform: translateX(0%);
+	transition: all 250ms ease;
+}
+.menu-secondary-exit {
+}
+.menu-secondary-exit-active {
+	transform: translateX(-100%);
+	transition: all 250ms ease;
+}
+
+.menu-tertiary-enter {
+	transform: translateX(-100%);
+}
+.menu-tertiary-enter-active {
+	transform: translateX(0%);
+	transition: all 250ms ease;
+}
+.menu-tertiary-exit {
+}
+.menu-tertiary-exit-active {
+	transform: translateX(100%);
+	transition: all 250ms ease;
 }
