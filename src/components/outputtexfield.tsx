@@ -5,7 +5,7 @@ const OutputTextfield: FC = (): ReactElement => {
 	const [words, wordCount, handleWordChange, resetWords] = useWordState('summary summary summary');
 
 	return (
-		<>
+		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4">
 			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Have a look at the summary</h1>
 			</div>
@@ -23,7 +23,7 @@ const OutputTextfield: FC = (): ReactElement => {
 					Save and finish
 				</button>
 			</div>
-		</>
+		</section>
 	);
 };
 

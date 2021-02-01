@@ -7,7 +7,7 @@ const InputTextfield: FC = (): ReactElement => {
 	const [words, wordCount, handleWordChange, resetWords] = useWordState('');
 
 	return (
-		<>
+		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full">
 			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
 			</div>
@@ -31,7 +31,7 @@ const InputTextfield: FC = (): ReactElement => {
 					</span>
 				</div>
 			</div>
-		</>
+		</section>
 	);
 };
 

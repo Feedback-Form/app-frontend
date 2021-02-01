@@ -3,7 +3,7 @@ import { useWordState } from '../hooks/hooks';
 
 const SummarySettings: FC = (): ReactElement => {
 	return (
-		<>
+		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4">
 			<div className="flex items-start w-3/4">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
 			</div>
@@ -59,7 +59,7 @@ const SummarySettings: FC = (): ReactElement => {
 					</button>
 				</div>
 			</div>
-		</>
+		</section>
 	);
 };
 

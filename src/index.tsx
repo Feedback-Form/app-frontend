@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import './animations.css';
 import reportWebVitals from './reportWebVitals';
 import Dashboard from './pages/dashboard';
 

@@ -1,0 +1,13 @@
+.alert-enter {
+	transform: 'translateX(-100%)';
+}
+.alert-enter-active {
+	transform: 'translateX(0)';
+	transition: '300ms ease-in';
+}
+.alert-exit {
+}
+.alert-exit-active {
+	transform: 'translateX(100%)';
+	transition: '300ms ease-out';
+}
