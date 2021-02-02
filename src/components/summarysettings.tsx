@@ -1,11 +1,45 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useWordState } from '../hooks/hooks';
 import { useText } from '../hooks/summaryContext';
+import axios from 'axios';
+const backend_url = 'http://localhost:5000';
+const token =
+	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 const SummarySettings: FC = (): ReactElement => {
-	const { setLength, setType, setTone, summaryLength, summaryType, summaryTone } = useText();
+	const { setLength, setType, setTone, summaryLength, summaryType, summaryTone, inputText, setOutputText } = useText();
 
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
+
+	const [isLoading, setIsLoading] = useState(false);
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	const req = {
+		inputText: inputText,
+		//has to change to word amount in FE
+		responseLengthInWords: '200',
+		summaryType: summaryType,
+		temperature: summaryTone,
+	};
+	function summarizeText(): void {
+		setIsLoading(true);
+		axios
+			.post(`${backend_url}/summarize/text`, req, config)
+
+			.then((res: any) => {
+				console.log('POST res', res);
+				setOutputText(res.data.choices[0].text);
+				setIsLoading(false);
+				//redirect to output component
+			})
+			.catch((err: any) => {
+				console.log('err', err);
+			});
+	}
+
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4">
 			<div className="flex items-start w-3/4">
@@ -94,7 +128,12 @@ const SummarySettings: FC = (): ReactElement => {
 					</div>
 				</div>
 				<div className="flex w-3/4 items-center">
-					<button className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg">
+					<button
+						onClick={() => {
+							summarizeText();
+						}}
+						className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg"
+					>
 						Summarize text
 					</button>
 				</div>
