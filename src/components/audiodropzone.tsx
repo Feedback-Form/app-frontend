@@ -24,8 +24,8 @@ const AudioDropzone: FC = (): ReactElement => {
 
 		axios
 			.post(`${backend}`, formData, config)
-			.then((response: any) => {
-				console.log(response);
+			.then((res: any) => {
+				console.log(res);
 			})
 			.catch((err: any) => {
 				console.log('err', err);

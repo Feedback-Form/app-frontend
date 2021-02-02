@@ -1,9 +1,11 @@
 import React, { FC, ReactElement, useState, useContext } from 'react';
 import { useWordState } from '../hooks/hooks';
 import { useText } from '../hooks/summaryContext';
+
 const InputTextfield: FC = (): ReactElement => {
 	const [maxWords, setMaxWords] = useState(300);
 	const { inputText, setInputText } = useText();
+	console.log('child comp', inputText);
 	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(inputText);
 
 	return (
