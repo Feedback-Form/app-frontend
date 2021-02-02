@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, useState, useReducer, createContext } from 'react';
 
-import InputTextfield from './inputtextfield';
-import SummarySettings from './summarysettings';
-import OutputTextfield from './outputtexfield';
+import InputTextfield from '../inputtextfield';
+import SummarySettings from '../summarysettings';
+import OutputTextfield from '../outputtexfield';
 import { CSSTransition } from 'react-transition-group';
 
-import { SummaryContext } from '../hooks/summaryContext';
+import { SummaryContext } from '../../hooks/summaryContext';
 
 const Summarize: FC = (): ReactElement => {
 	const [currentComponent, setCurrentComponent] = useState(1);

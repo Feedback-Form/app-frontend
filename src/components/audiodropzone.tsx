@@ -41,25 +41,33 @@ const AudioDropzone: FC = (): ReactElement => {
 	return (
 		<>
 			<div className="flex items-end w-3/4 ">
-				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
+				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Transcribe</h1>
 			</div>
-			<div {...getRootProps()} className="w-3/4 h-3/4 shadow-md rounded-md  ">
+			<div
+				{...getRootProps()}
+				className="cursor-pointer flex w-3/4 h-3/4 shadow-md rounded-md  transition-all ease-in-out duration-200  border-2 border-dashed border-gray-300 p-4 hover:outline-none hover:border-indigo-500 text-center items-center"
+			>
 				<input
 					{...getInputProps()}
 					className="w-full h-full rounded-md  tracking-wide
-						focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
+						 transition-all ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 
 						"
 				/>
-				{isDragAccept && <p className="text-base text-gray-900 font-medium">All files will be accepted</p>}
+				{isDragAccept && <p className="text-xl text-green-400 font-medium w-full">Your file will be accepted.</p>}
 
-				{isDragReject && <p className="text-base text-gray-900 font-medium">reject</p>}
+				{isDragReject && (
+					<div className="w-full space-y-1">
+						<p className="text-xl text-red-400 font-medium w-full">Wrong file type.</p>
+						<p className="text-lg text-gray-600 font-normal w-full">Please upload .MP3, .WAV or .FLAC </p>
+					</div>
+				)}
 
-				{!isDragActive && <p className="text-base text-gray-900 font-medium">drop some files</p>}
-			</div>
-			<div className="flex justify-between w-3/4 items-center">
-				<button className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200">
-					Transcribe
-				</button>
+				{!isDragActive && (
+					<div className="w-full space-y-1">
+						<p className="text-xl text-gray-800 font-medium w-full">Drop an audio file here or click to upload</p>
+						<p className="text-lg text-gray-600 font-normal w-full">.MP3, .WAV or .FLAC </p>
+					</div>
+				)}
 			</div>
 		</>
 	);
