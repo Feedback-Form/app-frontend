@@ -14,7 +14,7 @@ function useQuery() {
 }
 import { SummaryContext } from '../hooks/summaryContext';
 
-import AudioUploading from '../components/audiouploading';
+import AudioUploading from '../components/uploading';
 
 const SummarizePage: FC = (): ReactElement => {
 	//summaryContext related
@@ -23,43 +23,43 @@ const SummarizePage: FC = (): ReactElement => {
 	const [summaryType, setType] = useState(0);
 	const [summaryTone, setTone] = useState(0);
 	const [outputText, setOutputText] = useState('');
+	const [currentComponent, setCurrentComponent] = useState(3);
 
 	//UserContext related
 	const { userPlan } = useUserData();
 
 	//query params related
-	const query = useQuery();
-	const [id, setId] = useState(query.get('docid'));
+	// const query = useQuery();
+	// const [id, setId] = useState(query.get('docid'));
 
-	const config = {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-			Authorization: `Bearer ${token}`,
-		},
-	};
+	// const config = {
+	// 	headers: {
+	// 		'Content-Type': 'multipart/form-data',
+	// 		Authorization: `Bearer ${token}`,
+	// 	},
+	// };
 
-	const [isLoading, setIsLoading] = useState(true);
+	// const [isLoading, setIsLoading] = useState(true);
 
-	function getDocument() {
-		axios
-			.get(`${backend_url}/document/${id}`, config)
-			.then((res: any) => {
-				console.log('GET res', res.data);
-				//pass on to input component of summary
-				setInputText(res.data.transcript);
-				setIsLoading(false);
-			})
-			.catch((err: any) => {
-				console.log('err', err);
-			});
-	}
+	// function getDocument() {
+	// 	axios
+	// 		.get(`${backend_url}/document/${id}`, config)
+	// 		.then((res: any) => {
+	// 			console.log('GET res', res.data);
+	// 			//pass on to input component of summary
+	// 			setInputText(res.data.transcript);
+	// 			setIsLoading(false);
+	// 		})
+	// 		.catch((err: any) => {
+	// 			console.log('err', err);
+	// 		});
+	// }
 
-	useEffect(() => {
-		if (id !== undefined && id !== '') {
-			console.log('it worked!!!', id);
-			getDocument();
-		}
-	}, [id]);
+	// useEffect(() => {
+	// 	if (id !== undefined && id !== '') {
+	// 		getDocument();
+	// 	}
+	// }, [id]);
 
 	//console.log('docid:', { id: query.get('docid') });
 	// console.log('userDataContext:', {
@@ -73,18 +73,21 @@ const SummarizePage: FC = (): ReactElement => {
 				summaryType,
 				summaryTone,
 				outputText,
+				currentComponent,
 				setInputText,
 				setLength,
 				setType,
 				setTone,
 				setOutputText,
+				setCurrentComponent,
 			}}
 		>
 			<section className="h-screen w-full flex overflow-hidden font-scrptai">
 				<Sidebar />
 
 				{/* add a loading animation if isLoading === true */}
-				{!isLoading && <Summarize />}
+				{/* {!isLoading && <Summarize />} */}
+				<Summarize />
 			</section>
 		</SummaryContext.Provider>
 	);

@@ -4,9 +4,11 @@ import InputTextfield from '../inputtextfield';
 import SummarySettings from '../summarysettings';
 import OutputTextfield from '../outputtexfield';
 import { CSSTransition } from 'react-transition-group';
+import { useText } from '../../hooks/summaryContext';
 
+import Uploading from '../uploading';
 const Summarize: FC = (): ReactElement => {
-	const [currentComponent, setCurrentComponent] = useState(1);
+	const { currentComponent, setCurrentComponent } = useText();
 
 	// console.log('parent:', { text: inputText, summaryLength: summaryLength });
 
@@ -19,6 +21,9 @@ const Summarize: FC = (): ReactElement => {
 				<SummarySettings />
 			</CSSTransition>
 			<CSSTransition in={currentComponent === 3} timeout={400} classNames="menu-primary" unmountOnExit>
+				<Uploading message="Your text is being summarized." />
+			</CSSTransition>
+			<CSSTransition in={currentComponent === 4} timeout={400} classNames="menu-primary" unmountOnExit>
 				<OutputTextfield />
 			</CSSTransition>
 
@@ -32,8 +37,8 @@ const Summarize: FC = (): ReactElement => {
 					className={`rounded-full h-5 w-5 ${currentComponent === 2 ? 'bg-indigo-500' : 'bg-gray-300'}`}
 				></div>
 				<div
-					onClick={() => setCurrentComponent(3)}
-					className={`rounded-full h-5 w-5 ${currentComponent === 3 ? 'bg-indigo-500' : 'bg-gray-300'}`}
+					onClick={() => setCurrentComponent(4)}
+					className={`rounded-full h-5 w-5 ${currentComponent === 4 ? 'bg-indigo-500' : 'bg-gray-300'}`}
 				></div>
 			</div>
 		</main>

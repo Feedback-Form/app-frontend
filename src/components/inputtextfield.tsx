@@ -4,12 +4,12 @@ import { useText } from '../hooks/summaryContext';
 
 const InputTextfield: FC = (): ReactElement => {
 	const [maxWords, setMaxWords] = useState(300);
-	const { inputText, setInputText } = useText();
+	const { inputText, setInputText, setCurrentComponent } = useText();
 	console.log('child comp', inputText);
 	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(inputText);
 
 	return (
-		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full">
+		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full space-y-10">
 			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
 			</div>
@@ -28,7 +28,10 @@ const InputTextfield: FC = (): ReactElement => {
 			</div>
 			<div className="flex justify-between w-3/4 items-center">
 				<button
-					onClick={() => setInputText(fullText)}
+					onClick={() => {
+						setInputText(fullText);
+						setCurrentComponent(2);
+					}}
 					className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200"
 				>
 					Next step

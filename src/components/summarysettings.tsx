@@ -6,12 +6,22 @@ const backend_url = 'http://localhost:5000';
 const token =
 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 const SummarySettings: FC = (): ReactElement => {
-	const { setLength, setType, setTone, summaryLength, summaryType, summaryTone, inputText, setOutputText } = useText();
+	const {
+		setLength,
+		setType,
+		setTone,
+		summaryLength,
+		summaryType,
+		summaryTone,
+		inputText,
+		setOutputText,
+		currentComponent,
+		setCurrentComponent,
+	} = useText();
 
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
 
-	const [isLoading, setIsLoading] = useState(false);
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -25,14 +35,14 @@ const SummarySettings: FC = (): ReactElement => {
 		temperature: summaryTone,
 	};
 	function summarizeText(): void {
-		setIsLoading(true);
+		setCurrentComponent(3);
 		axios
 			.post(`${backend_url}/summarize/text`, req, config)
 
 			.then((res: any) => {
 				console.log('POST res', res);
 				setOutputText(res.data.choices[0].text);
-				setIsLoading(false);
+				setCurrentComponent(4);
 				//redirect to output component
 			})
 			.catch((err: any) => {
@@ -41,7 +51,7 @@ const SummarySettings: FC = (): ReactElement => {
 	}
 
 	return (
-		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4">
+		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-10">
 			<div className="flex items-start w-3/4">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
 			</div>

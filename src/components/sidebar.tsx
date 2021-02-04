@@ -30,7 +30,7 @@ const Sidebar: FC = (): ReactElement => {
 						</svg>
 						<h1 className="font-medium pl-2 text-base tracking-wide">Summarize</h1>
 					</li>
-					<li
+					{/* <li
 						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
             transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
 					>
@@ -49,7 +49,7 @@ const Sidebar: FC = (): ReactElement => {
 							/>
 						</svg>
 						<h1 className="font-medium pl-2 text-base tracking-wide">Transcribe</h1>
-					</li>
+					</li> */}
 					<li
 						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
             transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"

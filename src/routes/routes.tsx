@@ -3,14 +3,14 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { UserContext } from '../hooks/userContext';
 
 //pages
-import SummarizePage from '../pages/summarize';
-import TranscribePage from '../pages/transcribe';
+import SummarizePage from '../pages/summarizePage';
+// import TranscribePage from '../pages/transcribe';
 
 const Routes: FC = (): ReactElement => {
 	const [userPlan, setUserPlan] = useState('SCRPTAI_ADVANCED_PLAN');
 	return (
 		<Switch>
-			<Route exact path="/" render={() => <Redirect to="/transcribe" />} />
+			<Route exact path="/" render={() => <Redirect to="/summarize" />} />
 			<Route
 				exact
 				path="/summarize"
@@ -20,7 +20,7 @@ const Routes: FC = (): ReactElement => {
 					</UserContext.Provider>
 				)}
 			/>
-			<Route
+			{/* <Route
 				exact
 				path="/transcribe"
 				render={() => (
@@ -28,7 +28,7 @@ const Routes: FC = (): ReactElement => {
 						<TranscribePage />
 					</UserContext.Provider>
 				)}
-			/>
+			/> */}
 		</Switch>
 	);
 };
