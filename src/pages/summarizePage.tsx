@@ -23,7 +23,7 @@ const SummarizePage: FC = (): ReactElement => {
 	const [summaryType, setType] = useState(0);
 	const [summaryTone, setTone] = useState(0);
 	const [outputText, setOutputText] = useState('');
-	const [currentComponent, setCurrentComponent] = useState(3);
+	const [currentComponent, setCurrentComponent] = useState(1);
 
 	//UserContext related
 	const { userPlan } = useUserData();

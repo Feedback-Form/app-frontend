@@ -4,13 +4,15 @@ import { UserContext } from '../hooks/userContext';
 
 //pages
 import SummarizePage from '../pages/summarizePage';
+import DocumentsPage from '../pages/docsPage';
+import SingleDocPage from '../pages/singleDocPage';
 // import TranscribePage from '../pages/transcribe';
 
 const Routes: FC = (): ReactElement => {
 	const [userPlan, setUserPlan] = useState('SCRPTAI_ADVANCED_PLAN');
 	return (
 		<Switch>
-			<Route exact path="/" render={() => <Redirect to="/summarize" />} />
+			<Route exact path="/" render={() => <Redirect to="/documents" />} />
 			<Route
 				exact
 				path="/summarize"
@@ -20,6 +22,8 @@ const Routes: FC = (): ReactElement => {
 					</UserContext.Provider>
 				)}
 			/>
+			<Route exact path="/documents" render={() => <DocumentsPage />} />
+			<Route exact path="/document/:id" render={() => <SingleDocPage />} />
 			{/* <Route
 				exact
 				path="/transcribe"
