@@ -23,7 +23,9 @@ const Routes: FC = (): ReactElement => {
 				)}
 			/>
 			<Route exact path="/documents" render={() => <DocumentsPage />} />
-			<Route exact path="/document/:id" render={() => <SingleDocPage />} />
+
+			<Route path="/document/:id" render={() => <SingleDocPage />} />
+
 			{/* <Route
 				exact
 				path="/transcribe"

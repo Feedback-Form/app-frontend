@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 //hooks
 import { useWordState } from '../hooks/hooks';
 
@@ -24,13 +25,14 @@ const Documents: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoadingTwo, setIsLoadingTwo] = useState(false);
 	const [documents, setDocuments] = useState([]);
+	const [redirect, setRedirect] = useState(false);
+	const [selectedDocId, setSelectedDocId] = useState('');
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	};
 	function openDeleteWidget(id: string): void {
-		console.log('ID', id);
 		setIsLoadingTwo(true);
 		axios
 			.delete(`${backend_url}/document/delete/${id}`, config)
@@ -63,9 +65,10 @@ const Documents: FC = (): ReactElement => {
 	// 	docs.push(`My Document_${i}`);
 	// }
 	//console.log('docs', docs);
-	///document/delete/6012a9dd2760e7e3d1cedcf0
-	function openDocument(): void {
-		alert('open doc');
+
+	function openDocument(id: string): void {
+		setSelectedDocId(id);
+		setRedirect(true);
 	}
 
 	return (
@@ -73,7 +76,7 @@ const Documents: FC = (): ReactElement => {
 			<section className="flex-shrink flex flex-col items-center justify-center h-3/4 w-full space-y-10 bg-white text-gray-900">
 				{isLoadingTwo && <LoadingWidget />}
 				{isLoading ? (
-					<Uploading message="retrieving docs..." />
+					<Uploading message="fetching documents..." />
 				) : (
 					<>
 						<div className="flex items-end w-3/4 ">
@@ -89,7 +92,7 @@ const Documents: FC = (): ReactElement => {
 										focus:ring-2 focus:ring-indigo-500
 										transition-all ease-in-out duration-200 px-4"
 									>
-										<div onClick={() => openDocument()} className="cursor-pointer justify-evenly flex flex-col h-3/4">
+										<div onClick={() => openDocument(i._id)} className="cursor-pointer justify-evenly flex flex-col h-3/4">
 											<h1 className="w-full">{i.title}</h1>
 											<p className=" text-sm font-thin truncate">{i.gptThreeSummary}</p>
 										</div>
@@ -118,6 +121,8 @@ const Documents: FC = (): ReactElement => {
 						</section>
 					</>
 				)}
+
+				{redirect && <Redirect to={`/document/${selectedDocId}`} />}
 			</section>
 		</>
 	);

@@ -18,5 +18,6 @@
 	},
 	"jest.enableInlineErrorMessages": true,
 	"jest.showCoverageOnLoad": true,
-	"jest.runAllTestsFirst": false
+	"jest.runAllTestsFirst": false,
+	"workbench.editor.wrapTabs": true
 }

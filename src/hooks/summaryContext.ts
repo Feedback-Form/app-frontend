@@ -22,11 +22,11 @@ export const SummaryContext = createContext<TextContextType>({
 	summaryTone: 1,
 	outputText: '',
 	currentComponent: 1,
-	setInputText: inputText => console.log('text_'),
+	setInputText: inputText => console.log('text_missing'),
 	setLength: summaryLength => console.warn('summaryLength_missing'),
 	setType: summaryType => console.warn('summaryType_missing'),
 	setTone: summaryTone => console.warn('summaryLength_missing'),
 	setOutputText: outputText => console.warn('OutputText_missing'),
-	setCurrentComponent: currentComponent => console.warn('currentComponent is missing'),
+	setCurrentComponent: currentComponent => console.warn('currentComponent_missing'),
 });
 export const useText = () => useContext(SummaryContext);

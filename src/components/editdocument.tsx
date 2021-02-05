@@ -1,30 +1,65 @@
-import React, { FC, ReactElement } from 'react';
-
+import React, { FC, ReactElement, useState } from 'react';
+import axios from 'axios';
 //hooks
 import { useWordState } from '../hooks/hooks';
+import { useSingleDocContext } from '../hooks/singleDocContext';
+
+//components
+import LoadingWidget from './loadingWidget';
+
+//const
+const backend_url = 'http://localhost:5000';
+const token =
+	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 
 const EditDocument: FC = (): ReactElement => {
-	const [fullTextOne, wordCountOne, handleWordChangeOne, resetWordsOne] = useWordState('lorem ipsum');
-	const [fullTextTwo, wordCountTwo, handleWordChangeTwo, resetWordsTwo] = useWordState('lorem ipsum');
-	const [title, wordCountThree, handleWordChangeThree, resetWordsThree] = useWordState('lorem ipsum');
+	const { title, transcript, gptThreeSummary, docId } = useSingleDocContext();
+
+	const [summaryLocal, wordCountOne, handleWordChangeOne, resetWordsOne] = useWordState(gptThreeSummary);
+	const [transcriptLocal, wordCountTwo, handleWordChangeTwo, resetWordsTwo] = useWordState(transcript);
+	const [titleLocal, wordCountThree, handleWordChangeThree, resetWordsThree] = useWordState(title);
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	//config
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	const req = {
+		title: titleLocal,
+		transcript: transcriptLocal,
+		gptThreeSummary: summaryLocal,
+	};
 
 	function saveEdit(): void {
-		alert('save');
+		setIsLoading(true);
+		axios
+			.patch(`${backend_url}/document/edit/${docId}`, req, config)
+			.then((res: any) => {
+				console.log('patch res', res);
+				setIsLoading(false);
+			})
+			.catch((err: any) => {
+				console.log('err', err);
+				setIsLoading(false);
+			});
 	}
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center w-full space-y-8 overflow-y-auto py-16">
-			{/* {isLoading && <LoadingWidget />} */}
+			{isLoading && <LoadingWidget />}
 
 			<div className="flex items-end w-3/4 ">
 				<input
-					value={title}
+					value={titleLocal}
 					onChange={e => {
 						handleWordChangeThree(e);
 					}}
 					type="text"
 					placeholder="Add a title"
 					className="bg-white text-4xl text-gray-900 font-medium tracking-wide
-                    focus:outline-none"
+                    focus:outline-none w-full"
 				/>
 			</div>
 			<div className="flex items-end w-3/4 ">
@@ -32,7 +67,7 @@ const EditDocument: FC = (): ReactElement => {
 			</div>
 			<div className="w-3/4 h-full shadow-md rounded-md  ">
 				<textarea
-					value={fullTextOne}
+					value={summaryLocal}
 					onChange={e => {
 						handleWordChangeOne(e);
 					}}
@@ -46,7 +81,7 @@ const EditDocument: FC = (): ReactElement => {
 			</div>
 			<div className="w-3/4 h-full shadow-md rounded-md  ">
 				<textarea
-					value={fullTextTwo}
+					value={transcriptLocal}
 					onChange={e => {
 						handleWordChangeTwo(e);
 					}}
