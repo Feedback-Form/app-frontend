@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useState, useContext } from 'react';
 import { useWordState } from '../hooks/hooks';
-import { useText } from '../hooks/summaryContext';
+import { useText } from '../hooks/contexts/summaryContext';
 
 const InputTextfield: FC = (): ReactElement => {
 	const [maxWords, setMaxWords] = useState(300);

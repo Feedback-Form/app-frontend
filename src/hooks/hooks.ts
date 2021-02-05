@@ -16,3 +16,14 @@ export const useWordState = (initialVal: string) => {
 	};
 	return [words, wordCount, handleChange, reset] as const;
 };
+
+export const useInputState = (initiaVal: string) => {
+	const [input, setInput] = useState(initiaVal);
+	const handleChange = (e: { target: { value: any } }) => {
+		setInput(e.target.value);
+	};
+	const reset = () => {
+		setInput('');
+	};
+	return [input, handleChange, reset] as const;
+};

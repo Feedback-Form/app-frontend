@@ -4,7 +4,7 @@ import InputTextfield from '../inputtextfield';
 import SummarySettings from '../summarysettings';
 import OutputTextfield from '../outputtexfield';
 import { CSSTransition } from 'react-transition-group';
-import { useText } from '../../hooks/summaryContext';
+import { useText } from '../../hooks/contexts/summaryContext';
 
 import Uploading from '../uploading';
 const Summarize: FC = (): ReactElement => {

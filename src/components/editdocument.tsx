@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
 //hooks
 import { useWordState } from '../hooks/hooks';
-import { useSingleDocContext } from '../hooks/singleDocContext';
+import { useSingleDocContext } from '../hooks/contexts/singleDocContext';
 
 //components
 import LoadingWidget from './loadingWidget';
@@ -95,8 +95,10 @@ const EditDocument: FC = (): ReactElement => {
 					onClick={() => {
 						saveEdit();
 					}}
+					disabled={isLoading}
 					// disabled={isLoading}
-					className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
+					className="bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-600  focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50
+					"
 				>
 					Save
 				</button>

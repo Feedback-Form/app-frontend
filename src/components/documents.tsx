@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 //hooks
 import { useWordState } from '../hooks/hooks';
-import { DocsContext } from '../hooks/docsContext';
+import { DocsContext } from '../hooks/contexts/docsContext';
 //components
 import DeleteWidget from './deletewidget';
 import Uploading from './uploading';
@@ -91,15 +91,16 @@ const Documents: FC = (): ReactElement => {
 					setDocId,
 				}}
 			>
+				{isDeleteRequest && <DeleteWidget />}
 				<section className="flex-shrink flex flex-col items-center justify-center h-3/4 w-full space-y-10 bg-white text-gray-900">
 					{isLoadingTwo && <LoadingWidget />}
-					{isDeleteRequest && <DeleteWidget />}
+
 					{isLoading ? (
 						<Uploading message="fetching documents..." />
 					) : (
 						<>
 							<div className="flex items-end w-3/4 ">
-								<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
+								<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Documents</h1>
 							</div>
 							<section className="flex xs:grid grid-cols-4 flex-wrap w-3/4 xl:w-1/2 h-3/4 gap-4">
 								{documents.map((i: Document) => {

@@ -1,36 +1,41 @@
 import React, { ReactElement, FC } from 'react';
+import { NavLink } from 'react-router-dom';
 import scrptAiLogo from '../images/scrptai_logo.svg';
 const Sidebar: FC = (): ReactElement => {
 	return (
-		<nav className="bg-gray-100 flex-shrink  pr-2 border-r border-gray-200 ">
-			<div className="pt-10 pb-20 pl-3 ">
-				<img className="w-32" src={scrptAiLogo} alt="scrpt_ai_logo" />
-			</div>
-
+		<nav className="bg-gray-100 flex-shrink h-full flex flex-col justify-between  border-r border-gray-200 ">
 			{/* Group 1 */}
-			<div className="space-y-10 ">
-				<div className="space-y-1">
-					<li
-						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
+
+			<div className="space-y-3">
+				<div className="pt-10 pb-20 pl-3 ">
+					<img className="w-32" src={scrptAiLogo} alt="scrpt_ai_logo" />
+				</div>
+				<div>
+					<NavLink exact to="/summarize">
+						<li
+							className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
                 transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
-					>
-						<svg
-							className="w-6 stroke-current stroke-2 "
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-							/>
-						</svg>
-						<h1 className="font-medium pl-2 text-base tracking-wide">Summarize</h1>
-					</li>
-					{/* <li
+							<svg
+								className="w-6 stroke-current stroke-2 "
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+								/>
+							</svg>
+
+							<h1 className="font-medium pl-2 text-base tracking-wide">Summarize</h1>
+						</li>
+					</NavLink>
+				</div>
+				{/* <li
 						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
             transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
 					>
@@ -50,6 +55,35 @@ const Sidebar: FC = (): ReactElement => {
 						</svg>
 						<h1 className="font-medium pl-2 text-base tracking-wide">Transcribe</h1>
 					</li> */}
+				<div>
+					<NavLink exact to="/documents">
+						<li
+							className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
+            transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
+						>
+							<svg
+								className="w-6 stroke-current stroke-2 "
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+								/>
+							</svg>
+							<h1 className="font-medium pl-2 text-base tracking-wide">Documents</h1>
+						</li>
+					</NavLink>
+				</div>
+			</div>
+
+			{/* Group 2 */}
+			<div className="space-y-3">
+				<div>
 					<li
 						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
             transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
@@ -65,16 +99,14 @@ const Sidebar: FC = (): ReactElement => {
 								strokeLinecap="round"
 								strokeLinejoin="round"
 								strokeWidth="2"
-								d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+								d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
 							/>
 						</svg>
-						<h1 className="font-medium pl-2 text-base tracking-wide">Documents</h1>
+						<h1 className="font-medium pl-2 text-base tracking-wide">Logout</h1>
 					</li>
 				</div>
-
-				{/* Group 2 */}
-				<div className="space-y-1">
-					<div>
+				<div>
+					<NavLink exact to="/settings">
 						<li
 							className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
             transition-all duration-200 ease-in-out rounded-r-md py-2 pr-14 pl-3 cursor-pointer"
@@ -96,24 +128,24 @@ const Sidebar: FC = (): ReactElement => {
 							</svg>
 							<h1 className="font-medium pl-2 text-base tracking-wide">Settings</h1>
 						</li>
-					</div>
-					<div>
-						<li
-							className="text-yellow-600 list-none flex items-center bg-yellow-200  hover:text-yellow-700 
-            transition-all duration-200 ease-in-out rounded-r-md py-2 pl-3 cursor-pointer"
+					</NavLink>
+				</div>
+				<div>
+					<li
+						className="text-yellow-600 list-none flex items-center bg-yellow-200  hover:text-yellow-700 
+            transition-all duration-200 ease-in-out  py-2 pl-3 cursor-pointer"
+					>
+						<svg
+							className="w-6 stroke-current stroke-2 "
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
 						>
-							<svg
-								className="w-6 stroke-current stroke-2 "
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-							</svg>
-							<h1 className="font-medium pl-2 text-base tracking-wide">Upgrade</h1>
-						</li>
-					</div>
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+						</svg>
+						<h1 className="font-medium pl-2 text-base tracking-wide">Upgrade</h1>
+					</li>
 				</div>
 			</div>
 		</nav>

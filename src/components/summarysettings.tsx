@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useWordState } from '../hooks/hooks';
-import { useText } from '../hooks/summaryContext';
+import { useText } from '../hooks/contexts/summaryContext';
 import axios from 'axios';
 const backend_url = 'http://localhost:5000';
 const token =

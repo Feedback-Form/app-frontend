@@ -1,7 +1,7 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import axios from 'axios';
 // type DeleteWidgetProps = { docName: string; docId: string };
-import { useDocsContext } from '../hooks/docsContext';
+import { useDocsContext } from '../hooks/contexts/docsContext';
 
 //const
 const backend_url = 'http://localhost:5000';
@@ -40,6 +40,7 @@ const DeleteWidget = (): ReactElement => {
 						</div>
 						<div className="flex space-x-6 justify-end">
 							<button
+								onClick={() => setDeleteRequest(false)}
 								className="py-2 px-6 bg-gray-100 text-gray-900 rounded-md hover:bg-gray-200 
                         focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
                         tracking-wide font-medium

@@ -8,7 +8,7 @@ import EditDocument from '../components/editdocument';
 import Uploading from '../components/uploading';
 
 //hooks
-import { SingleDocContext } from '../hooks/singleDocContext';
+import { SingleDocContext } from '../hooks/contexts/singleDocContext';
 
 type ParamType = {
 	id: string;
@@ -82,7 +82,7 @@ const SingleDocPage: FC = (): ReactElement => {
 				setDocId,
 			}}
 		>
-			<section className="h-screen w-full flex  font-scrptai overflow-y-auto">
+			<section className="h-screen w-full flex font-scrptai overflow-y-auto">
 				<Sidebar />
 				{isLoading ? <Uploading message="fetching document..." /> : <EditDocument />}
 			</section>
