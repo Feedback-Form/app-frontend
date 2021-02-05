@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 //hooks
 import { useWordState } from '../hooks/hooks';
-
+import { DocsContext } from '../hooks/docsContext';
 //components
 import DeleteWidget from './deletewidget';
 import Uploading from './uploading';
@@ -27,23 +27,31 @@ const Documents: FC = (): ReactElement => {
 	const [documents, setDocuments] = useState([]);
 	const [redirect, setRedirect] = useState(false);
 	const [selectedDocId, setSelectedDocId] = useState('');
+	const [isDeleteRequest, setDeleteRequest] = useState(false);
+	const [docName, setDocName] = useState('');
+	const [docId, setDocId] = useState('');
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	};
-	function openDeleteWidget(id: string): void {
-		setIsLoadingTwo(true);
-		axios
-			.delete(`${backend_url}/document/delete/${id}`, config)
-			.then((res: any) => {
-				console.log('succes', res);
-				setIsLoadingTwo(false);
-			})
-			.catch((err: any) => {
-				console.log('err', err);
-				setIsLoadingTwo(false);
-			});
+	function openDeleteWidget(id: string, title: string): void {
+		setDocName(title);
+		setDocId(id);
+		setDeleteRequest(true);
+
+		console.log('DOC STATE NAME', docName);
+		// setIsLoadingTwo(true);
+		// axios
+		// 	.delete(`${backend_url}/document/delete/${id}`, config)
+		// 	.then((res: any) => {
+		// 		console.log('succes', res);
+		// 		setIsLoadingTwo(false);
+		// 	})
+		// 	.catch((err: any) => {
+		// 		console.log('err', err);
+		// 		setIsLoadingTwo(false);
+		// 	});
 	}
 
 	//get documents
@@ -58,7 +66,7 @@ const Documents: FC = (): ReactElement => {
 				console.log('err', err);
 				setIsLoading(false);
 			});
-	}, [isLoadingTwo]);
+	}, [isLoadingTwo, isDeleteRequest]);
 
 	// const docs = [];
 	// for (let i = 0; i < 1; i++) {
@@ -73,57 +81,69 @@ const Documents: FC = (): ReactElement => {
 
 	return (
 		<>
-			<section className="flex-shrink flex flex-col items-center justify-center h-3/4 w-full space-y-10 bg-white text-gray-900">
-				{isLoadingTwo && <LoadingWidget />}
-				{isLoading ? (
-					<Uploading message="fetching documents..." />
-				) : (
-					<>
-						<div className="flex items-end w-3/4 ">
-							<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
-						</div>
-						<section className="flex xs:grid grid-cols-4 flex-wrap w-3/4 xl:w-1/2 h-3/4 gap-4">
-							{documents.map((i: Document) => {
-								return (
-									<div
-										key={i._id}
-										className="w-48 h-64 shadow-md rounded-md  border-2 flex flex-col justify-evenly
+			<DocsContext.Provider
+				value={{
+					isDeleteRequest,
+					docName,
+					docId,
+					setDeleteRequest,
+					setDocName,
+					setDocId,
+				}}
+			>
+				<section className="flex-shrink flex flex-col items-center justify-center h-3/4 w-full space-y-10 bg-white text-gray-900">
+					{isLoadingTwo && <LoadingWidget />}
+					{isDeleteRequest && <DeleteWidget />}
+					{isLoading ? (
+						<Uploading message="fetching documents..." />
+					) : (
+						<>
+							<div className="flex items-end w-3/4 ">
+								<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
+							</div>
+							<section className="flex xs:grid grid-cols-4 flex-wrap w-3/4 xl:w-1/2 h-3/4 gap-4">
+								{documents.map((i: Document) => {
+									return (
+										<div
+											key={i._id}
+											className="w-48 h-64 shadow-md rounded-md  border-2 flex flex-col justify-evenly
 										hover:border-indigo-400 hover:border-2 focus:outline-none
 										focus:ring-2 focus:ring-indigo-500
 										transition-all ease-in-out duration-200 px-4"
-									>
-										<div onClick={() => openDocument(i._id)} className="cursor-pointer justify-evenly flex flex-col h-3/4">
-											<h1 className="w-full">{i.title}</h1>
-											<p className=" text-sm font-thin truncate">{i.gptThreeSummary}</p>
-										</div>
+										>
+											<div onClick={() => openDocument(i._id)} className="cursor-pointer justify-evenly flex flex-col h-3/4">
+												<h1 className="w-full">{i.title}</h1>
+												<p className=" text-sm font-thin truncate">{i.gptThreeSummary}</p>
+											</div>
 
-										<div className="flex items-end justify-end text-gray-400 hover:text-red-500 ">
-											<svg
-												id={i._id}
-												onClick={() => openDeleteWidget(i._id)}
-												className="w-6 h-6 cursor-pointer"
-												xmlns="http://www.w3.org/2000/svg"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth="2"
-													d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-												/>
-											</svg>
+											<div className="flex items-end justify-end text-gray-400 hover:text-red-500 ">
+												<svg
+													id={i._id}
+													onClick={() => openDeleteWidget(i._id, i.title)}
+													className="w-6 h-6 cursor-pointer"
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth="2"
+														d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+													/>
+												</svg>
+											</div>
 										</div>
-									</div>
-								);
-							})}
-						</section>
-					</>
-				)}
+									);
+								})}
+							</section>
+						</>
+					)}
 
-				{redirect && <Redirect to={`/document/${selectedDocId}`} />}
-			</section>
+					{redirect && <Redirect to={`/document/${selectedDocId}`} />}
+				</section>
+			</DocsContext.Provider>
 		</>
 	);
 };
