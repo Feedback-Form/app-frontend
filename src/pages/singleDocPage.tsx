@@ -9,15 +9,13 @@ import Uploading from '../components/uploading';
 
 //hooks
 import { SingleDocContext } from '../hooks/contexts/singleDocContext';
-
+import { useUserData } from '../hooks/contexts/userContext';
 type ParamType = {
 	id: string;
 };
 
 //const
 const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 
 const SingleDocPage: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -31,14 +29,16 @@ const SingleDocPage: FC = (): ReactElement => {
 	const [transcript, setTranscript] = useState('');
 	const [gptThreeSummary, setGptThreeSummary] = useState('');
 
-	//config
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
+	const { token } = useUserData();
 
 	function getDocument() {
+		//config
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
 		axios
 			.get(`${backend_url}/document/${docId}`, config)
 			.then((res: any) => {

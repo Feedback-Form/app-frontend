@@ -4,7 +4,10 @@ import './index.css';
 import './animations.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes/routes';
+
+//routes
+import Routes from './routes/Routes';
+
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>

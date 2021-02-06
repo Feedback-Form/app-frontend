@@ -1,10 +1,13 @@
 import React, { FC, ReactElement, useState } from 'react';
+import axios from 'axios';
+
+//hooks
 import { useWordState } from '../hooks/hooks';
 import { useText } from '../hooks/contexts/summaryContext';
-import axios from 'axios';
+import { useUserData } from '../hooks/contexts/userContext';
+
 const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
+
 const SummarySettings: FC = (): ReactElement => {
 	const {
 		setLength,
@@ -18,15 +21,11 @@ const SummarySettings: FC = (): ReactElement => {
 		currentComponent,
 		setCurrentComponent,
 	} = useText();
+	const { token } = useUserData();
 
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
 
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
 	const req = {
 		inputText: inputText,
 		//has to change to word amount in FE
@@ -36,6 +35,11 @@ const SummarySettings: FC = (): ReactElement => {
 	};
 	function summarizeText(): void {
 		setCurrentComponent(3);
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
 		axios
 			.post(`${backend_url}/summarize/text`, req, config)
 

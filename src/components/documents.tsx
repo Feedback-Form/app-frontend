@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 //hooks
 import { useWordState } from '../hooks/hooks';
 import { DocsContext } from '../hooks/contexts/docsContext';
+import { useUserData } from '../hooks/contexts/userContext';
 //components
 import DeleteWidget from './deletewidget';
 import Uploading from './uploading';
@@ -11,8 +12,6 @@ import LoadingWidget from './loadingWidget';
 
 //const
 const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 
 type Document = {
 	_id: string;
@@ -30,11 +29,9 @@ const Documents: FC = (): ReactElement => {
 	const [isDeleteRequest, setDeleteRequest] = useState(false);
 	const [docName, setDocName] = useState('');
 	const [docId, setDocId] = useState('');
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
+
+	const { token } = useUserData();
+
 	function openDeleteWidget(id: string, title: string): void {
 		setDocName(title);
 		setDocId(id);
@@ -56,6 +53,11 @@ const Documents: FC = (): ReactElement => {
 
 	//get documents
 	useEffect(() => {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
 		axios
 			.get(`${backend_url}/documents`, config)
 			.then((res: any) => {

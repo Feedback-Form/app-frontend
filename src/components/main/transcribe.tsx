@@ -1,9 +1,9 @@
 import React, { FC, ReactElement, useState, useReducer, createContext } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import AudioDropzone from '../audiodropzone';
+import AudioDropzone from '../vault/audiodropzone';
 
 import Uploading from '../uploading';
-import TranscriptionOutput from '../transcriptionoutput';
+import TranscriptionOutput from '../vault/transcriptionoutput';
 const Transcribe: FC = (): ReactElement => {
 	const [currentComponent, setCurrentComponent] = useState(1);
 	return (

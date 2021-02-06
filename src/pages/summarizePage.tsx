@@ -1,21 +1,16 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 
+//components
 import Sidebar from '../components/sidebar';
 import Summarize from '../components/main/summarize';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import AuthenticationWidget from '../components/authenticationWidget';
 
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 import { SummaryContext } from '../hooks/contexts/summaryContext';
-const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
-function useQuery() {
-	return new URLSearchParams(useLocation().search);
-}
 
-import AudioUploading from '../components/uploading';
+//const
+const backend_url = 'http://localhost:5000';
 
 const SummarizePage: FC = (): ReactElement => {
 	//summaryContext related
@@ -26,9 +21,7 @@ const SummarizePage: FC = (): ReactElement => {
 	const [outputText, setOutputText] = useState('');
 	const [currentComponent, setCurrentComponent] = useState(1);
 
-	//UserContext related
-	const { token } = useUserData();
-	console.log('summarypage🚀:', token);
+	const { isAuthenticating } = useUserData();
 
 	return (
 		<SummaryContext.Provider
@@ -47,21 +40,16 @@ const SummarizePage: FC = (): ReactElement => {
 				setCurrentComponent,
 			}}
 		>
-			<section className="h-screen w-full flex overflow-hidden font-scrptai">
-				<Sidebar />
-
-				{/* add a loading animation if isLoading === true */}
-				{/* {!isLoading && <Summarize />} */}
-				<Summarize />
-			</section>
+			{isAuthenticating ? (
+				<AuthenticationWidget />
+			) : (
+				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+					<Sidebar />
+					<Summarize />
+				</section>
+			)}
 		</SummaryContext.Provider>
 	);
 };
 
 export default SummarizePage;
-
-{
-	/* <main className="flex-1 flex flex-col  bg-white text-gray-900  items-center justify-center space-y-1 ">
-				<Documents />
-			</main> */
-}

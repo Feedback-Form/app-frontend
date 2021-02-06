@@ -1,13 +1,28 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
+
+//components
 import Sidebar from '../components/sidebar';
-import Transcribe from '../components/main/transcribe';
+
 import Documents from '../components/documents';
+import AuthenticationWidget from '../components/authenticationWidget';
+
+//hooks
+import { useUserData } from '../hooks/contexts/userContext';
+
 const DocumentsPage: FC = (): ReactElement => {
+	const { isAuthenticating } = useUserData();
+
 	return (
-		<section className="h-screen w-full flex overflow-hidden font-scrptai">
-			<Sidebar />
-			<Documents />
-		</section>
+		<>
+			{isAuthenticating ? (
+				<AuthenticationWidget />
+			) : (
+				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+					<Sidebar />
+					<Documents />
+				</section>
+			)}
+		</>
 	);
 };
 export default DocumentsPage;

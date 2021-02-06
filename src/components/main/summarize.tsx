@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState, useReducer, createContext } from 're
 
 import InputTextfield from '../inputtextfield';
 import SummarySettings from '../summarysettings';
-import OutputTextfield from '../outputtexfield';
+import OutputTextfield from '../vault/outputtexfield';
 import { CSSTransition } from 'react-transition-group';
 import { useText } from '../../hooks/contexts/summaryContext';
 

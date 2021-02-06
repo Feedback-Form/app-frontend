@@ -3,14 +3,12 @@ import axios from 'axios';
 //hooks
 import { useWordState } from '../hooks/hooks';
 import { useSingleDocContext } from '../hooks/contexts/singleDocContext';
-
+import { useUserData } from '../hooks/contexts/userContext';
 //components
 import LoadingWidget from './loadingWidget';
 
 //const
 const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 
 const EditDocument: FC = (): ReactElement => {
 	const { title, transcript, gptThreeSummary, docId } = useSingleDocContext();
@@ -18,15 +16,10 @@ const EditDocument: FC = (): ReactElement => {
 	const [summaryLocal, wordCountOne, handleWordChangeOne, resetWordsOne] = useWordState(gptThreeSummary);
 	const [transcriptLocal, wordCountTwo, handleWordChangeTwo, resetWordsTwo] = useWordState(transcript);
 	const [titleLocal, wordCountThree, handleWordChangeThree, resetWordsThree] = useWordState(title);
+	const { token } = useUserData();
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	//config
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
 	const req = {
 		title: titleLocal,
 		transcript: transcriptLocal,
@@ -35,6 +28,12 @@ const EditDocument: FC = (): ReactElement => {
 
 	function saveEdit(): void {
 		setIsLoading(true);
+		//config
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
 		axios
 			.patch(`${backend_url}/document/edit/${docId}`, req, config)
 			.then((res: any) => {
