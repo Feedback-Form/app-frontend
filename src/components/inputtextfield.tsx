@@ -1,12 +1,16 @@
 import React, { FC, ReactElement, useState, useContext } from 'react';
+
+//hooks
 import { useWordState } from '../hooks/hooks';
 import { useText } from '../hooks/contexts/summaryContext';
+import { useUserData } from '../hooks/contexts/userContext';
 
 const InputTextfield: FC = (): ReactElement => {
-	const [maxWords, setMaxWords] = useState(300);
+	// const [maxWords, setMaxWords] = useState(300);
 	const { inputText, setInputText, setCurrentComponent } = useText();
 	console.log('child comp', inputText);
 	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(inputText);
+	const { userObject } = useUserData();
 
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full space-y-10">
@@ -38,7 +42,7 @@ const InputTextfield: FC = (): ReactElement => {
 				</button>
 				<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-2">
 					<span className="tracking-wider font-medium">
-						{wordCount} / {maxWords} words
+						{wordCount} / {userObject.maxSessionWords} words
 					</span>
 				</div>
 			</div>

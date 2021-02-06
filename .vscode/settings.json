@@ -19,5 +19,5 @@
 	"jest.enableInlineErrorMessages": true,
 	"jest.showCoverageOnLoad": true,
 	"jest.runAllTestsFirst": false,
-	"workbench.editor.wrapTabs": true
+	"workbench.editor.wrapTabs": false
 }
