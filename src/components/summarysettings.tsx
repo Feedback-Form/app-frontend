@@ -21,7 +21,7 @@ const SummarySettings: FC = (): ReactElement => {
 		currentComponent,
 		setCurrentComponent,
 	} = useText();
-	const { token } = useUserData();
+	const { token, userObject } = useUserData();
 
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
@@ -29,12 +29,13 @@ const SummarySettings: FC = (): ReactElement => {
 	const req = {
 		inputText: inputText,
 		//has to change to word amount in FE
-		responseLengthInWords: '200',
+		responseLengthInWords: summaryLength,
 		summaryType: summaryType,
 		temperature: summaryTone,
 	};
 	function summarizeText(): void {
 		setCurrentComponent(3);
+
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -65,26 +66,48 @@ const SummarySettings: FC = (): ReactElement => {
 
 					<div className="flex space-x-12">
 						<button
-							onClick={() => setLength('short')}
-							className={`flex-shrink ${summaryLength === 'short' ? clickedClasses : defaultClasses}
-								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
+							onClick={() => setLength(100)}
+							className={`flex-shrink ${summaryLength === 100 ? clickedClasses : defaultClasses}
+								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center `}
 						>
-							short
+							100 words
 						</button>
-						<button
-							onClick={() => setLength('basic')}
-							className={`flex-shrink ${summaryLength === 'basic' ? clickedClasses : defaultClasses}
-							focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
-						>
-							basic
-						</button>
-						<button
-							onClick={() => setLength('long')}
-							className={`flex-shrink ${summaryLength === 'long' ? clickedClasses : defaultClasses}
-								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
-						>
-							long
-						</button>
+						<span className="relative inline-flex">
+							<button
+								disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+								onClick={() => setLength(300)}
+								className={` flex-shrink  ${summaryLength === 300 ? clickedClasses : defaultClasses}
+							focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50 `}
+							>
+								300 words
+							</button>
+							{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+								<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
+									{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+									<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
+									{/* <span className="relative inline-flex rounded-full h-6 w-40 bg-purple-500 text-base ">Upgrade to unlock</span> */}
+									<h1 className="relative inline-flex text-xs text-white">Upgrade to unlock</h1>
+								</span>
+							)}
+						</span>
+						<span className="relative inline-flex">
+							<button
+								disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+								onClick={() => setLength(500)}
+								className={`flex-shrink ${summaryLength === 500 ? clickedClasses : defaultClasses}
+								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50`}
+							>
+								500 words
+							</button>
+							{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+								<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
+									{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+									<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
+									{/* <span className="relative inline-flex rounded-full h-6 w-40 bg-purple-500 text-base ">Upgrade to unlock</span> */}
+									<h1 className="relative inline-flex text-xs text-white">Upgrade to unlock</h1>
+								</span>
+							)}
+						</span>
 					</div>
 				</div>
 				<div className="justify-items-center">

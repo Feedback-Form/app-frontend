@@ -2,14 +2,14 @@ import React, { ReactElement } from 'react';
 import axios from 'axios';
 // type DeleteWidgetProps = { docName: string; docId: string };
 import { useDocsContext } from '../hooks/contexts/docsContext';
+import { useUserData } from '../hooks/contexts/userContext';
 
 //const
 const backend_url = 'http://localhost:5000';
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 
 const DeleteWidget = (): ReactElement => {
 	const { docName, docId, setDeleteRequest } = useDocsContext();
+	const { token } = useUserData();
 
 	const config = {
 		headers: {

@@ -15,11 +15,12 @@ const backend_url = 'http://localhost:5000';
 const SummarizePage: FC = (): ReactElement => {
 	//summaryContext related
 	const [inputText, setInputText] = useState('');
-	const [summaryLength, setLength] = useState('short');
+	const [summaryLength, setLength] = useState(100);
 	const [summaryType, setType] = useState(0);
 	const [summaryTone, setTone] = useState(0);
 	const [outputText, setOutputText] = useState('');
 	const [currentComponent, setCurrentComponent] = useState(1);
+	const [wordLimitReached, setWordLimitReached] = useState(false);
 
 	const { isAuthenticating } = useUserData();
 
@@ -38,6 +39,8 @@ const SummarizePage: FC = (): ReactElement => {
 				setTone,
 				setOutputText,
 				setCurrentComponent,
+				wordLimitReached,
+				setWordLimitReached,
 			}}
 		>
 			{isAuthenticating ? (

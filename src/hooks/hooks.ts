@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
-export const useWordState = (initialVal: string) => {
-	const [words, setWords] = useState(initialVal);
-	const [wordCount, setWordCount] = useState(0);
+export const useWordState = (initialWords: string) => {
+	//count the words based on the initialWords input
+	const curWordCount = (initialWords.match(/\s/g) || []).length;
+	const [words, setWords] = useState(initialWords);
+
+	const [wordCount, setWordCount] = useState(curWordCount);
 
 	const handleChange = (e: { target: { value: any } }) => {
 		const curWords = e.target.value;
@@ -14,7 +17,7 @@ export const useWordState = (initialVal: string) => {
 		setWords('');
 		setWordCount(0);
 	};
-	return [words, wordCount, handleChange, reset] as const;
+	return [words, wordCount, handleChange, setWords, reset] as const;
 };
 
 export const useInputState = (initiaVal: string) => {

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useReducer, createContext } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
 
 import InputTextfield from '../inputtextfield';
 import SummarySettings from '../summarysettings';
@@ -8,7 +8,11 @@ import { useText } from '../../hooks/contexts/summaryContext';
 
 import Uploading from '../uploading';
 const Summarize: FC = (): ReactElement => {
-	const { currentComponent, setCurrentComponent } = useText();
+	const { currentComponent, setCurrentComponent, wordLimitReached } = useText();
+
+	useEffect(() => {
+		console.log('change');
+	}, [wordLimitReached]);
 
 	// console.log('parent:', { text: inputText, summaryLength: summaryLength });
 
@@ -28,18 +32,29 @@ const Summarize: FC = (): ReactElement => {
 			</CSSTransition>
 
 			<div className="w-full items-center justify-center flex  space-x-6">
-				<div
-					onClick={() => setCurrentComponent(1)}
-					className={`rounded-full h-5 w-5 ${currentComponent === 1 ? 'bg-indigo-500' : 'bg-gray-300'}`}
-				></div>
-				<div
+				<button
+					disabled={wordLimitReached}
+					onClick={() => {
+						setCurrentComponent(1);
+					}}
+					className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${
+						currentComponent === 1 ? 'bg-indigo-500' : 'bg-gray-300'
+					}`}
+				></button>
+				<button
+					disabled={wordLimitReached}
 					onClick={() => setCurrentComponent(2)}
-					className={`rounded-full h-5 w-5 ${currentComponent === 2 ? 'bg-indigo-500' : 'bg-gray-300'}`}
-				></div>
-				<div
+					className={`focus:outline-none  disabled:opacity-50 rounded-full h-5 w-5 ${
+						currentComponent === 2 ? 'bg-indigo-500' : 'bg-gray-300'
+					}`}
+				></button>
+				<button
+					disabled={wordLimitReached}
 					onClick={() => setCurrentComponent(4)}
-					className={`rounded-full h-5 w-5 ${currentComponent === 4 ? 'bg-indigo-500' : 'bg-gray-300'}`}
-				></div>
+					className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${
+						currentComponent === 4 ? 'bg-indigo-500' : 'bg-gray-300'
+					}`}
+				></button>
 			</div>
 		</main>
 	);
