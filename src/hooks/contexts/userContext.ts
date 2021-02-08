@@ -4,6 +4,7 @@ type UserObj = {
 	productName: string;
 	maxSessionWords: number;
 	maxResponseWords: number;
+	stripeCustomerId: string;
 };
 
 export type UserContextType = {
@@ -15,6 +16,7 @@ export type UserContextType = {
 		productName: string;
 		maxSessionWords: number;
 		maxResponseWords: number;
+		stripeCustomerId: string;
 	};
 	setUserPlan: (userPlan: string) => void;
 	setToken: (token: string) => void;
@@ -32,6 +34,7 @@ export const UserContext = createContext<UserContextType>({
 		productName: '',
 		maxSessionWords: 0,
 		maxResponseWords: 0,
+		stripeCustomerId: '',
 	},
 	setUserPlan: userPlan => console.warn('userplan_missing'),
 	setToken: token => console.warn('token_missing'),

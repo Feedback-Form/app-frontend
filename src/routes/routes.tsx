@@ -28,6 +28,7 @@ interface UserObj {
 			subscription: {
 				productName: string;
 			};
+			stripeCustomerId: string;
 		};
 		usage: {
 			words: {
@@ -49,6 +50,7 @@ const Routes: FC = (): ReactElement => {
 		productName: '',
 		maxSessionWords: 0,
 		maxResponseWords: 0,
+		stripeCustomerId: '',
 	});
 
 	console.log('jwt received 🍀', jwtReceived);
@@ -59,7 +61,7 @@ const Routes: FC = (): ReactElement => {
 			console.log('REDIRECT USER TO LOGIN PAGE 🚨');
 			//activate redirect if authentication failes and user was in one of the following routes
 			// /summarize, /documents & /document/:id
-			//setRedirect(true);
+			setRedirect(true);
 		} else {
 			console.log('localstorage:', { token });
 
@@ -78,6 +80,7 @@ const Routes: FC = (): ReactElement => {
 						productName: res.data.user.billing.subscription.productName,
 						maxSessionWords: res.data.user.usage.words.maxSessionWords,
 						maxResponseWords: res.data.user.usage.words.maxResponseWords,
+						stripeCustomerId: res.data.user.billing.stripeCustomerId,
 					});
 
 					setIsAuthenticating(false);
@@ -86,7 +89,7 @@ const Routes: FC = (): ReactElement => {
 					console.log('err', err);
 					//activate redirect if authentication failes and user was in one of the following routes
 					// /summarize, /documents & /document/:id
-					//setRedirect(true);
+					setRedirect(true);
 				});
 		}
 	}, [jwtReceived]);
