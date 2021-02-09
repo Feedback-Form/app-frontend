@@ -43,7 +43,7 @@ const SingleDocPage: FC = (): ReactElement => {
 			.get(`${backend_url}/document/${docId}`, config)
 			.then((res: any) => {
 				//check if the props are there
-				const title = res.data?.title;
+				const title = res.data?.title || '';
 				const transcript = res.data?.transcript;
 				const gptThreeSummary = res.data?.gptThreeSummary;
 

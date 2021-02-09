@@ -35,6 +35,10 @@ interface UserObj {
 				maxSessionWords: number;
 				maxResponseWords: number;
 			};
+			sessions: {
+				currentSessionCount: number;
+				maxMonthlySessionCount: number;
+			};
 		};
 	};
 }
@@ -52,6 +56,8 @@ const Routes: FC = (): ReactElement => {
 		maxSessionWords: 0,
 		maxResponseWords: 0,
 		stripeCustomerId: '',
+		currentSessionCount: 0,
+		maxMonthlySessionCount: 0,
 	});
 
 	console.log('jwt received 🍀', jwtReceived);
@@ -82,6 +88,8 @@ const Routes: FC = (): ReactElement => {
 							maxSessionWords: res.data.user.usage.words.maxSessionWords,
 							maxResponseWords: res.data.user.usage.words.maxResponseWords,
 							stripeCustomerId: res.data.user.billing.stripeCustomerId,
+							currentSessionCount: res.data.user.usage.sessions.currentSessionCount,
+							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
 						});
 
 						setIsAuthenticating(false);

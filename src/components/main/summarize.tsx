@@ -11,7 +11,7 @@ const Summarize: FC = (): ReactElement => {
 	const { currentComponent, setCurrentComponent, wordLimitReached } = useText();
 
 	useEffect(() => {
-		console.log('change');
+		console.log('rerender');
 	}, [wordLimitReached]);
 
 	// console.log('parent:', { text: inputText, summaryLength: summaryLength });

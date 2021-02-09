@@ -18,7 +18,7 @@ const LoginPage: FC = (): ReactElement => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const [redirect, setRedirect] = useState(false);
-	const { setToken, setJwtReceived } = useUserData();
+	const { setToken, setJwtReceived, token } = useUserData();
 
 	function loginUser(email: string, password: string): void {
 		setIsLoading(true);
@@ -32,6 +32,7 @@ const LoginPage: FC = (): ReactElement => {
 
 				// localStorage.setItem('auth_token', res.data.token);
 				setToken(res.data.token);
+				console.log('login_token', token);
 
 				setJwtReceived(true);
 

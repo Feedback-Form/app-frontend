@@ -1,7 +1,6 @@
 import React, { ReactElement, FC } from 'react';
-import docAnimation from '../assets/docAnimation.json';
+
 // import { redirectToCheckout } from '@stripe/stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 
 //const

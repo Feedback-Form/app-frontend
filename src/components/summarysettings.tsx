@@ -26,22 +26,25 @@ const SummarySettings: FC = (): ReactElement => {
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
 
-	const req = {
-		inputText: inputText,
-		//has to change to word amount in FE
-		responseLengthInWords: summaryLength,
-		summaryType: summaryType,
-		temperature: summaryTone,
-	};
 	function summarizeText(): void {
 		setCurrentComponent(3);
+
+		const req = {
+			inputText: inputText,
+			//has to change to word amount in FE
+			responseLengthInWords: summaryLength,
+			summaryType: summaryType,
+			temperature: summaryTone,
+		};
 
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		};
+		console.log('input characters', inputText.length);
 		axios
+
 			.post(`${backend_url}/summarize/text`, req, config)
 
 			.then((res: any) => {
@@ -51,7 +54,7 @@ const SummarySettings: FC = (): ReactElement => {
 				//redirect to output component
 			})
 			.catch((err: any) => {
-				console.log('err', err);
+				console.log({ err });
 			});
 	}
 
@@ -74,14 +77,14 @@ const SummarySettings: FC = (): ReactElement => {
 						</button>
 						<span className="relative inline-flex">
 							<button
-								disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+								disabled={userObject.maxResponseWords < 300}
 								onClick={() => setLength(300)}
 								className={` flex-shrink  ${summaryLength === 300 ? clickedClasses : defaultClasses}
 							focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50 `}
 							>
 								300 words
 							</button>
-							{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+							{userObject.maxResponseWords < 300 && (
 								<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
 									{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
 									<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
@@ -92,14 +95,14 @@ const SummarySettings: FC = (): ReactElement => {
 						</span>
 						<span className="relative inline-flex">
 							<button
-								disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+								disabled={userObject.maxResponseWords < 500}
 								onClick={() => setLength(500)}
 								className={`flex-shrink ${summaryLength === 500 ? clickedClasses : defaultClasses}
 								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50`}
 							>
 								500 words
 							</button>
-							{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+							{userObject.maxResponseWords < 500 && (
 								<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
 									{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
 									<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
@@ -119,7 +122,7 @@ const SummarySettings: FC = (): ReactElement => {
 							className={`flex-shrink ${summaryType === 0 ? clickedClasses : defaultClasses}
 								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 						>
-							short
+							normal
 						</button>
 						<button
 							onClick={() => setType(1)}

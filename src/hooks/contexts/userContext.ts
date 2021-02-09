@@ -5,6 +5,8 @@ type UserObj = {
 	maxSessionWords: number;
 	maxResponseWords: number;
 	stripeCustomerId: string;
+	currentSessionCount: number;
+	maxMonthlySessionCount: number;
 };
 
 export type UserContextType = {
@@ -17,9 +19,11 @@ export type UserContextType = {
 		maxSessionWords: number;
 		maxResponseWords: number;
 		stripeCustomerId: string;
+		currentSessionCount: number;
+		maxMonthlySessionCount: number;
 	};
 	setUserPlan: (userPlan: string) => void;
-	setToken: (token: string) => void;
+	setToken: (key: string) => void;
 	setJwtReceived: (jwtReceived: boolean) => void;
 	setIsAuthenticating: (isAuthenticating: boolean) => void;
 	setUserObject: (userObject: UserObj) => void;
@@ -35,6 +39,8 @@ export const UserContext = createContext<UserContextType>({
 		maxSessionWords: 0,
 		maxResponseWords: 0,
 		stripeCustomerId: '',
+		currentSessionCount: 0,
+		maxMonthlySessionCount: 0,
 	},
 	setUserPlan: userPlan => console.warn('userplan_missing'),
 	setToken: token => console.warn('token_missing'),
