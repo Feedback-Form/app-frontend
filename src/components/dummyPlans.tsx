@@ -34,7 +34,7 @@ const DummyPlans: FC = (): ReactElement => {
 			});
 	}
 	return (
-		<section className="absolute h-full w-full bg-white">
+		<section className=" h-full w-full bg-white">
 			<div className="flex justify-center h-full w-full items-center space-x-10">
 				<div className="w-3/4 md:w-1/3 xl:w-1/4  rounded-md px-10 py-8  text-center">
 					<button

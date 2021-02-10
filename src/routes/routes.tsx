@@ -9,6 +9,7 @@ import DocumentsPage from '../pages/docsPage';
 import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
+import StatusPage from '../components/statusPage';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -119,36 +120,17 @@ const Routes: FC = (): ReactElement => {
 					setUserObject,
 				}}
 			>
-				{/* <Route exact path="/" render={() => <Redirect to="/summarize" />} /> */}
+				{/* <Route exact path="/" render={() => <Redirect to="/success" />} /> */}
 				{redirect && <Redirect to="/login" />}
+
 				<Route path="/login" render={() => <LoginPage />} />
 				<Route exact path="/summarize" render={() => <SummarizePage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
-				<Route
-					path="/success"
-					render={() => (
-						<>
-							{' '}
-							<div>
-								<h1 className="text-gray-900">success</h1>
-							</div>
-						</>
-					)}
-				/>
-				<Route
-					path="/cancelled"
-					render={() => (
-						<>
-							{' '}
-							<div>
-								<h1 className="text-gray-900">cancelled</h1>
-							</div>
-						</>
-					)}
-				/>
+				<Route path="/success" render={() => <StatusPage success={true} destinationPathName={'summarize'} />} />
+				<Route path="/cancelled" render={() => <StatusPage success={false} destinationPathName={'summarize'} />} />
 
 				{/* <Route
 				exact

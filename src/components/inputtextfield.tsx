@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useContext } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 //hooks
 import { useCharacterState } from '../hooks/hooks';
