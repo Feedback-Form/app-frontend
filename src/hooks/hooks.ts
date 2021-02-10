@@ -1,23 +1,24 @@
 import { useState } from 'react';
 
-export const useWordState = (initialWords: string) => {
+export const useCharacterState = (initialCharacters: string) => {
 	//count the words based on the initialWords input
-	const curWordCount = (initialWords.match(/\s/g) || []).length;
-	const [words, setWords] = useState(initialWords);
+	const [words, setWords] = useState(initialCharacters);
 
-	const [wordCount, setWordCount] = useState(curWordCount);
+	const [characterCount, setCharacterCount] = useState(initialCharacters.length);
 
 	const handleChange = (e: { target: { value: any } }) => {
 		const curWords = e.target.value;
+		//set the current words
 		setWords(curWords);
-		const curWordCount = (curWords.match(/\s/g) || []).length;
-		setWordCount(curWordCount);
+		//set the current characters
+		const curCharacterCount = curWords.length;
+		setCharacterCount(curCharacterCount);
 	};
 	const reset = () => {
 		setWords('');
-		setWordCount(0);
+		setCharacterCount(0);
 	};
-	return [words, wordCount, handleChange, setWords, reset] as const;
+	return [words, characterCount, handleChange, setWords, reset] as const;
 };
 
 export const useInputState = (initiaVal: string) => {
@@ -30,3 +31,24 @@ export const useInputState = (initiaVal: string) => {
 	};
 	return [input, handleChange, reset] as const;
 };
+
+//not needed
+// export const useWordState = (initialWords: string) => {
+// 	//count the words based on the initialWords input
+// 	const curWordCount = (initialWords.match(/\s/g) || []).length;
+// 	const [words, setWords] = useState(initialWords);
+
+// 	const [wordCount, setWordCount] = useState(curWordCount);
+
+// 	const handleChange = (e: { target: { value: any } }) => {
+// 		const curWords = e.target.value;
+// 		setWords(curWords);
+// 		const curWordCount = (curWords.match(/\s/g) || []).length;
+// 		setWordCount(curWordCount);
+// 	};
+// 	const reset = () => {
+// 		setWords('');
+// 		setWordCount(0);
+// 	};
+// 	return [words, wordCount, handleChange, setWords, reset] as const;
+// };

@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { useWordState } from '../../hooks/hooks';
+import { useCharacterState } from '../../hooks/hooks';
 import { useText } from '../../hooks/contexts/summaryContext';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -8,7 +8,7 @@ const token =
 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 const TranscriptionOutput: FC = (): ReactElement => {
 	const { outputText, setOutputText } = useText();
-	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(outputText);
+	const [fullText, characterCount, handleWordChange, resetWords] = useCharacterState(outputText);
 	const [redirect, setRedirect] = useState(false);
 	const [id, setId] = useState('luk_375');
 

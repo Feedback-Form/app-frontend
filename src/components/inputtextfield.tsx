@@ -1,15 +1,15 @@
 import React, { FC, ReactElement, useState, useContext } from 'react';
 
 //hooks
-import { useWordState } from '../hooks/hooks';
+import { useCharacterState } from '../hooks/hooks';
 import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const InputTextfield: FC = (): ReactElement => {
 	// const [maxWords, setMaxWords] = useState(300);
-	const { inputText, setInputText, setCurrentComponent, setWordLimitReached, wordLimitReached } = useText();
+	const { inputText, setInputText, setCurrentComponent, setCharacterLimitReached, characterLimitReached } = useText();
 
-	const [fullText, wordCount, handleWordChange, setWords, resetWords] = useWordState(inputText);
+	const [fullText, characterCount, handleWordChange, setWords, resetWords] = useCharacterState(inputText);
 	const { userObject } = useUserData();
 
 	return (
@@ -23,13 +23,13 @@ const InputTextfield: FC = (): ReactElement => {
 					onChange={e => {
 						handleWordChange(e);
 						setInputText(fullText);
-						setWordLimitReached(wordCount > userObject.maxSessionWords);
-						console.log('jwqe', wordLimitReached);
+						setCharacterLimitReached(characterCount > userObject.maxSessionCharacters);
+						console.log('jwqe', characterLimitReached);
 					}}
 					onPaste={e => {
 						setWords(e.clipboardData.getData('Text'));
 						setInputText(fullText);
-						setWordLimitReached(wordCount > userObject.maxSessionWords);
+						setCharacterLimitReached(characterCount > userObject.maxSessionCharacters);
 					}}
 					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
 						focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
@@ -39,7 +39,7 @@ const InputTextfield: FC = (): ReactElement => {
 			</div>
 			<div className="flex justify-between w-3/4 items-center">
 				<button
-					disabled={wordLimitReached}
+					disabled={characterLimitReached}
 					onClick={() => {
 						setInputText(fullText);
 						setCurrentComponent(2);
@@ -50,7 +50,7 @@ const InputTextfield: FC = (): ReactElement => {
 				</button>
 				<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-2">
 					<span className="tracking-wider font-medium">
-						{wordCount} / {userObject.maxSessionWords} words
+						{characterCount} / {userObject.maxSessionCharacters} characters
 					</span>
 				</div>
 			</div>

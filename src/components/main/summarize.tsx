@@ -2,17 +2,17 @@ import React, { FC, ReactElement, useEffect } from 'react';
 
 import InputTextfield from '../inputtextfield';
 import SummarySettings from '../summarysettings';
-import OutputTextfield from '../vault/outputtexfield';
+import OutputTextfield from '../outputtexfield';
 import { CSSTransition } from 'react-transition-group';
 import { useText } from '../../hooks/contexts/summaryContext';
 
 import Uploading from '../uploading';
 const Summarize: FC = (): ReactElement => {
-	const { currentComponent, setCurrentComponent, wordLimitReached } = useText();
+	const { currentComponent, setCurrentComponent, characterLimitReached } = useText();
 
 	useEffect(() => {
 		console.log('rerender');
-	}, [wordLimitReached]);
+	}, [characterLimitReached]);
 
 	// console.log('parent:', { text: inputText, summaryLength: summaryLength });
 
@@ -33,7 +33,7 @@ const Summarize: FC = (): ReactElement => {
 
 			<div className="w-full items-center justify-center flex  space-x-6">
 				<button
-					disabled={wordLimitReached}
+					disabled={characterLimitReached}
 					onClick={() => {
 						setCurrentComponent(1);
 					}}
@@ -42,14 +42,14 @@ const Summarize: FC = (): ReactElement => {
 					}`}
 				></button>
 				<button
-					disabled={wordLimitReached}
+					disabled={characterLimitReached}
 					onClick={() => setCurrentComponent(2)}
 					className={`focus:outline-none  disabled:opacity-50 rounded-full h-5 w-5 ${
 						currentComponent === 2 ? 'bg-indigo-500' : 'bg-gray-300'
 					}`}
 				></button>
 				<button
-					disabled={wordLimitReached}
+					disabled={characterLimitReached}
 					onClick={() => setCurrentComponent(4)}
 					className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${
 						currentComponent === 4 ? 'bg-indigo-500' : 'bg-gray-300'

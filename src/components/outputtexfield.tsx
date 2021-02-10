@@ -2,19 +2,19 @@ import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
 
 //components
-import LoadingWidget from '../loadingWidget';
+import LoadingWidget from './loadingWidget';
 
 //hooks
-import { useWordState } from '../../hooks/hooks';
-import { useText } from '../../hooks/contexts/summaryContext';
+import { useCharacterState } from '../hooks/hooks';
+import { useText } from '../hooks/contexts/summaryContext';
 
-import { useUserData } from '../../hooks/contexts/userContext';
+import { useUserData } from '../hooks/contexts/userContext';
 
 const backend_url = 'http://localhost:5000';
 
 const OutputTextfield: FC = (): ReactElement => {
 	const { outputText, setOutputText, inputText } = useText();
-	const [fullText, wordCount, handleWordChange, resetWords] = useWordState(outputText);
+	const [fullText, characterCount, handleWordChange, resetWords] = useCharacterState(outputText);
 	const [isLoading, setLoading] = useState(false);
 	const { token } = useUserData();
 

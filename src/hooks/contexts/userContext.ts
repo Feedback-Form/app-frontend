@@ -2,11 +2,11 @@ import { createContext, useContext } from 'react';
 
 type UserObj = {
 	productName: string;
-	maxSessionWords: number;
-	maxResponseWords: number;
 	stripeCustomerId: string;
 	currentSessionCount: number;
 	maxMonthlySessionCount: number;
+	maxResponseCharacters: number;
+	maxSessionCharacters: number;
 };
 
 export type UserContextType = {
@@ -16,11 +16,11 @@ export type UserContextType = {
 	isAuthenticating: boolean;
 	userObject: {
 		productName: string;
-		maxSessionWords: number;
-		maxResponseWords: number;
 		stripeCustomerId: string;
 		currentSessionCount: number;
 		maxMonthlySessionCount: number;
+		maxResponseCharacters: number;
+		maxSessionCharacters: number;
 	};
 	setUserPlan: (userPlan: string) => void;
 	setToken: (key: string) => void;
@@ -36,11 +36,11 @@ export const UserContext = createContext<UserContextType>({
 	isAuthenticating: true,
 	userObject: {
 		productName: '',
-		maxSessionWords: 0,
-		maxResponseWords: 0,
 		stripeCustomerId: '',
 		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
+		maxResponseCharacters: 0,
+		maxSessionCharacters: 0,
 	},
 	setUserPlan: userPlan => console.warn('userplan_missing'),
 	setToken: token => console.warn('token_missing'),

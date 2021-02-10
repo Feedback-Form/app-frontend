@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
 //hooks
-import { useWordState } from '../hooks/hooks';
+import { useCharacterState } from '../hooks/hooks';
 import { useSingleDocContext } from '../hooks/contexts/singleDocContext';
 import { useUserData } from '../hooks/contexts/userContext';
 //components
@@ -13,9 +13,9 @@ const backend_url = 'http://localhost:5000';
 const EditDocument: FC = (): ReactElement => {
 	const { title, transcript, gptThreeSummary, docId } = useSingleDocContext();
 
-	const [summaryLocal, wordCountOne, handleWordChangeOne, resetWordsOne] = useWordState(gptThreeSummary);
-	const [transcriptLocal, wordCountTwo, handleWordChangeTwo, resetWordsTwo] = useWordState(transcript);
-	const [titleLocal, wordCountThree, handleWordChangeThree, resetWordsThree] = useWordState(title);
+	const [summaryLocal, characterCountOne, handleWordChangeOne, resetWordsOne] = useCharacterState(gptThreeSummary);
+	const [transcriptLocal, characterCountTwo, handleWordChangeTwo, resetWordsTwo] = useCharacterState(transcript);
+	const [titleLocal, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState(title);
 	const { token } = useUserData();
 
 	const [isLoading, setIsLoading] = useState(false);

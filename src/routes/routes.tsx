@@ -9,7 +9,6 @@ import DocumentsPage from '../pages/docsPage';
 import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
-// import TranscribePage from '../pages/transcribe';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -31,13 +30,13 @@ interface UserObj {
 			stripeCustomerId: string;
 		};
 		usage: {
-			words: {
-				maxSessionWords: number;
-				maxResponseWords: number;
-			};
 			sessions: {
 				currentSessionCount: number;
 				maxMonthlySessionCount: number;
+			};
+			characters: {
+				maxSessionCharacters: number;
+				maxResponseCharacters: number;
 			};
 		};
 	};
@@ -53,11 +52,11 @@ const Routes: FC = (): ReactElement => {
 	const [isAuthenticating, setIsAuthenticating] = useState(true);
 	const [userObject, setUserObject] = useState({
 		productName: '',
-		maxSessionWords: 0,
-		maxResponseWords: 0,
 		stripeCustomerId: '',
 		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
+		maxSessionCharacters: 0,
+		maxResponseCharacters: 0,
 	});
 
 	console.log('jwt received 🍀', jwtReceived);
@@ -85,11 +84,11 @@ const Routes: FC = (): ReactElement => {
 
 						setUserObject({
 							productName: res.data.user.billing.subscription.productName,
-							maxSessionWords: res.data.user.usage.words.maxSessionWords,
-							maxResponseWords: res.data.user.usage.words.maxResponseWords,
 							stripeCustomerId: res.data.user.billing.stripeCustomerId,
 							currentSessionCount: res.data.user.usage.sessions.currentSessionCount,
 							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
+							maxSessionCharacters: res.data.user.usage.characters.maxSessionCharacters,
+							maxResponseCharacters: res.data.user.usage.characters.maxResponseCharacters,
 						});
 
 						setIsAuthenticating(false);

@@ -50,7 +50,7 @@ const AudioDropzone: FC = (): ReactElement => {
 				<input
 					{...getInputProps()}
 					className="w-full h-full rounded-md  tracking-wide
-						 transition-all ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 
+						 transition-all ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500
 						"
 				/>
 				{isDragAccept && <p className="text-xl text-green-400 font-medium w-full">Your file will be accepted.</p>}

@@ -2,7 +2,6 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 //hooks
-import { useWordState } from '../hooks/hooks';
 import { DocsContext } from '../hooks/contexts/docsContext';
 import { useUserData } from '../hooks/contexts/userContext';
 //components
