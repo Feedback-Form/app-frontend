@@ -6,9 +6,6 @@ import axios from 'axios';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 declare class Stripe {
 	constructor(publicKey: string);
 	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
@@ -30,7 +27,7 @@ const Sidebar: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.post(`${backend_url}/customer-portal`, req, config)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`, req, config)
 			.then((res: any) => {
 				// console.log(res.data);
 				window.location.href = res.data.url;
@@ -48,7 +45,7 @@ const Sidebar: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.post(`${backend_url}/user/logout`, {}, config)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/logout`, {}, config)
 			.then((res: any) => {
 				//clear localStorage
 				localStorage.clear();
@@ -64,7 +61,7 @@ const Sidebar: FC = (): ReactElement => {
 			priceId,
 		};
 		axios
-			.post(`${backend_url}/create-checkout-session`, req)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`, req)
 			.then((res: any) => {
 				//redirect to checkout session
 				stripe

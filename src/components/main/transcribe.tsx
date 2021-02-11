@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useReducer, createContext } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import AudioDropzone from '../vault/audiodropzone';
 

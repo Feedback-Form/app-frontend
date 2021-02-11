@@ -7,9 +7,6 @@ import { useUserData } from '../hooks/contexts/userContext';
 //components
 import LoadingWidget from './loadingWidget';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 const EditDocument: FC = (): ReactElement => {
 	const { title, transcript, gptThreeSummary, docId } = useSingleDocContext();
 
@@ -35,7 +32,7 @@ const EditDocument: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.patch(`${backend_url}/document/edit/${docId}`, req, config)
+			.patch(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/edit/${docId}`, req, config)
 			.then((res: any) => {
 				console.log('patch res', res);
 				setIsLoading(false);

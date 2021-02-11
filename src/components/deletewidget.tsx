@@ -4,9 +4,6 @@ import axios from 'axios';
 import { useDocsContext } from '../hooks/contexts/docsContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 const DeleteWidget = (): ReactElement => {
 	const { docName, docId, setDeleteRequest } = useDocsContext();
 	const { token } = useUserData();
@@ -19,7 +16,7 @@ const DeleteWidget = (): ReactElement => {
 	function deleteDocument(): void {
 		//add a loading toggler
 		axios
-			.delete(`${backend_url}/document/delete/${docId}`, config)
+			.delete(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/delete/${docId}`, config)
 			.then((res: any) => {
 				console.log('success', res);
 				setDeleteRequest(false);

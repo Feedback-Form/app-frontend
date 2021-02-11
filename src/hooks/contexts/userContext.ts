@@ -48,4 +48,4 @@ export const UserContext = createContext<UserContextType>({
 	setIsAuthenticating: isAuthenticating => console.warn('isauthenticating_missing'),
 	setUserObject: useObject => console.warn('userobj_missing'),
 });
-export const useUserData = () => useContext(UserContext);
+export const useUserData = (): any => useContext(UserContext);

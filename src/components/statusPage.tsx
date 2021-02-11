@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useEffect } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 type StatusPageProps = {
 	success: boolean;

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 // const audioUpload: FC = (): ReactElement => {

@@ -8,8 +8,6 @@ import ResponseWidget from './responseWidget';
 import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
-const backend_url = 'http://localhost:5000';
-
 const SummarySettings: FC = (): ReactElement => {
 	const {
 		setLength,
@@ -49,7 +47,7 @@ const SummarySettings: FC = (): ReactElement => {
 		console.log('req', req);
 		axios
 
-			.post(`${backend_url}/summarize/text`, req, config)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/summarize/text`, req, config)
 
 			.then((res: any) => {
 				console.log('POST res', res);
@@ -59,15 +57,19 @@ const SummarySettings: FC = (): ReactElement => {
 			})
 			.catch((err: any) => {
 				console.log({ err });
+				setCurrentComponent(2);
 				setResMessage(err.message);
 				setErrWidget(true);
-				setCurrentComponent(2);
+				setTimeout(() => {
+					setErrWidget(false);
+				}, 5000);
 			});
 	}
 
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-10">
-			<ResponseWidget success={false} response={resMessage} />
+			{errWidget && <ResponseWidget success={false} response={resMessage} />}
+
 			<div className="flex items-start w-3/4">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
 			</div>

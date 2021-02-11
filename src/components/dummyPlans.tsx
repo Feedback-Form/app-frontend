@@ -3,9 +3,6 @@ import React, { ReactElement, FC } from 'react';
 // import { redirectToCheckout } from '@stripe/stripe-js';
 import axios from 'axios';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 declare class Stripe {
 	constructor(publicKey: string);
 	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
@@ -18,7 +15,7 @@ const DummyPlans: FC = (): ReactElement => {
 			priceId,
 		};
 		axios
-			.post(`${backend_url}/create-checkout-session`, req)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`, req)
 			.then((res: any) => {
 				//redirect to checkout session
 				stripe

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 
 //components
 import Sidebar from '../components/sidebar';
@@ -8,9 +8,6 @@ import AuthenticationWidget from '../components/authenticationWidget';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 import { SummaryContext } from '../hooks/contexts/summaryContext';
-
-//const
-const backend_url = 'http://localhost:5000';
 
 const SummarizePage: FC = (): ReactElement => {
 	//summaryContext related

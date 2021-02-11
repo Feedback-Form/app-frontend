@@ -21,4 +21,4 @@ export const SingleDocContext = createContext<SingleDocumentContextType>({
 	setGptThreeSummary: gptThreeSummary => console.warn('gptThreeSummary_missing'),
 	setDocId: docId => console.warn('docId_missing'),
 });
-export const useSingleDocContext = () => useContext(SingleDocContext);
+export const useSingleDocContext = (): any => useContext(SingleDocContext);

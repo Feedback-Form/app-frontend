@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import Sidebar from '../components/sidebar';
 import Transcribe from '../components/main/transcribe';
 const TranscribePage: FC = (): ReactElement => {

@@ -8,9 +8,6 @@ import { useUserData } from '../hooks/contexts/userContext';
 //components
 import LoadingWidget from '../components/loadingWidget';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 const LoginPage: FC = (): ReactElement => {
 	const [email, handleEmailChange, resetEmail] = useInputState('');
 	const [password, handlePasswordChange, resetPassword] = useInputState('');
@@ -23,7 +20,7 @@ const LoginPage: FC = (): ReactElement => {
 	function loginUser(email: string, password: string): void {
 		setIsLoading(true);
 		axios
-			.post(`${backend_url}/user/login`, { email, password })
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/login`, { email, password })
 			.then((res: any) => {
 				console.log('res', res.data.token);
 

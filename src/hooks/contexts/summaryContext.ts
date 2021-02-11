@@ -33,4 +33,5 @@ export const SummaryContext = createContext<TextContextType>({
 	setCurrentComponent: currentComponent => console.warn('currentComponent_missing'),
 	setCharacterLimitReached: characterLimitReached => console.warn('wordlimit_missing'),
 });
-export const useText = () => useContext(SummaryContext);
+// @typescript-eslint/explicit-module-boundary-types
+export const useText = (): any => useContext(SummaryContext);

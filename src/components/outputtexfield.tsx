@@ -10,8 +10,6 @@ import { useText } from '../hooks/contexts/summaryContext';
 
 import { useUserData } from '../hooks/contexts/userContext';
 
-const backend_url = 'http://localhost:5000';
-
 const OutputTextfield: FC = (): ReactElement => {
 	const { outputText, setOutputText, inputText } = useText();
 	const [fullText, characterCount, handleWordChange, resetWords] = useCharacterState(outputText);
@@ -30,7 +28,7 @@ const OutputTextfield: FC = (): ReactElement => {
 	function postDocument(): void {
 		setLoading(true);
 		axios
-			.post(`${backend_url}/document/create`, req, config)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/create`, req, config)
 			.then((res: any) => {
 				console.log('POST res', res);
 				setLoading(false);

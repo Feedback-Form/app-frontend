@@ -9,9 +9,6 @@ import DeleteWidget from './deletewidget';
 import Uploading from './uploading';
 import LoadingWidget from './loadingWidget';
 
-//const
-const backend_url = 'http://localhost:5000';
-
 type Document = {
 	_id: string;
 	title: string;
@@ -58,7 +55,7 @@ const Documents: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.get(`${backend_url}/documents`, config)
+			.get(`${process.env.REACT_APP_SCRPTAI_BACKEND}/documents`, config)
 			.then((res: any) => {
 				setDocuments(res.data);
 				setIsLoading(false);

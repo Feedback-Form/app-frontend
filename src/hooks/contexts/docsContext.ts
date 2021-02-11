@@ -18,4 +18,4 @@ export const DocsContext = createContext<docsContextType>({
 	setDocId: docId => console.warn('docId_missing'),
 });
 
-export const useDocsContext = () => useContext(DocsContext);
+export const useDocsContext = (): any => useContext(DocsContext);

@@ -3,7 +3,6 @@ import { useCharacterState } from '../../hooks/hooks';
 import { useText } from '../../hooks/contexts/summaryContext';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-const backend_url = 'http://localhost:5000';
 const token =
 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE5YmU0YTRiZmE4OTU5NmYwYjk4NjQiLCJpYXQiOjE2MTIyOTk4NTAsImV4cCI6MTYxNDg5MTg1MH0.oNtSKQOG4fUTGCmc28dM72vc9eAZZrVvcL31XNffO1s';
 const TranscriptionOutput: FC = (): ReactElement => {
@@ -23,7 +22,7 @@ const TranscriptionOutput: FC = (): ReactElement => {
 
 	function postDocument(): void {
 		axios
-			.post(`${backend_url}/document/create`, req, config)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/create`, req, config)
 			.then((res: any) => {
 				console.log('POST res', res);
 				setId(res.data._id);

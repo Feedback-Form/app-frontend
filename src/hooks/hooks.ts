@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useCharacterState = (initialCharacters: string) => {
+export const useCharacterState = (initialCharacters: string): any => {
 	//count the words based on the initialWords input
 	const [words, setWords] = useState(initialCharacters);
 
@@ -21,7 +21,7 @@ export const useCharacterState = (initialCharacters: string) => {
 	return [words, characterCount, handleChange, setWords, reset] as const;
 };
 
-export const useInputState = (initiaVal: string) => {
+export const useInputState = (initiaVal: string): any => {
 	const [input, setInput] = useState(initiaVal);
 	const handleChange = (e: { target: { value: any } }) => {
 		setInput(e.target.value);

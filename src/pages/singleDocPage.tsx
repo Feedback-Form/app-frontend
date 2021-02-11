@@ -14,9 +14,6 @@ type ParamType = {
 	id: string;
 };
 
-//const
-const backend_url = 'http://localhost:5000';
-
 const SingleDocPage: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -40,7 +37,7 @@ const SingleDocPage: FC = (): ReactElement => {
 		};
 
 		axios
-			.get(`${backend_url}/document/${docId}`, config)
+			.get(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/${docId}`, config)
 			.then((res: any) => {
 				//check if the props are there
 				const title = res.data?.title || '';

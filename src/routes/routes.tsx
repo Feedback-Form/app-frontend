@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, createContext, useContext, useState, useEffect } from 'react';
+import React, { FC, ReactElement, useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 
 import axios from 'axios';
@@ -14,9 +14,6 @@ import StatusPage from '../components/statusPage';
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
-
-//const
-const backend_url = 'http://localhost:5000';
 
 type AuthToken = {
 	auth_token: string;
@@ -79,7 +76,7 @@ const Routes: FC = (): ReactElement => {
 				};
 
 				axios
-					.get<UserObj>(`${backend_url}/user/info`, config)
+					.get<UserObj>(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`, config)
 					.then(res => {
 						console.log('userobj', res);
 
