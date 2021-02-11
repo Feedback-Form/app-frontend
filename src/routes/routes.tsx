@@ -117,9 +117,8 @@ const Routes: FC = (): ReactElement => {
 					setUserObject,
 				}}
 			>
-				{/* <Route exact path="/" render={() => <Redirect to="/success" />} /> */}
 				{redirect && <Redirect to="/login" />}
-
+				<Route exact path="/" render={() => <Redirect to="/login" />} />
 				<Route path="/login" render={() => <LoginPage />} />
 				<Route exact path="/summarize" render={() => <SummarizePage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
