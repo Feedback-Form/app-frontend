@@ -1,6 +1,9 @@
 import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
 
+//components
+import ResponseWidget from './responseWidget';
+
 //hooks
 import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
@@ -21,6 +24,8 @@ const SummarySettings: FC = (): ReactElement => {
 		setCurrentComponent,
 	} = useText();
 	const { token, userObject } = useUserData();
+	const [errWidget, setErrWidget] = useState(false);
+	const [resMessage, setResMessage] = useState('');
 
 	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
 	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
@@ -54,11 +59,15 @@ const SummarySettings: FC = (): ReactElement => {
 			})
 			.catch((err: any) => {
 				console.log({ err });
+				setResMessage(err.message);
+				setErrWidget(true);
+				setCurrentComponent(2);
 			});
 	}
 
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-10">
+			<ResponseWidget success={false} response={resMessage} />
 			<div className="flex items-start w-3/4">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
 			</div>
