@@ -1,7 +1,7 @@
-import React, { ReactElement, FC, useState } from 'react';
+import React, { ReactElement, FC, useState, useEffect } from 'react';
 import scrptAiLogo from '../images/scrptai_logo.svg';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 //hooks
 import { useInputState } from '../hooks/hooks';
 import { useUserData } from '../hooks/contexts/userContext';
@@ -9,13 +9,14 @@ import { useUserData } from '../hooks/contexts/userContext';
 import LoadingWidget from '../components/loadingWidget';
 
 const LoginPage: FC = (): ReactElement => {
+	const history = useHistory();
 	const [email, handleEmailChange, resetEmail] = useInputState('');
 	const [password, handlePasswordChange, resetPassword] = useInputState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const [redirect, setRedirect] = useState(false);
-	const { setToken, setJwtReceived, token } = useUserData();
+	const { setToken, setJwtReceived, token, jwtReceived } = useUserData();
 
 	function loginUser(email: string, password: string): void {
 		setIsLoading(true);
@@ -32,9 +33,10 @@ const LoginPage: FC = (): ReactElement => {
 				console.log('login_token', token);
 
 				setJwtReceived(true);
-
 				setIsLoading(false);
-				setRedirect(true);
+				history.push('/summarize');
+
+				//setRedirect(true);
 			})
 			.catch((err: any) => {
 				console.log(err);
@@ -47,7 +49,7 @@ const LoginPage: FC = (): ReactElement => {
 	return (
 		<div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12 font-scrptai">
 			{isLoading && <LoadingWidget />}
-			{redirect && <Redirect to="/summarize" />}
+			{/* {jwtReceived && <Redirect to="/summarize" />} */}
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
 					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
