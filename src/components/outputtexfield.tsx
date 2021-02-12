@@ -11,7 +11,7 @@ import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const OutputTextfield: FC = (): ReactElement => {
-	const { outputText, setOutputText, inputText } = useText();
+	const { outputText, setOutputText, inputText, inputRiskGroup } = useText();
 	const [fullText, characterCount, handleWordChange, resetWords] = useCharacterState(outputText);
 	const [isLoading, setLoading] = useState(false);
 	const { token } = useUserData();
@@ -24,6 +24,7 @@ const OutputTextfield: FC = (): ReactElement => {
 	const req = {
 		gptThreeSummary: fullText,
 		transcript: inputText,
+		inputRiskGroup: inputRiskGroup,
 	};
 	function postDocument(): void {
 		setLoading(true);

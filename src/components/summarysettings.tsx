@@ -20,6 +20,7 @@ const SummarySettings: FC = (): ReactElement => {
 		setOutputText,
 		currentComponent,
 		setCurrentComponent,
+		setInputRiskGroup,
 	} = useText();
 	const { token, userObject } = useUserData();
 	const [errWidget, setErrWidget] = useState(false);
@@ -51,7 +52,8 @@ const SummarySettings: FC = (): ReactElement => {
 
 			.then((res: any) => {
 				console.log('POST res', res);
-				setOutputText(res.data.choices[0].text);
+				setOutputText(res.data.gptSummary.text);
+				setInputRiskGroup(res.data.inputRiskGroup);
 				setCurrentComponent(4);
 				//redirect to output component
 			})

@@ -8,6 +8,7 @@ export type TextContextType = {
 	outputText: string;
 	currentComponent: number;
 	characterLimitReached: boolean;
+	inputRiskGroup: string;
 	setInputText: (text: string) => void;
 	setLength: (summaryLength: number) => void;
 	setType: (summaryType: number) => void;
@@ -15,6 +16,7 @@ export type TextContextType = {
 	setOutputText: (outputText: string) => void;
 	setCurrentComponent: (currentComponent: number) => void;
 	setCharacterLimitReached: (characterLimitReached: boolean) => void;
+	setInputRiskGroup: (inputRiskGroup: string) => void;
 };
 
 export const SummaryContext = createContext<TextContextType>({
@@ -25,6 +27,7 @@ export const SummaryContext = createContext<TextContextType>({
 	outputText: '',
 	currentComponent: 1,
 	characterLimitReached: false,
+	inputRiskGroup: '0',
 	setInputText: inputText => console.log('text_missing'),
 	setLength: summaryLength => console.warn('summaryLength_missing'),
 	setType: summaryType => console.warn('summaryType_missing'),
@@ -32,6 +35,7 @@ export const SummaryContext = createContext<TextContextType>({
 	setOutputText: outputText => console.warn('OutputText_missing'),
 	setCurrentComponent: currentComponent => console.warn('currentComponent_missing'),
 	setCharacterLimitReached: characterLimitReached => console.warn('wordlimit_missing'),
+	setInputRiskGroup: inputRiskGroup => console.warn('gptriskgroup_missing'),
 });
 // @typescript-eslint/explicit-module-boundary-types
 export const useText = (): any => useContext(SummaryContext);
