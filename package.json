@@ -36,7 +36,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet",
     "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
- 
+  "husky": {	
+    "hooks": {	
+      "pre-push": "npm run lint",	
+      "pre-commit": "pretty-quick --staged"	
+    }	
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
