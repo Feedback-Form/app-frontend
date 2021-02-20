@@ -180,27 +180,27 @@ const SummarySettings: FC = (): ReactElement => {
 						<div className="justify-items-center">
 							<h1 className="text-xl pb-8">Summary language</h1>
 
-							<div className="flex space-x-12">
+							<div className="flex gap-10 flex-wrap">
 								<button
 									onClick={() => setSummaryLanguage('English')}
 									className={`flex-shrink ${summaryLanguage === 'English' ? clickedClasses : defaultClasses}
 							focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 								>
-									English
+									🇺🇸 English
 								</button>
 								<button
 									onClick={() => setSummaryLanguage('German')}
 									className={`flex-shrink ${summaryLanguage === 'German' ? clickedClasses : defaultClasses}
 						focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 								>
-									German
+									🇩🇪 German
 								</button>
 								<button
 									onClick={() => setSummaryLanguage('Italian')}
 									className={`flex-shrink ${summaryLanguage === 'Italian' ? clickedClasses : defaultClasses}
 							focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 								>
-									Italian
+									🇮🇹 Italian
 								</button>
 								<span className="relative inline-flex">
 									<button
@@ -209,7 +209,43 @@ const SummarySettings: FC = (): ReactElement => {
 										className={` flex-shrink  ${summaryLanguage === 'Spanish' ? clickedClasses : defaultClasses}
 						focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50 `}
 									>
-										Spanish
+										🇪🇸 Spanish
+									</button>
+									{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+										<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
+											{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+											<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
+											{/* <span className="relative inline-flex rounded-full h-6 w-40 bg-purple-500 text-base ">Upgrade to unlock</span> */}
+											<h1 className="relative inline-flex text-xs text-white">Upgrade to unlock</h1>
+										</span>
+									)}
+								</span>
+								<span className="relative inline-flex">
+									<button
+										disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+										onClick={() => setSummaryLanguage('French')}
+										className={` flex-shrink  ${summaryLanguage === 'Spanish' ? clickedClasses : defaultClasses}
+						focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50 `}
+									>
+										🇫🇷 French
+									</button>
+									{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
+										<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
+											{/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+											<span className="text-center absolute inline-flex w-full h-full bg-yellow-500 rounded-full"></span>
+											{/* <span className="relative inline-flex rounded-full h-6 w-40 bg-purple-500 text-base ">Upgrade to unlock</span> */}
+											<h1 className="relative inline-flex text-xs text-white">Upgrade to unlock</h1>
+										</span>
+									)}
+								</span>
+								<span className="relative inline-flex">
+									<button
+										disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+										onClick={() => setSummaryLanguage('Swedish')}
+										className={` flex-shrink  ${summaryLanguage === 'Spanish' ? clickedClasses : defaultClasses}
+						focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center disabled:opacity-50 `}
+									>
+										🇸🇪 Swedish
 									</button>
 									{userObject.productName !== 'SCRPTAI_BASIC_PLAN' && (
 										<span className="flex absolute h-5 w-32 top-0 right-0 -mt-3  text-center items-center justify-center shadow-xs select-none">
