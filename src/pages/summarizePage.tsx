@@ -19,6 +19,7 @@ const SummarizePage: FC = (): ReactElement => {
 	const [currentComponent, setCurrentComponent] = useState(1);
 	const [characterLimitReached, setCharacterLimitReached] = useState(false);
 	const [inputRiskGroup, setInputRiskGroup] = useState('0');
+	const [summaryLanguage, setSummaryLanguage] = useState('English');
 
 	const { isAuthenticating } = useUserData();
 
@@ -41,6 +42,8 @@ const SummarizePage: FC = (): ReactElement => {
 				setCharacterLimitReached,
 				inputRiskGroup,
 				setInputRiskGroup,
+				summaryLanguage,
+				setSummaryLanguage,
 			}}
 		>
 			{isAuthenticating ? (

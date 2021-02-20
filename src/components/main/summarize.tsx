@@ -24,9 +24,9 @@ const Summarize: FC = (): ReactElement => {
 			<CSSTransition in={currentComponent === 2} timeout={400} classNames="menu-secondary" unmountOnExit>
 				<SummarySettings />
 			</CSSTransition>
-			<CSSTransition in={currentComponent === 3} timeout={400} classNames="menu-primary" unmountOnExit>
+			{/* <CSSTransition in={currentComponent === 3} timeout={400} classNames="menu-primary" unmountOnExit>
 				<Uploading message="Your text is being summarized." />
-			</CSSTransition>
+			</CSSTransition> */}
 			<CSSTransition in={currentComponent === 4} timeout={400} classNames="menu-primary" unmountOnExit>
 				<OutputTextfield />
 			</CSSTransition>
