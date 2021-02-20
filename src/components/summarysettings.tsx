@@ -180,7 +180,7 @@ const SummarySettings: FC = (): ReactElement => {
 						<div className="justify-items-center">
 							<h1 className="text-xl pb-8">Summary language</h1>
 
-							<div className="flex gap-10 flex-wrap">
+							<div className="flex gap-10 flex-wrap max-w-5xl">
 								<button
 									onClick={() => setSummaryLanguage('English')}
 									className={`flex-shrink ${summaryLanguage === 'English' ? clickedClasses : defaultClasses}
