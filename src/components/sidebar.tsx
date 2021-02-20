@@ -187,12 +187,12 @@ const Sidebar: FC = (): ReactElement => {
 					{/* <NavLink exact to="/settings"> */}
 					<li className="list-none">
 						<button
-							disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+							disabled={userObject.stripeCustomerId === ''}
 							onClick={() => {
 								customerPortalHandler();
 							}}
 							className={` ${
-								userObject.productName !== 'SCRPTAI_BASIC_PLAN'
+								userObject.stripeCustomerId === ''
 									? 'text-gray-400 cursor-not-allowed'
 									: 'hover:bg-indigo-200 hover:text-indigo-600 text-gray-600 '
 							}  flex items-center disabled:opacity-50
