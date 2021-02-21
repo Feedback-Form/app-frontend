@@ -80,13 +80,13 @@ const SummarySettings: FC = (): ReactElement => {
 			{isLoading ? (
 				<Uploading message="Your text is being summarized." />
 			) : (
-				<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-10">
+				<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-4 xl:space-y-10">
 					<div className="flex items-start w-3/4">
 						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
 					</div>
-					<div className="w-3/4 h-3/4 rounded-md  space-y-12 ">
+					<div className="w-3/4 h-3/4 rounded-md  space-y-4 xl:space-y-8">
 						<div className="justify-items-center">
-							<h1 className="text-xl pb-8">Summary length</h1>
+							<h1 className="text-xl pb-4">Summary length</h1>
 
 							<div className="flex space-x-12">
 								<button
@@ -124,7 +124,7 @@ const SummarySettings: FC = (): ReactElement => {
 							</div>
 						</div>
 						<div className="justify-items-center">
-							<h1 className="text-xl pb-8">Summary type</h1>
+							<h1 className="text-xl pb-4">Summary type</h1>
 
 							<div className="flex space-x-12">
 								<button
@@ -151,7 +151,7 @@ const SummarySettings: FC = (): ReactElement => {
 							</div>
 						</div>
 						<div className="justify-items-center">
-							<h1 className="text-xl pb-8">Summary tone</h1>
+							<h1 className="text-xl pb-4">Summary tone</h1>
 
 							<div className="flex space-x-12">
 								<button
@@ -178,7 +178,7 @@ const SummarySettings: FC = (): ReactElement => {
 							</div>
 						</div>
 						<div className="justify-items-center">
-							<h1 className="text-xl pb-8">Summary language</h1>
+							<h1 className="text-xl pb-4">Summary language</h1>
 
 							<div className="flex gap-10 flex-wrap max-w-5xl">
 								<button
