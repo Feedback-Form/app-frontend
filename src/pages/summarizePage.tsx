@@ -12,14 +12,14 @@ import { SummaryContext } from '../hooks/contexts/summaryContext';
 const SummarizePage: FC = (): ReactElement => {
 	//summaryContext related
 	const [inputText, setInputText] = useState('');
-	const [summaryLength, setLength] = useState(500);
+	const [summaryLength, setLength] = useState(100);
 	const [summaryType, setType] = useState(0);
 	const [summaryTone, setTone] = useState(0);
 	const [outputText, setOutputText] = useState('');
 	const [currentComponent, setCurrentComponent] = useState(1);
 	const [characterLimitReached, setCharacterLimitReached] = useState(false);
 	const [inputRiskGroup, setInputRiskGroup] = useState('0');
-	const [summaryLanguage, setSummaryLanguage] = useState('English');
+	const [summaryLanguage, setSummaryLanguage] = useState('english');
 
 	const { isAuthenticating } = useUserData();
 

@@ -32,6 +32,21 @@ export const useInputState = (initiaVal: string): any => {
 	return [input, handleChange, reset] as const;
 };
 
+export const useWordState = (initialCharacters: string): any => {
+	//count the words based on the initialWords input
+	const [words, setWords] = useState(initialCharacters);
+
+	const handleChange = (e: { target: { value: any } }) => {
+		const curWords = e.target.value;
+		//set the current words
+		setWords(curWords);
+	};
+	const reset = () => {
+		setWords('');
+	};
+	return [words, handleChange, setWords, reset] as const;
+};
+
 //not needed
 // export const useWordState = (initialWords: string) => {
 // 	//count the words based on the initialWords input

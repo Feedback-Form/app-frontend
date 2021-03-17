@@ -127,16 +127,6 @@ const Routes: FC = (): ReactElement => {
 				<Route path="/plans" render={() => <DummyPlans />} />
 				<Route path="/success" render={() => <StatusPage success={true} destinationPathName={'summarize'} />} />
 				<Route path="/cancelled" render={() => <StatusPage success={false} destinationPathName={'summarize'} />} />
-
-				{/* <Route
-				exact
-				path="/transcribe"
-				render={() => (
-					<UserContext.Provider value={{ userPlan }}>
-						<TranscribePage />
-					</UserContext.Provider>
-				)}
-			/> */}
 			</UserContext.Provider>
 		</Switch>
 	);

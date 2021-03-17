@@ -1,7 +1,7 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 
 //hooks
-import { useCharacterState } from '../hooks/hooks';
+import { useWordState } from '../hooks/hooks';
 import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
@@ -9,27 +9,41 @@ const InputTextfield: FC = (): ReactElement => {
 	// const [maxWords, setMaxWords] = useState(300);
 	const { inputText, setInputText, setCurrentComponent, setCharacterLimitReached, characterLimitReached } = useText();
 
-	const [fullText, characterCount, handleWordChange, setWords, resetWords] = useCharacterState(inputText);
+	const [fullText, handleTexthange, setText, resetText] = useWordState(inputText);
+	const [characterLimit, setCharacterLimit] = useState<number>(0);
+
 	const { userObject } = useUserData();
 
+	//adjust characterLimit
+	useEffect(() => {
+		setCharacterLimit(fullText.length);
+	}, [fullText]);
+
+	useEffect(() => {
+		setInputText(fullText);
+	}, [fullText]);
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full space-y-10">
 			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summarize</h1>
 			</div>
-			<div className="w-3/4 h-3/4 shadow-md rounded-md  ">
+			<div className="w-3/4 h-3/4 shadow-md rounded-md">
 				<textarea
 					value={fullText}
 					onChange={e => {
-						handleWordChange(e);
-						setInputText(fullText);
-						setCharacterLimitReached(characterCount > userObject.maxSessionCharacters);
-						console.log('jwqe', characterLimitReached);
+						handleTexthange(e);
+						// setInputText(fullText);
+						setCharacterLimitReached(characterLimit > userObject.maxSessionCharacters);
 					}}
 					onPaste={e => {
-						setWords(e.clipboardData.getData('Text'));
-						setInputText(fullText);
-						setCharacterLimitReached(characterCount > userObject.maxSessionCharacters);
+						setText((existingText: string) => existingText.concat(e.clipboardData.getData('Text')));
+						// setInputText(fullText);
+						setCharacterLimitReached(characterLimit > userObject.maxSessionCharacters);
+						e.preventDefault();
+					}}
+					onCut={(e: any) => {
+						setText(e.target.value);
+						// setInputText(fullText);
 					}}
 					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
 						focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
@@ -50,7 +64,7 @@ const InputTextfield: FC = (): ReactElement => {
 				</button>
 				<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-2">
 					<span className="tracking-wider font-medium">
-						{characterCount} / {userObject.maxSessionCharacters} characters
+						{characterLimit} / {userObject.maxSessionCharacters} characters
 					</span>
 				</div>
 			</div>

@@ -59,20 +59,6 @@ const EditDocument: FC = (): ReactElement => {
 				/>
 			</div>
 			<div className="flex items-end w-3/4 ">
-				<h1 className="tracking-wide text-2xl text-gray-500 font-normal">The summary</h1>
-			</div>
-			<div className="w-3/4 h-full shadow-md rounded-md  ">
-				<textarea
-					value={summaryLocal}
-					onChange={e => {
-						handleWordChangeOne(e);
-					}}
-					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
-                    focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
-                    "
-				/>
-			</div>
-			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-2xl text-gray-500 font-normal">Your input</h1>
 			</div>
 			<div className="w-3/4 h-full shadow-md rounded-md  ">
@@ -86,6 +72,21 @@ const EditDocument: FC = (): ReactElement => {
                     "
 				/>
 			</div>
+			<div className="flex items-end w-3/4 ">
+				<h1 className="tracking-wide text-2xl text-gray-500 font-normal">The summary</h1>
+			</div>
+			<div className="w-3/4 h-full shadow-md rounded-md  ">
+				<textarea
+					value={summaryLocal}
+					onChange={e => {
+						handleWordChangeOne(e);
+					}}
+					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
+                    focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ease-in-out duration-200
+                    "
+				/>
+			</div>
+
 			<div className="flex justify-between w-3/4 items-center">
 				<button
 					onClick={() => {

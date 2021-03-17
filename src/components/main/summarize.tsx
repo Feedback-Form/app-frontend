@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useEffect } from 'react';
 
 import InputTextfield from '../inputtextfield';
-import SummarySettings from '../summarysettings';
+import SummarySettings from '../summarysettings/summarysettings';
 import OutputTextfield from '../outputtexfield';
 import { CSSTransition } from 'react-transition-group';
 import { useText } from '../../hooks/contexts/summaryContext';
