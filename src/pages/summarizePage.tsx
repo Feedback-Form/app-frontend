@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, useState } from 'react';
 
 //components
-import Sidebar from '../components/sidebar';
-import Summarize from '../components/main/summarize';
+import Sidebar from '../components/sidebar/sideBar';
+import Summarize from '../components/summarize';
 import AuthenticationWidget from '../components/authenticationWidget';
 
 //hooks
@@ -14,7 +14,6 @@ const SummarizePage: FC = (): ReactElement => {
 	const [inputText, setInputText] = useState('');
 	const [summaryLength, setLength] = useState(100);
 	const [summaryType, setType] = useState(0);
-	const [summaryTone, setTone] = useState(0);
 	const [outputText, setOutputText] = useState('');
 	const [currentComponent, setCurrentComponent] = useState(1);
 	const [characterLimitReached, setCharacterLimitReached] = useState(false);
@@ -29,13 +28,11 @@ const SummarizePage: FC = (): ReactElement => {
 				inputText,
 				summaryLength,
 				summaryType,
-				summaryTone,
 				outputText,
 				currentComponent,
 				setInputText,
 				setLength,
 				setType,
-				setTone,
 				setOutputText,
 				setCurrentComponent,
 				characterLimitReached,

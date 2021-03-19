@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 //components
-import Sidebar from '../components/sidebar';
-import EditDocument from '../components/editdocument';
-import Uploading from '../components/uploading';
+import Sidebar from '../components/sidebar/sideBar';
+import EditDocument from '../components/editDocument';
+import Uploading from '../components/uploading/uploading';
 
 //hooks
 import { SingleDocContext } from '../hooks/contexts/singleDocContext';
@@ -60,11 +60,6 @@ const SingleDocPage: FC = (): ReactElement => {
 	//fetching the document if the state is undefined or ''
 	useEffect(() => {
 		getDocument();
-
-		// if (docId !== undefined && docId !== '') {
-		// 	getDocument();
-		// 	setIsLoading(false);
-		// }
 	}, []);
 	return (
 		<SingleDocContext.Provider
@@ -81,7 +76,11 @@ const SingleDocPage: FC = (): ReactElement => {
 		>
 			<section className="h-screen w-full flex font-scrptai overflow-y-auto">
 				<Sidebar />
-				{isLoading ? <Uploading message="fetching document..." /> : <EditDocument />}
+				{isLoading ? (
+					<Uploading message="getting document" />
+				) : (
+					<EditDocument />
+				)}
 			</section>
 		</SingleDocContext.Provider>
 	);

@@ -9,7 +9,7 @@ import DocumentsPage from '../pages/docsPage';
 import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
-import StatusPage from '../components/statusPage';
+import StatusPage from '../components/status-page/statusPage';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -60,7 +60,12 @@ const Routes: FC = (): ReactElement => {
 	console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
 		//if one of the paths below, not AUTH is required.
-		if (pathname !== '/login' && pathname !== '/plans' && pathname !== '/success' && pathname !== '/cancelled') {
+		if (
+			pathname !== '/login' &&
+			pathname !== '/plans' &&
+			pathname !== '/success' &&
+			pathname !== '/cancelled'
+		) {
 			if (token === '' || token === undefined || token === null) {
 				console.log('REDIRECT USER TO LOGIN PAGE 🚨');
 				//activate redirect if authentication failes and user was in one of the following routes
@@ -76,17 +81,24 @@ const Routes: FC = (): ReactElement => {
 				};
 
 				axios
-					.get<UserObj>(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`, config)
+					.get<UserObj>(
+						`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`,
+						config,
+					)
 					.then(res => {
 						console.log('userobj', res);
 
 						setUserObject({
 							productName: res.data.user.billing.subscription.productName,
 							stripeCustomerId: res.data.user.billing.stripeCustomerId,
-							currentSessionCount: res.data.user.usage.sessions.currentSessionCount,
-							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
-							maxSessionCharacters: res.data.user.usage.characters.maxSessionCharacters,
-							maxResponseCharacters: res.data.user.usage.characters.maxResponseCharacters,
+							currentSessionCount:
+								res.data.user.usage.sessions.currentSessionCount,
+							maxMonthlySessionCount:
+								res.data.user.usage.sessions.maxMonthlySessionCount,
+							maxSessionCharacters:
+								res.data.user.usage.characters.maxSessionCharacters,
+							maxResponseCharacters:
+								res.data.user.usage.characters.maxResponseCharacters,
 						});
 
 						setIsAuthenticating(false);
@@ -125,8 +137,18 @@ const Routes: FC = (): ReactElement => {
 
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
-				<Route path="/success" render={() => <StatusPage success={true} destinationPathName={'summarize'} />} />
-				<Route path="/cancelled" render={() => <StatusPage success={false} destinationPathName={'summarize'} />} />
+				<Route
+					path="/success"
+					render={() => (
+						<StatusPage success={true} destinationPathName={'summarize'} />
+					)}
+				/>
+				<Route
+					path="/cancelled"
+					render={() => (
+						<StatusPage success={false} destinationPathName={'summarize'} />
+					)}
+				/>
 			</UserContext.Provider>
 		</Switch>
 	);

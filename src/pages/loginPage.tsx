@@ -21,7 +21,10 @@ const LoginPage: FC = (): ReactElement => {
 	function loginUser(email: string, password: string): void {
 		setIsLoading(true);
 		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/login`, { email, password })
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/login`, {
+				email,
+				password,
+			})
 			.then((res: any) => {
 				console.log('res', res.data.token);
 
@@ -58,7 +61,9 @@ const LoginPage: FC = (): ReactElement => {
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
 						<form autoComplete="on">
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">E-mail</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
+								E-mail
+							</label>
 							<input
 								value={email}
 								onChange={e => {
@@ -67,7 +72,9 @@ const LoginPage: FC = (): ReactElement => {
 								type="text"
 								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full"
 							/>
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Password</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
+								Password
+							</label>
 							<input
 								value={password}
 								onChange={e => {
@@ -83,14 +90,20 @@ const LoginPage: FC = (): ReactElement => {
 									resetPassword();
 								}}
 								disabled={isLoading}
-								className="transition-all duration-200 bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
+								className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
 							>
 								<span className="inline-block mr-2">Login</span>
 							</button>
 						</form>
 						{showErrorMessage && (
 							<div className="flex space-x-2 items-center text-red-500 pt-2">
-								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<svg
+									className="w-5 h-5"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"

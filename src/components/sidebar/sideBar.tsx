@@ -1,17 +1,24 @@
 import React, { ReactElement, FC, useState } from 'react';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
-import scrptAiLogo from '../images/scrptai_logo.svg';
-import scrptAiLogoShort from '../images/scrptai_logo_short.svg';
+import scrptAiLogo from '../../images/scrptai_logo.svg';
+import scrptAiLogoShort from '../../images/scrptai_logo_short.svg';
 import axios from 'axios';
 
 //hooks
-import { useUserData } from '../hooks/contexts/userContext';
+import { useUserData } from '../../hooks/contexts/userContext';
 
 declare class Stripe {
 	constructor(publicKey: string);
-	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
+	redirectToCheckout({
+		sessionId,
+	}: {
+		sessionId: string;
+	}): Promise<{ error: Error }>;
 }
-const stripe = new Stripe('pk_test_51IDXKLIy6PlSkETF0Aog8XohbZ7mtE8LQln3iQ3rH8RPuEXPQWKgsRsznHXWGQr0Y4ehrRn9iGruDVeA24RX5lEu00IMNMmRkK');
+
+const stripe = new Stripe(
+	'pk_test_51IDXKLIy6PlSkETF0Aog8XohbZ7mtE8LQln3iQ3rH8RPuEXPQWKgsRsznHXWGQr0Y4ehrRn9iGruDVeA24RX5lEu00IMNMmRkK',
+);
 
 const Sidebar: FC = (): ReactElement => {
 	const [redirect, setRedirect] = useState(false);
@@ -29,7 +36,11 @@ const Sidebar: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`, req, config)
+			.post(
+				`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`,
+				req,
+				config,
+			)
 			.then((res: any) => {
 				// console.log(res.data);
 				window.location.href = res.data.url;
@@ -63,7 +74,10 @@ const Sidebar: FC = (): ReactElement => {
 			priceId,
 		};
 		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`, req)
+			.post(
+				`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`,
+				req,
+			)
 			.then((res: any) => {
 				//redirect to checkout session
 				stripe
@@ -80,23 +94,31 @@ const Sidebar: FC = (): ReactElement => {
 	}
 
 	return (
-		<nav className="bg-gray-100 w-20 xl:w-auto flex-shrink-0 h-full flex flex-col justify-between border-r border-gray-200 ">
+		<nav className="bg-gray-50 w-20 xl:w-auto flex-shrink-0 h-full flex flex-col justify-between ">
 			{/* Group 1 */}
 
 			<div className="space-y-3">
 				<div className="pt-10 pb-20 pl-5 xl:pl-3 ">
-					<img className="w-32 invisible xl:visible" src={scrptAiLogo} alt="scrpt_ai_logo" />
-					<img className="w-9 visible xl:invisible" src={scrptAiLogoShort} alt="scrpt_ai_logo" />
+					<img
+						className="w-32 invisible xl:visible"
+						src={scrptAiLogo}
+						alt="scrpt_ai_logo"
+					/>
+					<img
+						className="w-9 visible xl:invisible"
+						src={scrptAiLogoShort}
+						alt="scrpt_ai_logo"
+					/>
 				</div>
 				<div>
 					<NavLink exact to="/summarize">
 						<li
 							className={`${
 								pathname === '/summarize'
-									? 'bg-indigo-200 text-indigo-600 hover:bg-indigo-300 hover:text-indigo-700'
-									: 'hover:bg-indigo-200 hover:text-indigo-600'
-							} text-gray-600 list-none block xl:flex items-center  
-                			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer`}
+									? 'text-teal-700 hover:text-teal-600 '
+									: ' hover:text-teal-600 text-gray-500'
+							}    list-none block xl:flex items-center  
+                			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer  `}
 						>
 							<svg
 								className="w-7 xl:w-6 stroke-current stroke-2 "
@@ -113,12 +135,14 @@ const Sidebar: FC = (): ReactElement => {
 								/>
 							</svg>
 
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Summarize</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
+								Summarize
+							</h1>
 						</li>
 					</NavLink>
 				</div>
 				{/* <li
-						className="text-gray-600 list-none flex items-center hover:bg-indigo-200 hover:text-indigo-600
+						className="text-gray-600 list-none flex items-center hover:bg-teal-300 hover:text-teal-700
             transition-all duration-200 ease-in-out rounded-r-md py-2 xl:pr-14 pl-3 cursor-pointer"
 					>
 						<svg 
@@ -138,13 +162,13 @@ const Sidebar: FC = (): ReactElement => {
 						<h1 className="font-medium pl-2 text-base tracking-wide">Transcribe</h1>
 					</li> */}
 				<div>
-					<NavLink exact to="/documents" activeClassName="bg-indigo-200">
+					<NavLink exact to="/documents" activeClassName="bg-teal-200">
 						<li
 							className={`${
 								pathname === '/documents'
-									? 'bg-indigo-200 text-indigo-600 hover:bg-indigo-300 hover:text-indigo-700'
-									: 'hover:bg-indigo-200 hover:text-indigo-600'
-							} text-gray-600 list-none block xl:flex items-center  
+									? 'text-teal-700 hover:text-teal-600 '
+									: ' hover:text-teal-600'
+							} text-gray-500 list-none block xl:flex items-center  
                 			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer`}
 						>
 							<svg
@@ -161,7 +185,9 @@ const Sidebar: FC = (): ReactElement => {
 									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Documents</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
+								Documents
+							</h1>
 						</li>
 					</NavLink>
 				</div>
@@ -173,7 +199,7 @@ const Sidebar: FC = (): ReactElement => {
 					<li className="list-none">
 						<button
 							onClick={() => logOutUser()}
-							className="text-gray-600 list-none block xl:flex items-center  hover:bg-indigo-200 hover:text-indigo-600
+							className="text-gray-500 list-none block xl:flex items-center  hover:text-teal-600
                 			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full"
 						>
 							<svg
@@ -190,7 +216,9 @@ const Sidebar: FC = (): ReactElement => {
 									d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Logout</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
+								Logout
+							</h1>
 						</button>
 					</li>
 				</div>
@@ -198,15 +226,14 @@ const Sidebar: FC = (): ReactElement => {
 					{/* <NavLink exact to="/settings"> */}
 					<li className="list-none">
 						<button
-							disabled={userObject.stripeCustomerId === ''}
+							disabled={userObject.stripeCustomerId !== 'xxxx'}
 							onClick={() => {
 								customerPortalHandler();
 							}}
 							className={` ${
-								userObject.stripeCustomerId === ''
-									? 'text-gray-400 cursor-not-allowed'
-									: 'hover:bg-indigo-200 hover:text-indigo-600 text-gray-600 '
-							}   block xl:flex items-center disabled:opacity-50
+								userObject.stripeCustomerId !== 'xxx' &&
+								'text-gray-500 hover:text-gray-600 cursor-not-allowed '
+							}   block xl:flex items-center disabled:opacity-50 
             				transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full`}
 						>
 							<svg
@@ -223,7 +250,9 @@ const Sidebar: FC = (): ReactElement => {
 									d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Manage Billing</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
+								Manage Billing
+							</h1>
 						</button>
 					</li>
 
@@ -238,7 +267,7 @@ const Sidebar: FC = (): ReactElement => {
 							}}
 							className={` ${
 								userObject.productName === 'SCRPTAI_BASIC_PLAN'
-									? 'text-gray-600 bg-gray-300  hover:text-gray-700 opacity-50 cursor-not-allowed'
+									? 'text-gray-500 bg-gray-300  hover:text-gray-400 opacity-50 cursor-not-allowed'
 									: 'text-yellow-600 bg-yellow-200  hover:text-yellow-700 '
 							}  list-none block xl:flex items-center 
             	transition-all duration-200 ease-in-out   pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full `}
@@ -250,9 +279,16 @@ const Sidebar: FC = (): ReactElement => {
 								viewBox="0 0 24 24"
 								stroke="currentColor"
 							>
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M13 10V3L4 14h7v7l9-11h-7z"
+								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Upgrade</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
+								Upgrade
+							</h1>
 						</button>
 					</li>
 				</div>

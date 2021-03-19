@@ -2,19 +2,14 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 //hooks
-import { DocsContext } from '../hooks/contexts/docsContext';
-import { useUserData } from '../hooks/contexts/userContext';
+import { DocsContext } from '../../hooks/contexts/docsContext';
+import { useUserData } from '../../hooks/contexts/userContext';
 //components
-import DeleteWidget from './deletewidget';
-import Uploading from './uploading';
-import LoadingWidget from './loadingWidget';
+import DeleteWidget from '../deleteWidget';
+import Uploading from '../uploading/uploading';
+import LoadingWidget from '../loadingWidget';
 
-type Document = {
-	_id: string;
-	title: string;
-	gptThreeSummary: string;
-	createdAt: string;
-};
+import { Document } from './document-interface';
 
 const Documents: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -32,19 +27,6 @@ const Documents: FC = (): ReactElement => {
 		setDocName(title);
 		setDocId(id);
 		setDeleteRequest(true);
-
-		console.log('DOC STATE NAME', docName);
-		// setIsLoadingTwo(true);
-		// axios
-		// 	.delete(`${backend_url}/document/delete/${id}`, config)
-		// 	.then((res: any) => {
-		// 		console.log('succes', res);
-		// 		setIsLoadingTwo(false);
-		// 	})
-		// 	.catch((err: any) => {
-		// 		console.log('err', err);
-		// 		setIsLoadingTwo(false);
-		// 	});
 	}
 
 	//get documents
@@ -65,12 +47,6 @@ const Documents: FC = (): ReactElement => {
 				setIsLoading(false);
 			});
 	}, [isLoadingTwo, isDeleteRequest]);
-
-	// const docs = [];
-	// for (let i = 0; i < 1; i++) {
-	// 	docs.push(`My Document_${i}`);
-	// }
-	//console.log('docs', docs);
 
 	function openDocument(id: string): void {
 		setSelectedDocId(id);
@@ -98,7 +74,9 @@ const Documents: FC = (): ReactElement => {
 					) : (
 						<>
 							<div className="flex items-end w-3/4 ">
-								<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Documents</h1>
+								<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
+									Documents
+								</h1>
 							</div>
 							<section className="flex xs:grid grid-cols-4 flex-wrap w-3/4 xl:w-1/2 h-3/4 gap-4">
 								{documents.map((i: Document) => {
@@ -106,13 +84,18 @@ const Documents: FC = (): ReactElement => {
 										<div
 											key={i._id}
 											className="w-48 h-64 shadow-md rounded-md  border-2 flex flex-col justify-evenly
-										hover:border-indigo-400 hover:border-2 focus:outline-none
-										focus:ring-2 focus:ring-indigo-500
+										hover:border-teal-700 hover:border-2 focus:outline-none
+										focus:ring-2 focus:ring-indigo-600
 										transition-all ease-in-out duration-200 px-4"
 										>
-											<div onClick={() => openDocument(i._id)} className="cursor-pointer justify-evenly flex flex-col h-3/4">
+											<div
+												onClick={() => openDocument(i._id)}
+												className="cursor-pointer justify-evenly flex flex-col h-3/4"
+											>
 												<h1 className="w-full">{i.title}</h1>
-												<p className=" text-sm font-thin truncate">{i.gptThreeSummary}</p>
+												<p className=" text-sm font-thin truncate">
+													{i.gptThreeSummary}
+												</p>
 											</div>
 
 											<div className="flex items-end justify-end text-gray-400 hover:text-red-500 ">

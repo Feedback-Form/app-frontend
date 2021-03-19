@@ -2,8 +2,8 @@ import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
 
 //components
-import ResponseWidget from '../responseWidget';
-import Uploading from '../uploading';
+import ResponseWidget from '../response-widget/responseWidget';
+import Uploading from '../uploading/uploading';
 
 //hooks
 import { useText } from '../../hooks/contexts/summaryContext';
@@ -31,8 +31,9 @@ const SummarySettings: FC = (): ReactElement => {
 	const [resMessage, setResMessage] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	const clickedClasses = 'bg-indigo-400 text-white hover:indigo-500';
-	const defaultClasses = 'bg-gray-300 text-gray-600 hover:text-white hover:bg-indigo-400';
+	const clickedClasses = 'bg-teal-700 text-white hover:bg-teal-600';
+	const defaultClasses =
+		'bg-gray-300 text-gray-600 hover:text-white hover:bg-teal-700';
 	const languages: Array<languageObject> = [
 		{
 			language: 'english',
@@ -56,7 +57,11 @@ const SummarySettings: FC = (): ReactElement => {
 			icon: '🇮🇹',
 		},
 	];
-	const summaryTypes: Array<string> = ['normal', 'one-sentence', 'for a second grader'];
+	const summaryTypes: Array<string> = [
+		'normal',
+		'one-sentence',
+		'for a second grader',
+	];
 	const responseLength: Array<number> = [100, 250, 400];
 
 	function summarizeText(): void {
@@ -77,13 +82,17 @@ const SummarySettings: FC = (): ReactElement => {
 
 		axios
 
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/summarize/text`, req, config)
+			.post(
+				`${process.env.REACT_APP_SCRPTAI_BACKEND}/summarize/text`,
+				req,
+				config,
+			)
 
 			.then((res: any) => {
 				setOutputText(res.data.gptSummary.text);
 				setInputRiskGroup(res.data.inputRiskGroup);
 				//redirect to output component
-				setCurrentComponent(4);
+				setCurrentComponent(3);
 			})
 			.catch((err: any) => {
 				//setCurrentComponent(2);
@@ -105,7 +114,9 @@ const SummarySettings: FC = (): ReactElement => {
 			) : (
 				<section className="flex-shrink  flex flex-col items-center justify-center w-full h-3/4 space-y-8">
 					<div className="flex items-start w-3/4">
-						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Summary settings</h1>
+						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
+							Summary settings
+						</h1>
 					</div>
 
 					<div className="w-3/4 h-3/4 flex flex-col justify-evenly">
@@ -118,7 +129,9 @@ const SummarySettings: FC = (): ReactElement => {
 										<button
 											key={index}
 											onClick={() => setLength(item)}
-											className={`flex-shrink ${summaryLength === item ? clickedClasses : defaultClasses}
+											className={`flex-shrink ${
+												summaryLength === item ? clickedClasses : defaultClasses
+											}
 								focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center `}
 										>
 											{item} characters
@@ -136,7 +149,9 @@ const SummarySettings: FC = (): ReactElement => {
 										<button
 											key={index}
 											onClick={() => setType(index)}
-											className={`flex-shrink ${summaryType === index ? clickedClasses : defaultClasses}
+											className={`flex-shrink ${
+												summaryType === index ? clickedClasses : defaultClasses
+											}
 											focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 										>
 											{item}
@@ -154,7 +169,11 @@ const SummarySettings: FC = (): ReactElement => {
 										<button
 											key={index}
 											onClick={() => setSummaryLanguage(item.language)}
-											className={`flex-shrink ${summaryLanguage === item.language ? clickedClasses : defaultClasses}
+											className={`flex-shrink ${
+												summaryLanguage === item.language
+													? clickedClasses
+													: defaultClasses
+											}
 									focus:outline-none rounded-md w-64 py-3 font-medium tracking-wide text-xl transition-all ease-in-out duration-200 items-center`}
 										>
 											{item.icon}
@@ -169,7 +188,7 @@ const SummarySettings: FC = (): ReactElement => {
 								onClick={() => {
 									summarizeText();
 								}}
-								className="bg-indigo-500 hover:bg-indigo-400 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg"
+								className="bg-teal-700 hover:bg-teal-600 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg"
 							>
 								Summarize text
 							</button>

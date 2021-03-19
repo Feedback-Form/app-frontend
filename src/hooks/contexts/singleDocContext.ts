@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-export type SingleDocumentContextType = {
+export interface SingleDocumentContextType {
 	title: string;
 	transcript: string;
 	gptThreeSummary: string;
@@ -9,7 +9,7 @@ export type SingleDocumentContextType = {
 	setTranscript: (transcript: string) => void;
 	setGptThreeSummary: (gptThreeSummary: string) => void;
 	setDocId: (id: string) => void;
-};
+}
 
 export const SingleDocContext = createContext<SingleDocumentContextType>({
 	title: '',
@@ -18,7 +18,8 @@ export const SingleDocContext = createContext<SingleDocumentContextType>({
 	docId: '',
 	setTitle: title => console.warn('title_missing'),
 	setTranscript: transcript => console.warn('transcript_missing'),
-	setGptThreeSummary: gptThreeSummary => console.warn('gptThreeSummary_missing'),
+	setGptThreeSummary: gptThreeSummary =>
+		console.warn('gptThreeSummary_missing'),
 	setDocId: docId => console.warn('docId_missing'),
 });
 export const useSingleDocContext = (): any => useContext(SingleDocContext);

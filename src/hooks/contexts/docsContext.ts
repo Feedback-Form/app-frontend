@@ -1,13 +1,13 @@
 import { createContext, useContext } from 'react';
 
-export type docsContextType = {
+export interface docsContextType {
 	isDeleteRequest: boolean;
 	docName: string;
 	docId: string;
 	setDeleteRequest: (isDeleteRequest: boolean) => void;
 	setDocName: (docName: string) => void;
 	setDocId: (docId: string) => void;
-};
+}
 
 export const DocsContext = createContext<docsContextType>({
 	isDeleteRequest: false,

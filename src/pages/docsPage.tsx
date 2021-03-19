@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 
 //components
-import Sidebar from '../components/sidebar';
+import Sidebar from '../components/sidebar/sideBar';
 
-import Documents from '../components/documents';
+import Documents from '../components/documents/documents';
 import AuthenticationWidget from '../components/authenticationWidget';
 
 //hooks

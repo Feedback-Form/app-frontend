@@ -4,7 +4,9 @@ export const useCharacterState = (initialCharacters: string): any => {
 	//count the words based on the initialWords input
 	const [words, setWords] = useState(initialCharacters);
 
-	const [characterCount, setCharacterCount] = useState(initialCharacters.length);
+	const [characterCount, setCharacterCount] = useState(
+		initialCharacters.length,
+	);
 
 	const handleChange = (e: { target: { value: any } }) => {
 		const curWords = e.target.value;
@@ -46,24 +48,3 @@ export const useWordState = (initialCharacters: string): any => {
 	};
 	return [words, handleChange, setWords, reset] as const;
 };
-
-//not needed
-// export const useWordState = (initialWords: string) => {
-// 	//count the words based on the initialWords input
-// 	const curWordCount = (initialWords.match(/\s/g) || []).length;
-// 	const [words, setWords] = useState(initialWords);
-
-// 	const [wordCount, setWordCount] = useState(curWordCount);
-
-// 	const handleChange = (e: { target: { value: any } }) => {
-// 		const curWords = e.target.value;
-// 		setWords(curWords);
-// 		const curWordCount = (curWords.match(/\s/g) || []).length;
-// 		setWordCount(curWordCount);
-// 	};
-// 	const reset = () => {
-// 		setWords('');
-// 		setWordCount(0);
-// 	};
-// 	return [words, wordCount, handleChange, setWords, reset] as const;
-// };
