@@ -10,6 +10,7 @@ import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
 import StatusPage from '../components/status-page/statusPage';
+import TrialExpiredPage from '../pages/trialExpiredPage';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -56,8 +57,8 @@ const Routes: FC = (): ReactElement => {
 		maxSessionCharacters: 0,
 		maxResponseCharacters: 0,
 	});
-
-	console.log('jwt received 🍀', jwtReceived);
+	const [expiredTrialRedirect, setExpiredTrialRedirect] = useState(false);
+	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
 		//if one of the paths below, not AUTH is required.
 		if (
@@ -86,13 +87,13 @@ const Routes: FC = (): ReactElement => {
 						config,
 					)
 					.then(res => {
-						console.log('userobj', res);
+						const { currentSessionCount } = res.data.user.usage.sessions;
+						const { productName } = res.data.user.billing.subscription;
 
 						setUserObject({
-							productName: res.data.user.billing.subscription.productName,
+							productName,
 							stripeCustomerId: res.data.user.billing.stripeCustomerId,
-							currentSessionCount:
-								res.data.user.usage.sessions.currentSessionCount,
+							currentSessionCount,
 							maxMonthlySessionCount:
 								res.data.user.usage.sessions.maxMonthlySessionCount,
 							maxSessionCharacters:
@@ -100,6 +101,20 @@ const Routes: FC = (): ReactElement => {
 							maxResponseCharacters:
 								res.data.user.usage.characters.maxResponseCharacters,
 						});
+
+						//REMOVE in PROD
+						console.log({
+							currentSessionCount,
+							productName,
+						});
+
+						//triggers if the user has used up all trial sessions
+						if (
+							currentSessionCount >= 25 &&
+							productName !== 'SCRPTAI_BASIC_PLAN'
+						) {
+							setExpiredTrialRedirect(true);
+						}
 
 						setIsAuthenticating(false);
 					})
@@ -130,13 +145,18 @@ const Routes: FC = (): ReactElement => {
 				}}
 			>
 				{redirect && <Redirect to="/login" />}
+				{expiredTrialRedirect && <Redirect to="/trial/expired" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
-				<Route path="/login" render={() => <LoginPage />} />
+				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/summarize" render={() => <SummarizePage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
-
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
+				<Route
+					exact
+					path="/trial/expired"
+					render={() => <TrialExpiredPage />}
+				/>
 				<Route
 					path="/success"
 					render={() => (

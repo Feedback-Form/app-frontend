@@ -44,11 +44,11 @@ const DummyPlans: FC = (): ReactElement => {
 				<div className="w-3/4 md:w-1/3 xl:w-1/4  rounded-md px-10 py-8  text-center">
 					<button
 						onClick={() => {
-							checkoutHandler('price_1IDc8VIy6PlSkETFdUzqL63A');
+							checkoutHandler('price_1IX58FIy6PlSkETFvrgaFB3J');
 						}}
 						className="bg-blue-500 text-white rounded-md p-4 hover:bg-blue-400"
 					>
-						39.99
+						4.99
 					</button>
 				</div>
 			</div>
