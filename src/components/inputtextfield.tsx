@@ -77,8 +77,8 @@ const InputTextfield: FC = (): ReactElement => {
 				>
 					Next step
 				</button>
-				<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-2">
-					<span className="tracking-wider font-medium">
+				<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-3">
+					<span className="tracking-wider font-medium ">
 						{characterLimit} / {userObject.maxSessionCharacters} characters
 					</span>
 				</div>

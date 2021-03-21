@@ -57,7 +57,6 @@ const EditDocument: FC = (): ReactElement => {
 				setIsLoading(false);
 			})
 			.catch((err: any) => {
-				console.log('err', err);
 				setIsLoading(false);
 			});
 	}

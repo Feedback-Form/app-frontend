@@ -51,7 +51,6 @@ const Sidebar: FC = (): ReactElement => {
 	}
 
 	function logOutUser(): void {
-		console.log(token);
 		const config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -200,7 +199,7 @@ const Sidebar: FC = (): ReactElement => {
 						<button
 							onClick={() => logOutUser()}
 							className="text-gray-500 list-none block xl:flex items-center  hover:text-teal-600
-                			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full"
+                			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full focus:ring-0 focus:outline-none"
 						>
 							<svg
 								className="w-7 xl:w-6 stroke-current stroke-2 "
@@ -261,12 +260,12 @@ const Sidebar: FC = (): ReactElement => {
 				<div>
 					<li className="list-none">
 						<button
-							disabled={userObject.productName === 'SCRPTAI_BASIC_PLAN'}
+							disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
 							onClick={() => {
 								checkoutHandler('price_1IDc8VIy6PlSkETFdUzqL63A');
 							}}
 							className={` ${
-								userObject.productName === 'SCRPTAI_BASIC_PLAN'
+								userObject.productName !== 'SCRPTAI_BASIC_PLAN'
 									? 'text-gray-500 bg-gray-300  hover:text-gray-400 opacity-50 cursor-not-allowed'
 									: 'text-yellow-600 bg-yellow-200  hover:text-yellow-700 '
 							}  list-none block xl:flex items-center 

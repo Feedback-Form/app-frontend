@@ -10,7 +10,10 @@ import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
 import StatusPage from '../components/status-page/statusPage';
-import TrialExpiredPage from '../pages/trialExpiredPage';
+import TrialEndedPage from '../pages/trialEndedPage';
+import SignUpPage from '../pages/signUpPage';
+import PasswordForgotPage from '../pages/passwordForgotPage';
+import PasswordChangePage from '../pages/passwordChangePage';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -57,7 +60,7 @@ const Routes: FC = (): ReactElement => {
 		maxSessionCharacters: 0,
 		maxResponseCharacters: 0,
 	});
-	const [expiredTrialRedirect, setExpiredTrialRedirect] = useState(false);
+	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
 		//if one of the paths below, not AUTH is required.
@@ -65,7 +68,8 @@ const Routes: FC = (): ReactElement => {
 			pathname !== '/login' &&
 			pathname !== '/plans' &&
 			pathname !== '/success' &&
-			pathname !== '/cancelled'
+			pathname !== '/cancelled' &&
+			pathname !== '/signup'
 		) {
 			if (token === '' || token === undefined || token === null) {
 				console.log('REDIRECT USER TO LOGIN PAGE 🚨');
@@ -113,7 +117,7 @@ const Routes: FC = (): ReactElement => {
 							currentSessionCount >= 25 &&
 							productName !== 'SCRPTAI_BASIC_PLAN'
 						) {
-							setExpiredTrialRedirect(true);
+							setEndredTrialRedirect(true);
 						}
 
 						setIsAuthenticating(false);
@@ -145,18 +149,26 @@ const Routes: FC = (): ReactElement => {
 				}}
 			>
 				{redirect && <Redirect to="/login" />}
-				{expiredTrialRedirect && <Redirect to="/trial/expired" />}
+				{endedTrialRedirect && <Redirect to="/trial/ended" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/summarize" render={() => <SummarizePage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
+				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
+				<Route exact path="/signup" render={() => <SignUpPage />} />
 				<Route
 					exact
-					path="/trial/expired"
-					render={() => <TrialExpiredPage />}
+					path="/password/reset/initiate"
+					render={() => <PasswordForgotPage />}
 				/>
+				<Route
+					exact
+					path="/password/reset/:userId/:token"
+					render={() => <PasswordChangePage />}
+				/>
+
 				<Route
 					path="/success"
 					render={() => (
