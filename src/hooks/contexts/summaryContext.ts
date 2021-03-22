@@ -4,7 +4,7 @@ export interface TextContextType {
 	inputText: string;
 	summaryLength: number;
 	summaryType: number;
-	outputText: string;
+	outputArray: Array<string>;
 	currentComponent: number;
 	characterLimitReached: boolean;
 	inputRiskGroup: string;
@@ -12,7 +12,7 @@ export interface TextContextType {
 	setInputText: (text: string) => void;
 	setLength: (summaryLength: number) => void;
 	setType: (summaryType: number) => void;
-	setOutputText: (outputText: string) => void;
+	setOutputArray: (outputText: Array<string>) => void;
 	setCurrentComponent: (currentComponent: number) => void;
 	setCharacterLimitReached: (characterLimitReached: boolean) => void;
 	setInputRiskGroup: (inputRiskGroup: string) => void;
@@ -23,7 +23,7 @@ export const SummaryContext = createContext<TextContextType>({
 	inputText: '',
 	summaryLength: 100,
 	summaryType: 1,
-	outputText: '',
+	outputArray: [''],
 	currentComponent: 1,
 	characterLimitReached: false,
 	inputRiskGroup: '0',
@@ -31,7 +31,7 @@ export const SummaryContext = createContext<TextContextType>({
 	setInputText: inputText => console.log('text_missing'),
 	setLength: summaryLength => console.warn('summaryLength_missing'),
 	setType: summaryType => console.warn('summaryType_missing'),
-	setOutputText: outputText => console.warn('OutputText_missing'),
+	setOutputArray: outputText => console.warn('OutputText_missing'),
 	setCurrentComponent: currentComponent =>
 		console.warn('currentComponent_missing'),
 	setCharacterLimitReached: characterLimitReached =>

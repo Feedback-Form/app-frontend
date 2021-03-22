@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useState } from 'react';
 import axios from 'axios';
-
+import { useParams } from 'react-router-dom';
 //components
 import LoadingWidget from './loadingWidget';
 
@@ -11,13 +11,9 @@ import { useText } from '../hooks/contexts/summaryContext';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const OutputTextfield: FC = (): ReactElement => {
-	const { outputText, setOutputText, inputText, inputRiskGroup } = useText();
-	const [
-		fullText,
-		characterCount,
-		handleWordChange,
-		resetWords,
-	] = useCharacterState(outputText);
+	const { outputArray, setOutputText, inputText, inputRiskGroup } = useText();
+	const params = useParams<{ type: string; language: string }>();
+	const { type, language } = params;
 	const [isLoading, setLoading] = useState(false);
 	const { token } = useUserData();
 
@@ -26,9 +22,12 @@ const OutputTextfield: FC = (): ReactElement => {
 			Authorization: `Bearer ${token}`,
 		},
 	};
+
 	const req = {
-		gptThreeSummary: fullText,
-		transcript: inputText,
+		generatedOutput: outputArray.join('\n'),
+		inputText,
+		outputType: type,
+		outputLanguage: language,
 		inputRiskGroup: inputRiskGroup,
 	};
 	function postDocument(): void {
@@ -55,20 +54,20 @@ const OutputTextfield: FC = (): ReactElement => {
 
 			<div className="flex items-end w-3/4 ">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
-					Have a look at the summary
+					Have a the generated copy
 				</h1>
 			</div>
-			<div className="w-3/4 h-3/4 shadow-md rounded-md  ">
-				<textarea
-					value={fullText}
-					onChange={e => {
-						handleWordChange(e);
-						setOutputText(fullText);
-					}}
-					className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
-						focus:outline-none focus:ring-2 focus:ring-teal-700 transition-all ease-in-out duration-200
-						"
-				/>
+			<div className="w-3/4 h-3/4 space-y-10 flex flex-col justify-center">
+				{outputArray.map((item: string, index: number) => {
+					return (
+						<div
+							key={index}
+							className="bg-teal-700 text-teal-50 rounded-md tracking-wide text-lg px-4 py-6 w-3/4"
+						>
+							{item}
+						</div>
+					);
+				})}
 			</div>
 			<div className="flex justify-between w-3/4 items-center">
 				<button

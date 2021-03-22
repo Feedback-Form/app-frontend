@@ -38,7 +38,7 @@ const LoginPage: FC = (): ReactElement => {
 
 				setJwtReceived(true);
 				setIsLoading(false);
-				history.push('/summarize');
+				history.push('/generate');
 
 				//setRedirect(true);
 			})

@@ -98,7 +98,7 @@ const Sidebar: FC = (): ReactElement => {
 
 			<div className="space-y-3">
 				<div className="pt-10 pb-20 pl-5 xl:pl-3 ">
-					<img
+					{/* <img
 						className="w-32 invisible xl:visible"
 						src={scrptAiLogo}
 						alt="scrpt_ai_logo"
@@ -107,13 +107,13 @@ const Sidebar: FC = (): ReactElement => {
 						className="w-9 visible xl:invisible"
 						src={scrptAiLogoShort}
 						alt="scrpt_ai_logo"
-					/>
+					/> */}
 				</div>
 				<div>
-					<NavLink exact to="/summarize">
+					<NavLink exact to="/generate">
 						<li
 							className={`${
-								pathname === '/summarize'
+								pathname === '/generate'
 									? 'text-teal-700 hover:text-teal-600 '
 									: ' hover:text-teal-600 text-gray-500'
 							}    list-none block xl:flex items-center  
@@ -135,7 +135,7 @@ const Sidebar: FC = (): ReactElement => {
 							</svg>
 
 							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Summarize
+								Generate
 							</h1>
 						</li>
 					</NavLink>

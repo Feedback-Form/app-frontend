@@ -5,8 +5,6 @@ interface UserObj {
 	stripeCustomerId: string;
 	currentSessionCount: number;
 	maxMonthlySessionCount: number;
-	maxResponseCharacters: number;
-	maxSessionCharacters: number;
 }
 
 export interface UserContextType {
@@ -19,8 +17,6 @@ export interface UserContextType {
 		stripeCustomerId: string;
 		currentSessionCount: number;
 		maxMonthlySessionCount: number;
-		maxResponseCharacters: number;
-		maxSessionCharacters: number;
 	};
 	setUserPlan: (userPlan: string) => void;
 	setToken: (key: string) => void;
@@ -39,8 +35,6 @@ export const UserContext = createContext<UserContextType>({
 		stripeCustomerId: '',
 		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
-		maxResponseCharacters: 0,
-		maxSessionCharacters: 0,
 	},
 	setUserPlan: userPlan => console.warn('userplan_missing'),
 	setToken: token => console.warn('token_missing'),

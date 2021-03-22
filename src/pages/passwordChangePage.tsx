@@ -2,7 +2,6 @@ import React, { ReactElement, FC, useState, useEffect } from 'react';
 import scrptAiLogo from '../images/scrptai_logo.svg';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router-dom';
 
 //hooks
 import { useInputState } from '../hooks/hooks';

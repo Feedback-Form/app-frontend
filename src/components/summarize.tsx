@@ -1,7 +1,6 @@
 import React, { FC, ReactElement, useEffect } from 'react';
 
-import InputTextfield from './inputTextfield';
-import SummarySettings from './summary-settings/summarySettings';
+import InputTextfield from './inputTextField/inputTextfield';
 import OutputTextfield from './outputTexfield';
 import { CSSTransition } from 'react-transition-group';
 import { useText } from '../hooks/contexts/summaryContext';
@@ -11,6 +10,7 @@ const Summarize: FC = (): ReactElement => {
 		currentComponent,
 		setCurrentComponent,
 		characterLimitReached,
+		outputArray,
 	} = useText();
 
 	useEffect(() => {
@@ -27,17 +27,9 @@ const Summarize: FC = (): ReactElement => {
 			>
 				<InputTextfield />
 			</CSSTransition>
-			<CSSTransition
-				in={currentComponent === 2}
-				timeout={400}
-				classNames="menu-secondary"
-				unmountOnExit
-			>
-				<SummarySettings />
-			</CSSTransition>
 
 			<CSSTransition
-				in={currentComponent === 3}
+				in={currentComponent === 2}
 				timeout={400}
 				classNames="menu-primary"
 				unmountOnExit
@@ -56,17 +48,10 @@ const Summarize: FC = (): ReactElement => {
 					}`}
 				></button>
 				<button
-					disabled={characterLimitReached}
+					disabled={outputArray.length < 1}
 					onClick={() => setCurrentComponent(2)}
-					className={`focus:outline-none  disabled:opacity-50 rounded-full h-5 w-5 ${
-						currentComponent === 2 ? 'bg-teal-700' : 'bg-gray-300'
-					}`}
-				></button>
-				<button
-					disabled={characterLimitReached}
-					onClick={() => setCurrentComponent(3)}
 					className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${
-						currentComponent === 3 ? 'bg-teal-700' : 'bg-gray-300'
+						currentComponent === 2 ? 'bg-teal-700' : 'bg-gray-300'
 					}`}
 				></button>
 			</div>

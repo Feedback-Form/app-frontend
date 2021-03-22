@@ -94,7 +94,7 @@ const Documents: FC = (): ReactElement => {
 											>
 												<h1 className="w-full">{i.title}</h1>
 												<p className=" text-sm font-thin truncate">
-													{i.gptThreeSummary}
+													{i.generatedOutput}
 												</p>
 											</div>
 

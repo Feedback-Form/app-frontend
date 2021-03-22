@@ -9,12 +9,12 @@ import AuthenticationWidget from '../components/authenticationWidget';
 import { useUserData } from '../hooks/contexts/userContext';
 import { SummaryContext } from '../hooks/contexts/summaryContext';
 
-const SummarizePage: FC = (): ReactElement => {
+const GenerateTextPage: FC = (): ReactElement => {
 	//summaryContext related
 	const [inputText, setInputText] = useState('');
 	const [summaryLength, setLength] = useState(100);
 	const [summaryType, setType] = useState(0);
-	const [outputText, setOutputText] = useState('');
+	const [outputArray, setOutputArray] = useState<Array<string>>([]);
 	const [currentComponent, setCurrentComponent] = useState(1);
 	const [characterLimitReached, setCharacterLimitReached] = useState(false);
 	const [inputRiskGroup, setInputRiskGroup] = useState('0');
@@ -28,12 +28,12 @@ const SummarizePage: FC = (): ReactElement => {
 				inputText,
 				summaryLength,
 				summaryType,
-				outputText,
+				outputArray,
 				currentComponent,
 				setInputText,
 				setLength,
 				setType,
-				setOutputText,
+				setOutputArray,
 				setCurrentComponent,
 				characterLimitReached,
 				setCharacterLimitReached,
@@ -55,4 +55,4 @@ const SummarizePage: FC = (): ReactElement => {
 	);
 };
 
-export default SummarizePage;
+export default GenerateTextPage;

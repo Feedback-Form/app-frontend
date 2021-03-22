@@ -23,8 +23,10 @@ const SingleDocPage: FC = (): ReactElement => {
 
 	//singledoc context related
 	const [title, setTitle] = useState('');
-	const [transcript, setTranscript] = useState('');
-	const [gptThreeSummary, setGptThreeSummary] = useState('');
+	const [inputText, setInputText] = useState('');
+	const [generatedOutput, setGeneratedOutput] = useState('');
+	const [outputType, setOutputType] = useState('');
+	const [outputLanguage, setOutputLanguage] = useState('');
 
 	const { token } = useUserData();
 
@@ -41,13 +43,17 @@ const SingleDocPage: FC = (): ReactElement => {
 			.then((res: any) => {
 				//check if the props are there
 				const title = res.data?.title || '';
-				const transcript = res.data?.transcript;
-				const gptThreeSummary = res.data?.gptThreeSummary;
+				const inputText = res.data?.inputText;
+				const generatedOutputText = res.data?.generatedOutput;
+				const outputType = res.data?.outputType;
+				const outputLanguage = res.data?.outputLanguage;
 
 				//set props
 				setTitle(title);
-				setTranscript(transcript);
-				setGptThreeSummary(gptThreeSummary);
+				setInputText(inputText);
+				setGeneratedOutput(generatedOutputText);
+				setOutputType(outputType);
+				setOutputLanguage(outputLanguage);
 
 				setIsLoading(false);
 			})
@@ -65,19 +71,23 @@ const SingleDocPage: FC = (): ReactElement => {
 		<SingleDocContext.Provider
 			value={{
 				title,
-				transcript,
-				gptThreeSummary,
 				docId,
 				setTitle,
-				setTranscript,
-				setGptThreeSummary,
 				setDocId,
+				inputText,
+				setInputText,
+				generatedOutput,
+				setGeneratedOutput,
+				outputType,
+				setOutputType,
+				outputLanguage,
+				setOutputLanguage,
 			}}
 		>
 			<section className="h-screen w-full flex font-scrptai overflow-y-auto">
 				<Sidebar />
 				{isLoading ? (
-					<Uploading message="getting document" />
+					<Uploading message="Getting document" />
 				) : (
 					<EditDocument />
 				)}

@@ -8,20 +8,20 @@ import { useUserData } from '../hooks/contexts/userContext';
 import LoadingWidget from './loadingWidget';
 
 const EditDocument: FC = (): ReactElement => {
-	const { title, transcript, gptThreeSummary, docId } = useSingleDocContext();
+	const { title, inputText, generatedOutput, docId } = useSingleDocContext();
 
 	const [
 		summaryLocal,
 		characterCountOne,
 		handleWordChangeOne,
 		resetWordsOne,
-	] = useCharacterState(gptThreeSummary);
+	] = useCharacterState(inputText);
 	const [
 		transcriptLocal,
 		characterCountTwo,
 		handleWordChangeTwo,
 		resetWordsTwo,
-	] = useCharacterState(transcript);
+	] = useCharacterState(generatedOutput);
 	const [
 		titleLocal,
 		characterCountThree,

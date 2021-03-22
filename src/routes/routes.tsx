@@ -4,7 +4,7 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 //pages
-import SummarizePage from '../pages/summarizePage';
+import GenerateTextPage from '../pages/generateTextPage';
 import DocumentsPage from '../pages/docsPage';
 import SingleDocPage from '../pages/singleDocPage';
 import LoginPage from '../pages/loginPage';
@@ -14,6 +14,8 @@ import TrialEndedPage from '../pages/trialEndedPage';
 import SignUpPage from '../pages/signUpPage';
 import PasswordForgotPage from '../pages/passwordForgotPage';
 import PasswordChangePage from '../pages/passwordChangePage';
+import ChooseLanguagePage from '../pages/chooseLanguagePage';
+import ChooseTypePage from '../pages/chooseTypePage';
 
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
@@ -36,10 +38,6 @@ interface UserObj {
 				currentSessionCount: number;
 				maxMonthlySessionCount: number;
 			};
-			characters: {
-				maxSessionCharacters: number;
-				maxResponseCharacters: number;
-			};
 		};
 	};
 }
@@ -57,8 +55,6 @@ const Routes: FC = (): ReactElement => {
 		stripeCustomerId: '',
 		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
-		maxSessionCharacters: 0,
-		maxResponseCharacters: 0,
 	});
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
@@ -100,10 +96,6 @@ const Routes: FC = (): ReactElement => {
 							currentSessionCount,
 							maxMonthlySessionCount:
 								res.data.user.usage.sessions.maxMonthlySessionCount,
-							maxSessionCharacters:
-								res.data.user.usage.characters.maxSessionCharacters,
-							maxResponseCharacters:
-								res.data.user.usage.characters.maxResponseCharacters,
 						});
 
 						//REMOVE in PROD
@@ -152,10 +144,21 @@ const Routes: FC = (): ReactElement => {
 				{endedTrialRedirect && <Redirect to="/trial/ended" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 				<Route exact path="/login" render={() => <LoginPage />} />
-				<Route exact path="/summarize" render={() => <SummarizePage />} />
+
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
+				<Route exact path="/generate" render={() => <ChooseTypePage />} />
+				<Route
+					exact
+					path="/generate/:type/"
+					render={() => <ChooseLanguagePage />}
+				/>
+				<Route
+					exact
+					path="/generate/:type/:language"
+					render={() => <GenerateTextPage />}
+				/>
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/signup" render={() => <SignUpPage />} />
 				<Route
