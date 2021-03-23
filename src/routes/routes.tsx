@@ -63,13 +63,14 @@ const Routes: FC = (): ReactElement => {
 		/////
 		//REMOVE in PROD
 		////
-		setIsAuthenticating(false);
-		return;
+		// setIsAuthenticating(false);
+		// return;
 		////
 		////
+
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
-		console.log(shortPath[0]);
+
 		if (
 			shortPath[0] !== '/login' &&
 			shortPath[0] !== '/plans' &&
@@ -148,10 +149,11 @@ const Routes: FC = (): ReactElement => {
 			>
 				{redirect && <Redirect to="/login" />}
 				{endedTrialRedirect && <Redirect to="/trial/ended" />}
-				{/* <Route exact path="/" render={() => <Redirect to="/login" />} /> */}
-				{/* <Route exact path="/" render={() => <Redirect to="/login" />} /> */}
-				<Route exact path="/" render={() => <ChooseTypePage />} />
+				<Route exact path="/" render={() => <Redirect to="/login" />} />
 
+				{/* remove in PROD */}
+				{/* <Route exact path="/" render={() => <ChooseTypePage />} /> */}
+				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
 				<Route path="/plans" render={() => <DummyPlans />} />
