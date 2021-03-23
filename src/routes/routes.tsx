@@ -16,7 +16,7 @@ import PasswordForgotPage from '../pages/passwordForgotPage';
 import PasswordChangePage from '../pages/passwordChangePage';
 import ChooseLanguagePage from '../pages/chooseLanguagePage';
 import ChooseTypePage from '../pages/chooseTypePage';
-
+import VerifyAccountPage from '../pages/verifyAccountPage';
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -33,6 +33,7 @@ interface UserObj {
 			};
 			stripeCustomerId: string;
 		};
+
 		usage: {
 			sessions: {
 				currentSessionCount: number;
@@ -60,12 +61,16 @@ const Routes: FC = (): ReactElement => {
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
 		//if one of the paths below, not AUTH is required.
+		const shortPath = /[^*][^/]*/.exec(pathname)!;
+		console.log(shortPath[0]);
 		if (
-			pathname !== '/login' &&
-			pathname !== '/plans' &&
-			pathname !== '/success' &&
-			pathname !== '/cancelled' &&
-			pathname !== '/signup'
+			shortPath[0] !== '/login' &&
+			shortPath[0] !== '/plans' &&
+			shortPath[0] !== '/success' &&
+			shortPath[0] !== '/cancelled' &&
+			shortPath[0] !== '/signup' &&
+			shortPath[0] !== '/password' &&
+			shortPath[0] !== '/user'
 		) {
 			if (token === '' || token === undefined || token === null) {
 				console.log('REDIRECT USER TO LOGIN PAGE 🚨');
@@ -73,7 +78,7 @@ const Routes: FC = (): ReactElement => {
 				// /summarize, /documents & /document/:id
 				setRedirect(true);
 			} else {
-				console.log('localstorage:', { token });
+				setIsAuthenticating(true);
 
 				const config = {
 					headers: {
@@ -96,12 +101,6 @@ const Routes: FC = (): ReactElement => {
 							currentSessionCount,
 							maxMonthlySessionCount:
 								res.data.user.usage.sessions.maxMonthlySessionCount,
-						});
-
-						//REMOVE in PROD
-						console.log({
-							currentSessionCount,
-							productName,
 						});
 
 						//triggers if the user has used up all trial sessions
@@ -161,6 +160,11 @@ const Routes: FC = (): ReactElement => {
 				/>
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/signup" render={() => <SignUpPage />} />
+				<Route
+					exact
+					path="/user/verify/:userId/:token"
+					render={() => <VerifyAccountPage />}
+				/>
 				<Route
 					exact
 					path="/password/reset/initiate"

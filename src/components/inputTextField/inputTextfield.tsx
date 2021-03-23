@@ -116,7 +116,8 @@ const InputTextfield: FC = (): ReactElement => {
 								);
 								// setInputText(fullText);
 								setCharacterLimitReached(
-									characterLimit > userObject.maxSessionCharacters,
+									//characterLimit > userObject.maxSessionCharacters,
+									characterLimit > 500,
 								);
 								e.preventDefault();
 							}}
@@ -143,7 +144,7 @@ const InputTextfield: FC = (): ReactElement => {
 						</button>
 						<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-3">
 							<span className="tracking-wider font-medium ">
-								{characterLimit} / {userObject.maxSessionCharacters} characters
+								{characterLimit} / {500} characters
 							</span>
 						</div>
 					</div>

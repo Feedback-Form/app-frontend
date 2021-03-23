@@ -15,8 +15,8 @@ const SignUpPage: FC = (): ReactElement => {
 	const [name, handleNameChange, resetName] = useInputState('');
 	const [company, handleCompanyChange, resetCompany] = useInputState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const [errorMessage, setErrorMessage] = useState('');
-	const [showErrorMessage, setShowErrorMessage] = useState(false);
+	const [responseMessage, setResponseMessage] = useState('');
+	const [showResponseMessage, setShowResponseMessage] = useState(false);
 	const [redirect, setRedirect] = useState(false);
 	const { setToken, setJwtReceived, token, jwtReceived } = useUserData();
 
@@ -42,10 +42,6 @@ const SignUpPage: FC = (): ReactElement => {
 					currentSessionCount: 0,
 					maxMonthlySessionCount: 25,
 				},
-				characters: {
-					maxSessionCharacters: 600,
-					maxResponseCharacters: 500,
-				},
 			},
 		};
 		console.log(req);
@@ -57,15 +53,18 @@ const SignUpPage: FC = (): ReactElement => {
 
 				setJwtReceived(true);
 				setIsLoading(false);
-				history.push('/summarize');
+
+				setResponseMessage(res.data.message);
+				setShowResponseMessage(true);
+				//history.push('/summarize');
 
 				//setRedirect(true);
 			})
 			.catch((err: any) => {
 				console.log(err);
-				setErrorMessage('Unable to create account.');
-				setShowErrorMessage(true);
 				setIsLoading(false);
+				setResponseMessage('Unable to create account.');
+				setShowResponseMessage(true);
 			});
 
 		//reset fields
@@ -144,8 +143,14 @@ const SignUpPage: FC = (): ReactElement => {
 								<span className="inline-block mr-2">Create account</span>
 							</button>
 						</form>
-						{showErrorMessage && (
-							<div className="flex space-x-2 items-center text-red-500 pt-2">
+						{showResponseMessage && (
+							<div
+								className={`flex space-x-2 items-center ${
+									responseMessage === 'Unable to create account.'
+										? 'text-red-500'
+										: 'text-green-500'
+								} pt-2`}
+							>
 								<svg
 									className="w-5 h-5"
 									xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +165,7 @@ const SignUpPage: FC = (): ReactElement => {
 										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
 									/>
 								</svg>
-								<span>{errorMessage}</span>
+								<span>{responseMessage}</span>
 							</div>
 						)}
 					</div>
