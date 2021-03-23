@@ -60,6 +60,13 @@ const Routes: FC = (): ReactElement => {
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
+		/////
+		//REMOVE in PROD
+		////
+		setIsAuthenticating(false);
+		return;
+		////
+		////
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
 		console.log(shortPath[0]);
@@ -141,8 +148,9 @@ const Routes: FC = (): ReactElement => {
 			>
 				{redirect && <Redirect to="/login" />}
 				{endedTrialRedirect && <Redirect to="/trial/ended" />}
-				<Route exact path="/" render={() => <Redirect to="/login" />} />
-				<Route exact path="/login" render={() => <LoginPage />} />
+				{/* <Route exact path="/" render={() => <Redirect to="/login" />} /> */}
+				{/* <Route exact path="/" render={() => <Redirect to="/login" />} /> */}
+				<Route exact path="/" render={() => <ChooseTypePage />} />
 
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route path="/document/:id" render={() => <SingleDocPage />} />
@@ -159,7 +167,7 @@ const Routes: FC = (): ReactElement => {
 					render={() => <GenerateTextPage />}
 				/>
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
-				<Route exact path="/signup" render={() => <SignUpPage />} />
+				{/* <Route exact path="/signup" render={() => <SignUpPage />} /> */}
 				<Route
 					exact
 					path="/user/verify/:userId/:token"

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useEffect } from 'react';
 
-import InputTextfield from './inputTextField/inputTextfield';
-import OutputTextfield from './outputTexfield';
+import InputTextfield from './input-textfield/inputTextfield';
+import OutputTextfield from './output-textfield/outputTexfield';
 import { CSSTransition } from 'react-transition-group';
 import { useText } from '../hooks/contexts/summaryContext';
 
@@ -37,7 +37,7 @@ const Summarize: FC = (): ReactElement => {
 				<OutputTextfield />
 			</CSSTransition>
 
-			<div className="w-full items-center justify-center flex  space-x-6">
+			{/* <div className="w-full items-center justify-center flex  space-x-6 ">
 				<button
 					disabled={characterLimitReached}
 					onClick={() => {
@@ -54,7 +54,7 @@ const Summarize: FC = (): ReactElement => {
 						currentComponent === 2 ? 'bg-teal-700' : 'bg-gray-300'
 					}`}
 				></button>
-			</div>
+			</div> */}
 		</main>
 	);
 };

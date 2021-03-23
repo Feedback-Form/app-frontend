@@ -29,13 +29,13 @@ const ChooseLanguage: FC = (): ReactElement => {
 		},
 	];
 	return (
-		<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full space-y-10">
-			<div className="flex items-end w-3/4 ">
+		<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full">
+			<div className="flex flex-col w-3/4 h-1/5 justify-center">
 				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
 					Choose language
 				</h1>
 			</div>
-			<div className="flex w-3/4 h-3/4 justify-evenly items-center space-x-10">
+			<div className="flex flex-col w-3/4 h-4/5 justify-start items-center space-y-10">
 				{languages.map((item, index) => {
 					return (
 						<NavLink
@@ -44,12 +44,12 @@ const ChooseLanguage: FC = (): ReactElement => {
 							key={index}
 						>
 							<button
-								className="p-10 lg:p-16 bg-gray-200 rounded-md capitalize hover:bg-teal-700
-							 			hover:text-teal-50 transition-all ease-in-out duration-20 text-xl font-medium tracking-wide
-										 focus:outline-none"
+								className="w-64 md:w-80 py-6  bg-teal-700 rounded-lg text-white capitalize hover:bg-teal-600
+									  transition-all ease-in-out duration-200 text-lg md:text-xl font-medium tracking-wide
+									 focus:outline-none"
 							>
 								<p>
-									<span className="md:pr-4">{item.icon}</span>
+									<span className="pr-2 md:pr-4">{item.icon}</span>
 									{item.language}
 								</p>
 							</button>

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 //components
 import ResponseWidget from '../response-widget/responseWidget';
 import Uploading from '../uploading/uploading';
+import NavigationDots from '../navigationDots';
 //hooks
 import { useWordState } from '../../hooks/hooks';
 import { useText } from '../../hooks/contexts/summaryContext';
@@ -88,65 +89,70 @@ const InputTextfield: FC = (): ReactElement => {
 				}, 5000);
 			});
 	}
+
 	return (
 		<>
 			{errWidget && <ResponseWidget success={false} response={resMessage} />}
 			{isLoading ? (
 				<Uploading message="Your text is being summarized." />
 			) : (
-				<section className="flex-shrink  flex flex-col items-center justify-center h-3/4 w-full space-y-10 max-w-4xl">
-					<div className="flex items-end w-3/4 ">
+				<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full max-w-4xl">
+					<div className="flex flex-col w-3/4 h-1/5 justify-center">
 						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
 							Describe your product or service.
 						</h1>
 					</div>
-					<div className="w-3/4 h-1/2 shadow-md rounded-md ">
-						<textarea
-							value={fullText}
-							onChange={e => {
-								handleTexthange(e);
-								// setInputText(fullText);
-								setCharacterLimitReached(
-									characterLimit > userObject.maxSessionCharacters,
-								);
-							}}
-							onPaste={e => {
-								setText((existingText: string) =>
-									existingText.concat(e.clipboardData.getData('Text')),
-								);
-								// setInputText(fullText);
-								setCharacterLimitReached(
-									//characterLimit > userObject.maxSessionCharacters,
-									characterLimit > 500,
-								);
-								e.preventDefault();
-							}}
-							onCut={(e: any) => {
-								setText(e.target.value);
-								// setInputText(fullText);
-							}}
-							className="w-full h-full resize-none break-words rounded-md p-6 font-thin text-lg tracking-wide
-						focus:outline-none focus:ring-2 focus:ring-teal-700 transition-all ease-in-out duration-200
-						"
-							placeholder="Type or paste (⌘ + V) your text here."
-						/>
-					</div>
-					<div className="flex justify-between w-3/4 items-center">
-						<button
-							disabled={characterLimitReached}
-							onClick={() => {
-								setInputText(fullText);
-								generateOutPut();
-							}}
-							className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-md px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
-						>
-							Generate output
-						</button>
-						<div className="rounded-md bg-gray-300 text-gray-600 py-1 px-3">
-							<span className="tracking-wider font-medium ">
-								{characterLimit} / {500} characters
-							</span>
+					<div className="flex flex-col w-3/4 h-4/5 space-y-20 ">
+						<div className="flex flex-col shadow-md h-1/2">
+							<textarea
+								value={fullText}
+								onChange={e => {
+									handleTexthange(e);
+									// setInputText(fullText);
+									setCharacterLimitReached(
+										characterLimit > userObject.maxSessionCharacters,
+									);
+								}}
+								onPaste={e => {
+									setText((existingText: string) =>
+										existingText.concat(e.clipboardData.getData('Text')),
+									);
+									// setInputText(fullText);
+									setCharacterLimitReached(
+										//characterLimit > userObject.maxSessionCharacters,
+										characterLimit > 500,
+									);
+									e.preventDefault();
+								}}
+								onCut={(e: any) => {
+									setText(e.target.value);
+									// setInputText(fullText);
+								}}
+								className="w-full h-full rounded-lg resize-none break-words  p-6 font-thin text-lg tracking-wide
+					focus:outline-none focus:ring-2 focus:ring-teal-700 transition-all ease-in-out duration-200
+					"
+								placeholder="Type or paste (⌘ + V) your text here."
+							/>
 						</div>
+						<div className="flex justify-between items-center">
+							<button
+								disabled={characterLimitReached}
+								onClick={() => {
+									setInputText(fullText);
+									generateOutPut();
+								}}
+								className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg
+								 px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
+							>
+								Generate output
+							</button>
+							<div className="rounded-lg bg-gray-300 text-gray-600 py-2 px-3">
+								<span className="tracking-wider font-medium ">
+									{characterLimit} / {500} characters
+								</span>
+							</div>
+						</div>
+						<NavigationDots />
 					</div>
 				</section>
 			)}
