@@ -5,8 +5,8 @@ import axios from 'axios';
 
 //pages
 import GenerateTextPage from '../pages/generateTextPage';
-import DocumentsPage from '../pages/docsPage';
-import SingleDocPage from '../pages/singleDocPage';
+import DocumentsPage from '../pages/documentsPage';
+import SingleDocPage from '../pages/singleDocumentPage';
 import LoginPage from '../pages/loginPage';
 import DummyPlans from '../components/dummyPlans';
 import StatusPage from '../components/status-page/statusPage';
@@ -63,9 +63,9 @@ const Routes: FC = (): ReactElement => {
 		/////
 		//REMOVE in PROD
 		////
-		// setIsAuthenticating(false);
-		// return;
-		////
+		setIsAuthenticating(false);
+		return;
+		//
 		////
 
 		//if one of the paths below, not AUTH is required.
@@ -152,7 +152,9 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 
 				{/* remove in PROD */}
-				{/* <Route exact path="/" render={() => <ChooseTypePage />} /> */}
+				<Redirect to="/" />
+				<Route exact path="/" render={() => <DocumentsPage />} />
+				{/* ---- */}
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route path="/document/:id" render={() => <SingleDocPage />} />

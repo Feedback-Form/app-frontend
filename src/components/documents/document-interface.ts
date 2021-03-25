@@ -1,6 +1,8 @@
 export interface Document {
 	_id: string;
-	title: string;
 	generatedOutput: string;
-	createdAt: string;
+	title: string;
+	inputRiskGroup: string;
+	outputLanguage: string;
+	outputType: string;
 }

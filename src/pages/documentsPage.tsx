@@ -5,7 +5,7 @@ import Sidebar from '../components/sidebar/sideBar';
 
 import Documents from '../components/documents/documents';
 import AuthenticationWidget from '../components/authenticationWidget';
-
+import UserSessionBar from '../components/userSessionBar';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
@@ -18,6 +18,7 @@ const DocumentsPage: FC = (): ReactElement => {
 				<AuthenticationWidget />
 			) : (
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+					<UserSessionBar />
 					<Sidebar />
 					<Documents />
 				</section>
