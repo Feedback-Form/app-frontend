@@ -31,7 +31,7 @@ const ChooseLanguage: FC = (): ReactElement => {
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full">
 			<div className="flex flex-col w-3/4 h-1/5 justify-center">
-				<h1 className="tracking-wide text-3xl text-gray-900 font-medium">
+				<h1 className="tracking-wide text-3xl text-gray-900 font-medium md:pl-20">
 					Choose language
 				</h1>
 			</div>

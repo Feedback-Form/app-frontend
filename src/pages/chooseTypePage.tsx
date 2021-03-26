@@ -4,6 +4,7 @@ import React, { FC, ReactElement, useState } from 'react';
 import Sidebar from '../components/sidebar/sideBar';
 import ChooseType from '../components/choose-type/chooseType';
 import AuthenticationWidget from '../components/authenticationWidget';
+import UserSessionBar from '../components/userSessionBar';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
@@ -15,6 +16,7 @@ const ChooseTypePage: FC = (): ReactElement => {
 				<AuthenticationWidget />
 			) : (
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+					<UserSessionBar />
 					<Sidebar />
 					<ChooseType />
 				</section>

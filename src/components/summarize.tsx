@@ -18,7 +18,7 @@ const Summarize: FC = (): ReactElement => {
 	}, [characterLimitReached]);
 
 	return (
-		<main className="flex-1 flex flex-col  bg-white text-gray-900  items-center justify-evenly space-y-10">
+		<main className="flex-1 flex flex-col bg-white text-gray-900  items-center space-y-10">
 			<CSSTransition
 				in={currentComponent === 1}
 				timeout={400}

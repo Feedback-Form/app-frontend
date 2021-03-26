@@ -93,7 +93,7 @@ const Sidebar: FC = (): ReactElement => {
 	}
 
 	return (
-		<nav className="bg-gray-50 w-20 xl:w-auto flex-shrink-0 h-full flex flex-col justify-between ">
+		<nav className="bg-gray-50 w-20 xl:w-auto flex-shrink-0 h-full flex flex-col justify-between absolute">
 			{/* Group 1 */}
 
 			<div className="space-y-3">
