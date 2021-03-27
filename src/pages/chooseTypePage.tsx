@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 //components
 import Sidebar from '../components/sidebar/sideBar';
@@ -9,14 +9,15 @@ import UserSessionBar from '../components/userSessionBar';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const ChooseTypePage: FC = (): ReactElement => {
-	const { isAuthenticating } = useUserData();
+	const { isAuthenticating, userObject } = useUserData();
+
 	return (
 		<>
 			{isAuthenticating ? (
 				<AuthenticationWidget />
 			) : (
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
-					<UserSessionBar />
+					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
 					<ChooseType />
 				</section>

@@ -21,7 +21,7 @@ const GenerateTextPage: FC = (): ReactElement => {
 	const [inputRiskGroup, setInputRiskGroup] = useState('0');
 	const [summaryLanguage, setSummaryLanguage] = useState('english');
 
-	const { isAuthenticating } = useUserData();
+	const { isAuthenticating, userObject } = useUserData();
 
 	return (
 		<SummaryContext.Provider
@@ -48,7 +48,7 @@ const GenerateTextPage: FC = (): ReactElement => {
 				<AuthenticationWidget />
 			) : (
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
-					<UserSessionBar />
+					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
 					<Summarize />
 				</section>

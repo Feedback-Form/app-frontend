@@ -9,14 +9,14 @@ import UserSessionBar from '../components/userSessionBar';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const ChooseLanguagePage: FC = (): ReactElement => {
-	const { isAuthenticating } = useUserData();
+	const { isAuthenticating, userObject } = useUserData();
 	return (
 		<>
 			{isAuthenticating ? (
 				<AuthenticationWidget />
 			) : (
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
-					<UserSessionBar />
+					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
 					<ChooseLanguage />
 				</section>

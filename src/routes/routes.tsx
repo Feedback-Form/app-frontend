@@ -21,27 +21,8 @@ import VerifyAccountPage from '../pages/verifyAccountPage';
 import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-type AuthToken = {
-	auth_token: string;
-};
-
-interface UserObj {
-	user: {
-		billing: {
-			subscription: {
-				productName: string;
-			};
-			stripeCustomerId: string;
-		};
-
-		usage: {
-			sessions: {
-				currentSessionCount: number;
-				maxMonthlySessionCount: number;
-			};
-		};
-	};
-}
+//interfaces
+import { UserObject } from './interfaces/userObjectInterface';
 
 const Routes: FC = (): ReactElement => {
 	const location = useLocation();
@@ -51,12 +32,25 @@ const Routes: FC = (): ReactElement => {
 	const [jwtReceived, setJwtReceived] = useState(false);
 	const [redirect, setRedirect] = useState(false);
 	const [isAuthenticating, setIsAuthenticating] = useState(true);
+
+	//PROD
+	// const [userObject, setUserObject] = useState({
+	// 	productName: '',
+	// 	stripeCustomerId: '',
+	// 	currentSessionCount: 0,
+	// 	maxMonthlySessionCount: 0,
+	// 	userIsTrial: true,
+	// });
+
+	//TEST
 	const [userObject, setUserObject] = useState({
 		productName: '',
 		stripeCustomerId: '',
-		currentSessionCount: 0,
-		maxMonthlySessionCount: 0,
+		currentSessionCount: 6,
+		maxMonthlySessionCount: 25,
+		userIsTrial: true,
 	});
+
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
@@ -95,18 +89,20 @@ const Routes: FC = (): ReactElement => {
 				};
 
 				axios
-					.get<UserObj>(
+					.get<UserObject>(
 						`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`,
 						config,
 					)
 					.then(res => {
 						const { currentSessionCount } = res.data.user.usage.sessions;
 						const { productName } = res.data.user.billing.subscription;
+						const { stripeCustomerId, userIsTrial } = res.data.user.billing;
 
 						setUserObject({
 							productName,
-							stripeCustomerId: res.data.user.billing.stripeCustomerId,
+							stripeCustomerId,
 							currentSessionCount,
+							userIsTrial,
 							maxMonthlySessionCount:
 								res.data.user.usage.sessions.maxMonthlySessionCount,
 						});
@@ -153,7 +149,7 @@ const Routes: FC = (): ReactElement => {
 
 				{/* remove in PROD */}
 				<Redirect to="/" />
-				<Route exact path="/" render={() => <DocumentsPage />} />
+				<Route exact path="/" render={() => <ChooseTypePage />} />
 				{/* ---- */}
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />

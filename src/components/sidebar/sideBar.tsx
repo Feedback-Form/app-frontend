@@ -7,6 +7,9 @@ import axios from 'axios';
 //hooks
 import { useUserData } from '../../hooks/contexts/userContext';
 
+//modules
+import { checkoutHandler } from '../../modules/checkoutHandler';
+
 declare class Stripe {
 	constructor(publicKey: string);
 	redirectToCheckout({
@@ -15,10 +18,6 @@ declare class Stripe {
 		sessionId: string;
 	}): Promise<{ error: Error }>;
 }
-
-const stripe = new Stripe(
-	'pk_test_51IDXKLIy6PlSkETF0Aog8XohbZ7mtE8LQln3iQ3rH8RPuEXPQWKgsRsznHXWGQr0Y4ehrRn9iGruDVeA24RX5lEu00IMNMmRkK',
-);
 
 const Sidebar: FC = (): ReactElement => {
 	const [redirect, setRedirect] = useState(false);
@@ -62,30 +61,6 @@ const Sidebar: FC = (): ReactElement => {
 				//clear localStorage
 				localStorage.clear();
 				setRedirect(true);
-			})
-			.catch((err: any) => {
-				console.log('err', err);
-			});
-	}
-
-	function checkoutHandler(priceId: string): void {
-		const req = {
-			priceId,
-		};
-		axios
-			.post(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`,
-				req,
-			)
-			.then((res: any) => {
-				//redirect to checkout session
-				stripe
-					.redirectToCheckout({
-						sessionId: `${res.data.sessionId}`,
-					})
-					.then(res => {
-						console.log(res);
-					});
 			})
 			.catch((err: any) => {
 				console.log('err', err);
@@ -262,7 +237,7 @@ const Sidebar: FC = (): ReactElement => {
 						<button
 							disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
 							onClick={() => {
-								checkoutHandler('price_1IDc8VIy6PlSkETFdUzqL63A');
+								checkoutHandler();
 							}}
 							className={` ${
 								userObject.productName !== 'SCRPTAI_BASIC_PLAN'
