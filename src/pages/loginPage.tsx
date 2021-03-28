@@ -59,13 +59,11 @@ const LoginPage: FC = (): ReactElement => {
 	}
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12 font-scrptai">
+		<div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12 font-scrptai ">
 			{isLoading && <LoadingWidget />}
 			{/* {jwtReceived && <Redirect to="/summarize" />} */}
-			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
-				<div className="flex justify-center w-full">
-					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
-				</div>
+			<div className="p-10 sm:p-0 mx-auto md:w-full md:max-w-md space-y-6 ">
+				<img className="w-28 mx-auto" src={scrptAiLogo} alt="scrpt_ai_logo" />
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
