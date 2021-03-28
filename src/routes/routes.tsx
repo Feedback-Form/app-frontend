@@ -167,7 +167,7 @@ const Routes: FC = (): ReactElement => {
 					render={() => <GenerateTextPage />}
 				/>
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
-				{/* <Route exact path="/signup" render={() => <SignUpPage />} /> */}
+				<Route exact path="/signup" render={() => <SignUpPage />} />
 				<Route
 					exact
 					path="/user/verify/:userId/:token"

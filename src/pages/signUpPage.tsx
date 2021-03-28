@@ -1,5 +1,5 @@
 import React, { ReactElement, FC, useState, useEffect } from 'react';
-import scrptAiLogo from '../images/scrptai_logo.svg';
+import copykatLogoLong from '../images/copykat_logo_long.svg';
 import axios from 'axios';
 import { Redirect, useHistory } from 'react-router-dom';
 //hooks
@@ -19,6 +19,7 @@ const SignUpPage: FC = (): ReactElement => {
 	const [showResponseMessage, setShowResponseMessage] = useState(false);
 	const [redirect, setRedirect] = useState(false);
 	const { setToken, setJwtReceived, token, jwtReceived } = useUserData();
+	const [isError, setIsError] = useState(false);
 
 	function signUpUser(): void {
 		setIsLoading(true);
@@ -30,6 +31,7 @@ const SignUpPage: FC = (): ReactElement => {
 			password,
 			billing: {
 				stripeCustomerId: '',
+				userIsTrial: true,
 				subscription: {
 					productName: 'trial',
 					active: true,
@@ -37,14 +39,15 @@ const SignUpPage: FC = (): ReactElement => {
 					currentPeriodEnd: null,
 				},
 			},
+			userIsVerified: false,
 			usage: {
 				sessions: {
 					currentSessionCount: 0,
-					maxMonthlySessionCount: 25,
+					maxMonthlySessionCount: 50,
 				},
 			},
 		};
-		console.log(req);
+
 		axios
 			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/create`, req)
 			.then((res: any) => {
@@ -61,9 +64,9 @@ const SignUpPage: FC = (): ReactElement => {
 				//setRedirect(true);
 			})
 			.catch((err: any) => {
-				console.log(err);
 				setIsLoading(false);
-				setResponseMessage('Unable to create account.');
+				setIsError(true);
+				setResponseMessage(err.response.data.error.message);
 				setShowResponseMessage(true);
 			});
 
@@ -81,14 +84,18 @@ const SignUpPage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
+					<img
+						className="w-48 mx-auto"
+						src={copykatLogoLong}
+						alt="copykat_ai_logo"
+					/>
 				</div>
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
 						<form autoComplete="on">
 							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								E-mail
+								E-mail*
 							</label>
 							<input
 								value={email}
@@ -100,7 +107,7 @@ const SignUpPage: FC = (): ReactElement => {
 							/>
 
 							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Name
+								Name*
 							</label>
 							<input
 								value={name}
@@ -123,7 +130,7 @@ const SignUpPage: FC = (): ReactElement => {
 							/>
 
 							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Password
+								Password*
 							</label>
 							<input
 								value={password}
@@ -137,8 +144,14 @@ const SignUpPage: FC = (): ReactElement => {
 								onClick={() => {
 									signUpUser();
 								}}
-								disabled={isLoading}
-								className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
+								disabled={
+									isLoading ||
+									email === '' ||
+									name === '' ||
+									password === '' ||
+									password.length < 7
+								}
+								className="disabled:cursor-not-allowed transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
 							>
 								<span className="inline-block mr-2">Create account</span>
 							</button>
@@ -146,9 +159,7 @@ const SignUpPage: FC = (): ReactElement => {
 						{showResponseMessage && (
 							<div
 								className={`flex space-x-2 items-center ${
-									responseMessage === 'Unable to create account.'
-										? 'text-red-500'
-										: 'text-green-500'
+									isError === true ? 'text-red-500' : 'text-green-500'
 								} pt-2`}
 							>
 								<svg
