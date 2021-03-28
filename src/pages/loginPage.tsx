@@ -43,6 +43,7 @@ const LoginPage: FC = (): ReactElement => {
 				//setRedirect(true);
 			})
 			.catch((err: any) => {
+				console.log('🚀', err);
 				setErrorMessage(err.response.data.message);
 				setShowErrorMessage(true);
 				setIsLoading(false);

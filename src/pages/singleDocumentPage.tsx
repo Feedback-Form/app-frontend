@@ -6,7 +6,7 @@ import axios from 'axios';
 import Sidebar from '../components/sidebar/sideBar';
 import EditDocument from '../components/editDocument';
 import Uploading from '../components/uploading/uploading';
-
+import UserSessionBar from '../components/userSessionBar';
 //hooks
 import { SingleDocContext } from '../hooks/contexts/singleDocContext';
 import { useUserData } from '../hooks/contexts/userContext';
@@ -28,7 +28,7 @@ const SingleDocPage: FC = (): ReactElement => {
 	const [outputType, setOutputType] = useState('');
 	const [outputLanguage, setOutputLanguage] = useState('');
 
-	const { token } = useUserData();
+	const { token, userObject } = useUserData();
 
 	function getDocument() {
 		//config
@@ -86,6 +86,7 @@ const SingleDocPage: FC = (): ReactElement => {
 		>
 			<section className="h-screen w-full flex font-scrptai overflow-y-auto">
 				<Sidebar />
+				{userObject.userIsTrial === true && <UserSessionBar />}
 				{isLoading ? (
 					<Uploading message="Getting document" />
 				) : (

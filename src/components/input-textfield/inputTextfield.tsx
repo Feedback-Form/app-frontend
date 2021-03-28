@@ -103,15 +103,13 @@ const InputTextfield: FC = (): ReactElement => {
 						</h1>
 					</div>
 					<div className="flex flex-col w-3/4 h-4/5 space-y-20 ">
-						<div className="flex flex-col shadow-md h-1/2">
+						<div className="flex flex-col shadow-md h-1/2 rounded-lg">
 							<textarea
 								value={fullText}
 								onChange={e => {
 									handleTexthange(e);
 									// setInputText(fullText);
-									setCharacterLimitReached(
-										characterLimit > userObject.maxSessionCharacters,
-									);
+									setCharacterLimitReached(characterLimit > 400);
 								}}
 								onPaste={e => {
 									setText((existingText: string) =>
@@ -120,7 +118,7 @@ const InputTextfield: FC = (): ReactElement => {
 									// setInputText(fullText);
 									setCharacterLimitReached(
 										//characterLimit > userObject.maxSessionCharacters,
-										characterLimit > 500,
+										characterLimit > 400,
 									);
 									e.preventDefault();
 								}}
@@ -148,7 +146,7 @@ const InputTextfield: FC = (): ReactElement => {
 							</button>
 							<div className="rounded-lg bg-gray-300 text-gray-600 py-2 px-3">
 								<span className="tracking-wider font-medium ">
-									{characterLimit} / {500} characters
+									{characterLimit} / {400} characters
 								</span>
 							</div>
 						</div>

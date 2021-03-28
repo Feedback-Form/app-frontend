@@ -42,14 +42,14 @@ const VerifyAccountPage: FC = (): ReactElement => {
 							responseMessage === `You've successfully verified your account!`
 								? 'text-green-500'
 								: 'text-red-500'
-						} font-medium text-xl`}
+						} font-medium text-xl text-center`}
 					>
 						{responseMessage}
 					</p>
 
 					{responseMessage === `You've successfully verified your account!` && (
 						<div>
-							<p className="text-lg font-medium text-gray-700">
+							<p className="text-md font-base text-gray-700 py-5">
 								You may close this window and log in again. or click on the
 								button to navigate to the login page.
 							</p>

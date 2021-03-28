@@ -21,6 +21,7 @@ module.exports = {
 				teal: colors.teal,
 				lime: colors.lime,
 				cyan: colors.cyan,
+				rose: colors.rose,
 			},
 		},
 	},
@@ -28,6 +29,7 @@ module.exports = {
 		extend: {
 			opacity: ['disabled'],
 			cursor: ['disabled'],
+			margin: ['last'],
 		},
 	},
 	plugins: [],

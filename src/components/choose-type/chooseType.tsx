@@ -8,11 +8,11 @@ const ChooseType: FC = (): ReactElement => {
 			route: 'adcopy',
 			icon: '💸',
 		},
-		{
-			text: 'Instagram Captions',
-			route: 'captions',
-			icon: '🦄',
-		},
+		// {
+		// 	text: 'Instagram Captions',
+		// 	route: 'captions',
+		// 	icon: '🦄',
+		// },
 		{
 			text: 'Headlines',
 			route: 'headlines',
@@ -21,9 +21,25 @@ const ChooseType: FC = (): ReactElement => {
 		{
 			text: 'Value Propositions',
 			route: 'valuepropositions',
-			icon: '🎈',
+			icon: '💡',
+		},
+		{
+			text: 'Slogans',
+			route: 'slogans',
+			icon: '📣',
+		},
+		{
+			text: 'Product Descriptions',
+			route: 'productdescription',
+			icon: '🎯',
+		},
+		{
+			text: 'Catchy Email Subjectlines',
+			route: 'catchyemailsubjectlines',
+			icon: '📬',
 		},
 	];
+
 	return (
 		<section className="flex-shrink flex flex-col items-center justify-center  h-full w-full">
 			<div className="flex flex-col w-3/4 h-1/5 justify-center ">
@@ -31,12 +47,12 @@ const ChooseType: FC = (): ReactElement => {
 					Choose content type
 				</h1>
 			</div>
-			<div className="flex flex-col w-3/4 h-4/5 items-center space-y-10">
+			<div className="flex flex-col w-3/4 h-4/5 items-center space-y-10 overflow-y-auto ">
 				{types.map((item, index) => {
 					return (
 						<NavLink exact to={`/generate/${item.route}`} key={index}>
 							<button
-								className="w-64 md:w-80 py-6 bg-teal-700 rounded-lg capitalize hover:bg-teal-600 text-white
+								className="w-64 md:w-96 py-6 bg-teal-700 rounded-lg capitalize hover:bg-teal-600 text-white
 									  transition-all ease-in-out duration-200 text-lg md:text-xl font-medium tracking-wide
 									 focus:outline-none"
 							>

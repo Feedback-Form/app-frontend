@@ -15,213 +15,213 @@ import { Document } from './document-interface';
 const Documents: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoadingTwo, setIsLoadingTwo] = useState(false);
-	// const [documents, setDocuments] = useState([]);
-	const [documents, setDocuments] = useState([
-		{
-			_id: 'xaasdhah12',
-			title: '',
-			inputText: 'lorem ipsum lorem pisum',
-			generatedOutput: 'bitcoin is the future',
-			outputType: 'adcopy',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah123213',
-			title: '',
-			inputText: 'On running are the best shoes',
-			generatedOutput: 'cloud x',
-			outputType: 'captions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	const [documents, setDocuments] = useState([]);
+	// const [documents, setDocuments] = useState([
+	// 	{
+	// 		_id: 'xaasdhah12',
+	// 		title: '',
+	// 		inputText: 'lorem ipsum lorem pisum',
+	// 		generatedOutput: 'bitcoin is the future',
+	// 		outputType: 'adcopy',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah123213',
+	// 		title: '',
+	// 		inputText: 'On running are the best shoes',
+	// 		generatedOutput: 'cloud x',
+	// 		outputType: 'captions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah12',
-			title: '',
-			inputText: 'lorem ipsum lorem pisum',
-			generatedOutput: 'bitcoin is the future',
-			outputType: 'adcopy',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah123213',
-			title: '',
-			inputText: 'On running are the best shoes',
-			generatedOutput: 'cloud x',
-			outputType: 'captions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah12',
+	// 		title: '',
+	// 		inputText: 'lorem ipsum lorem pisum',
+	// 		generatedOutput: 'bitcoin is the future',
+	// 		outputType: 'adcopy',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah123213',
+	// 		title: '',
+	// 		inputText: 'On running are the best shoes',
+	// 		generatedOutput: 'cloud x',
+	// 		outputType: 'captions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah12',
-			title: '',
-			inputText: 'lorem ipsum lorem pisum',
-			generatedOutput: 'bitcoin is the future',
-			outputType: 'adcopy',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah123213',
-			title: '',
-			inputText: 'On running are the best shoes',
-			generatedOutput: 'cloud x',
-			outputType: 'captions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah12',
+	// 		title: '',
+	// 		inputText: 'lorem ipsum lorem pisum',
+	// 		generatedOutput: 'bitcoin is the future',
+	// 		outputType: 'adcopy',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah123213',
+	// 		title: '',
+	// 		inputText: 'On running are the best shoes',
+	// 		generatedOutput: 'cloud x',
+	// 		outputType: 'captions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah12',
-			title: '',
-			inputText: 'lorem ipsum lorem pisum',
-			generatedOutput: 'bitcoin is the future',
-			outputType: 'adcopy',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah123213',
-			title: '',
-			inputText: 'On running are the best shoes',
-			generatedOutput: 'cloud x',
-			outputType: 'captions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah12',
+	// 		title: '',
+	// 		inputText: 'lorem ipsum lorem pisum',
+	// 		generatedOutput: 'bitcoin is the future',
+	// 		outputType: 'adcopy',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah123213',
+	// 		title: '',
+	// 		inputText: 'On running are the best shoes',
+	// 		generatedOutput: 'cloud x',
+	// 		outputType: 'captions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah12',
-			title: '',
-			inputText: 'lorem ipsum lorem pisum',
-			generatedOutput: 'bitcoin is the future',
-			outputType: 'adcopy',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdhah123213',
-			title: '',
-			inputText: 'On running are the best shoes',
-			generatedOutput: 'cloud x',
-			outputType: 'captions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-		{
-			_id: 'xaasdh3213123ah12',
-			title: 'LTC',
-			inputText: 'Litecoin pump or dump?',
-			generatedOutput: 'ltc ltc ltc ltc ltc',
-			outputType: 'headlines',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah12',
+	// 		title: '',
+	// 		inputText: 'lorem ipsum lorem pisum',
+	// 		generatedOutput: 'bitcoin is the future',
+	// 		outputType: 'adcopy',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdhah123213',
+	// 		title: '',
+	// 		inputText: 'On running are the best shoes',
+	// 		generatedOutput: 'cloud x',
+	// 		outputType: 'captions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// 	{
+	// 		_id: 'xaasdh3213123ah12',
+	// 		title: 'LTC',
+	// 		inputText: 'Litecoin pump or dump?',
+	// 		generatedOutput: 'ltc ltc ltc ltc ltc',
+	// 		outputType: 'headlines',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
 
-		{
-			_id: 'xaasdhxyllah12',
-			title: 'M1 Macbook Pro',
-			inputText: "that's why you gotta buy a macbook",
-			generatedOutput: 'm1 processors are awesome',
-			outputType: 'valuepropositions',
-			inputRiskGroup: '2',
-			outputLanguage: 'english',
-		},
-	]);
+	// 	{
+	// 		_id: 'xaasdhxyllah12',
+	// 		title: 'M1 Macbook Pro',
+	// 		inputText: "that's why you gotta buy a macbook",
+	// 		generatedOutput: 'm1 processors are awesome',
+	// 		outputType: 'valuepropositions',
+	// 		inputRiskGroup: '2',
+	// 		outputLanguage: 'english',
+	// 	},
+	// ]);
 	//
 	//
 
@@ -276,8 +276,29 @@ const Documents: FC = (): ReactElement => {
 				break;
 			case 'valuepropositions':
 				return 'cyan';
+			case 'slogans':
+				return 'teal';
+			case 'catchyemailsubjectlines':
+				return 'indigo';
+			case 'productdescription':
+				return 'rose';
 			default:
 				return 'gray';
+		}
+	}
+	function sliceStrings(document: Document): string {
+		const { outputType } = document;
+		switch (outputType) {
+			case 'valuepropositions':
+				return 'valueprop';
+				break;
+			case 'catchyemailsubjectlines':
+				return 'catchyemail';
+				break;
+			case 'productdescription':
+				return 'productdesc';
+			default:
+				return outputType;
 		}
 	}
 
@@ -318,22 +339,22 @@ const Documents: FC = (): ReactElement => {
 										focus:ring-2 focus:ring-teal-600
 										transition-all ease-in-out duration-200 px-4"
 											>
-												<span className="flex absolute h-5 w-16 top-0 right-0 ">
+												<span className="flex absolute h-5 w-20 top-0 right-0 ">
 													<div
 														className={`relative inline-flex rounded-md  bg-${outputTypeColor(
 															i.outputType,
 														)}-500  text-white font-base text-xs w-full h-full justify-center`}
 													>
-														{i.outputType === 'valuepropositions'
-															? 'valueprop'
-															: i.outputType}
+														{sliceStrings(i)}
 													</div>
 												</span>
 												<div
 													onClick={() => openDocument(i._id)}
 													className="cursor-pointer justify-evenly flex flex-col h-3/4"
 												>
-													<h1 className="w-full">{i.title}</h1>
+													<h1 className="w-full text-lg trackin-wide truncate">
+														{i.title}
+													</h1>
 													<p className=" text-sm font-thin truncate">
 														{i.generatedOutput}
 													</p>

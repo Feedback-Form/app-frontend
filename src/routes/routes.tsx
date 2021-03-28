@@ -34,33 +34,33 @@ const Routes: FC = (): ReactElement => {
 	const [isAuthenticating, setIsAuthenticating] = useState(true);
 
 	//PROD
-	// const [userObject, setUserObject] = useState({
-	// 	productName: '',
-	// 	stripeCustomerId: '',
-	// 	currentSessionCount: 0,
-	// 	maxMonthlySessionCount: 0,
-	// 	userIsTrial: true,
-	// });
-
-	//TEST
 	const [userObject, setUserObject] = useState({
 		productName: '',
 		stripeCustomerId: '',
-		currentSessionCount: 6,
-		maxMonthlySessionCount: 25,
+		currentSessionCount: 0,
+		maxMonthlySessionCount: 0,
 		userIsTrial: true,
 	});
+
+	//TEST
+	// const [userObject, setUserObject] = useState({
+	// 	productName: '',
+	// 	stripeCustomerId: '',
+	// 	currentSessionCount: 6,
+	// 	maxMonthlySessionCount: 25,
+	// 	userIsTrial: true,
+	// });
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
-		/////
-		//REMOVE in PROD
-		////
-		setIsAuthenticating(false);
-		return;
-		//
-		////
+		// /////
+		// //REMOVE in PROD
+		// ////
+		// setIsAuthenticating(false);
+		// return;
+		// //
+		// ////
 
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
@@ -109,7 +109,7 @@ const Routes: FC = (): ReactElement => {
 
 						//triggers if the user has used up all trial sessions
 						if (
-							currentSessionCount >= 25 &&
+							currentSessionCount >= 50 &&
 							productName !== 'SCRPTAI_BASIC_PLAN'
 						) {
 							setEndredTrialRedirect(true);
@@ -148,13 +148,13 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 
 				{/* remove in PROD */}
-				<Redirect to="/" />
-				<Route exact path="/" render={() => <ChooseTypePage />} />
+				{/* <Redirect to="/" />
+				<Route exact path="/" render={() => <ChooseTypePage />} /> */}
 				{/* ---- */}
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
-				<Route path="/document/:id" render={() => <SingleDocPage />} />
-				<Route path="/plans" render={() => <DummyPlans />} />
+				<Route exact path="/document/:id" render={() => <SingleDocPage />} />
+				<Route exact path="/plans" render={() => <DummyPlans />} />
 				<Route exact path="/generate" render={() => <ChooseTypePage />} />
 				<Route
 					exact
