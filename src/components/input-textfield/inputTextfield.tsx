@@ -31,7 +31,8 @@ const InputTextfield: FC = (): ReactElement => {
 	const [fullText, handleTexthange, setText, resetText] = useWordState(
 		inputText,
 	);
-	const [characterLimit, setCharacterLimit] = useState(0);
+
+	const [currentCharacterLimit, setCurrentCharacterLimit] = useState(0);
 
 	const { token, userObject } = useUserData();
 	const [errWidget, setErrWidget] = useState(false);
@@ -41,9 +42,9 @@ const InputTextfield: FC = (): ReactElement => {
 	const params = useParams<{ type: string; language: string }>();
 	const { type, language } = params;
 
-	//adjust characterLimit
+	//adjust currentCharacterLimit
 	useEffect(() => {
-		setCharacterLimit(fullText.length);
+		setCurrentCharacterLimit(fullText.length);
 	}, [fullText]);
 
 	useEffect(() => {
@@ -109,17 +110,15 @@ const InputTextfield: FC = (): ReactElement => {
 								onChange={e => {
 									handleTexthange(e);
 									// setInputText(fullText);
-									setCharacterLimitReached(characterLimit > 400);
+
+									setCharacterLimitReached(currentCharacterLimit > 400);
 								}}
 								onPaste={e => {
 									setText((existingText: string) =>
 										existingText.concat(e.clipboardData.getData('Text')),
 									);
 									// setInputText(fullText);
-									setCharacterLimitReached(
-										//characterLimit > userObject.maxSessionCharacters,
-										characterLimit > 400,
-									);
+									setCharacterLimitReached(currentCharacterLimit > 400);
 									e.preventDefault();
 								}}
 								onCut={(e: any) => {
@@ -134,7 +133,7 @@ const InputTextfield: FC = (): ReactElement => {
 						</div>
 						<div className="flex justify-between items-center">
 							<button
-								disabled={characterLimitReached}
+								disabled={characterLimitReached || fullText.length === 0}
 								onClick={() => {
 									setInputText(fullText);
 									generateOutPut();
@@ -146,7 +145,7 @@ const InputTextfield: FC = (): ReactElement => {
 							</button>
 							<div className="rounded-lg bg-gray-300 text-gray-600 py-2 px-3">
 								<span className="tracking-wider font-medium ">
-									{characterLimit} / {400} characters
+									{currentCharacterLimit} / {400} characters
 								</span>
 							</div>
 						</div>

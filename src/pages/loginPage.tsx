@@ -142,6 +142,7 @@ const LoginPage: FC = (): ReactElement => {
 									resetEmail();
 									resetPassword();
 								}}
+								type="button"
 								disabled={isLoading}
 								className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3
 								 rounded-lg text-base tracking-wide shadow-sm
