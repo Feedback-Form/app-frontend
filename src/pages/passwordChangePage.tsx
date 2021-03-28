@@ -1,5 +1,5 @@
-import React, { ReactElement, FC, useState, useEffect } from 'react';
-import scrptAiLogo from '../images/scrptai_logo.svg';
+import React, { ReactElement, FC, useState } from 'react';
+import copykatLogoLong from '../images/copykat_logo_long.svg';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -58,7 +58,11 @@ const PasswordChangePage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
+					<img
+						className="w-48 mx-auto"
+						src={copykatLogoLong}
+						alt="copykat_ai_logo"
+					/>
 				</div>
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
@@ -129,7 +133,7 @@ const PasswordChangePage: FC = (): ReactElement => {
 								text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50
 								mt-8 mb-4"
 							>
-								<span className="inline-block mr-2">Login</span>
+								<span className="inline-block mr-2">Change password</span>
 							</button>
 						</form>
 						{responseMessage !== '' && (

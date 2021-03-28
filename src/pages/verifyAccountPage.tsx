@@ -1,6 +1,6 @@
 import React, { ReactElement, FC, useState, useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
-import scrptAiLogo from '../images/scrptai_logo.svg';
+import copykatLogoLong from '../images/copykat_logo_long.svg';
 import axios from 'axios';
 
 //components
@@ -23,7 +23,8 @@ const VerifyAccountPage: FC = (): ReactElement => {
 				setIsLoading(false);
 			})
 			.catch((err: any) => {
-				setResponseMessage(err.response.data.message);
+				// setResponseMessage(err.response.data.message);
+				setResponseMessage('Oops, something went wrong.');
 				setIsLoading(false);
 			});
 	}, []);
@@ -33,10 +34,14 @@ const VerifyAccountPage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
+					<img
+						className="w-48 mx-auto"
+						src={copykatLogoLong}
+						alt="copykat_ai_logo"
+					/>
 				</div>
 
-				<div>
+				<div className="space-y-4">
 					<p
 						className={`${
 							responseMessage === `You've successfully verified your account!`
@@ -46,6 +51,17 @@ const VerifyAccountPage: FC = (): ReactElement => {
 					>
 						{responseMessage}
 					</p>
+					{responseMessage !== `You've successfully verified your account!` && (
+						<p className="text-gray-800 font-medium text-center text-xl">
+							Please contact{' '}
+							<a
+								className="text-gray-700 hover:text-gray-600 ease-in-out duration-200 transition-all pl-1 "
+								href={`mailto:${process.env.REACT_APP_MAILTO}`}
+							>
+								{process.env.REACT_APP_MAILTO}
+							</a>
+						</p>
+					)}
 
 					{responseMessage === `You've successfully verified your account!` && (
 						<div>
