@@ -1,7 +1,7 @@
 import React, { ReactElement, FC, useState } from 'react';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
-import scrptAiLogo from '../../images/scrptai_logo.svg';
-import scrptAiLogoShort from '../../images/scrptai_logo_short.svg';
+import copykatLogoLong from '../../images/copykat_logo_long.svg';
+import copykatLogoShort from '../../images/copykat_logo_short.svg';
 import axios from 'axios';
 
 //hooks
@@ -73,16 +73,16 @@ const Sidebar: FC = (): ReactElement => {
 
 			<div className="space-y-3">
 				<div className="pt-10 pb-20 pl-5 xl:pl-3 ">
-					{/* <img
-						className="w-32 invisible xl:visible"
-						src={scrptAiLogo}
-						alt="scrpt_ai_logo"
+					<img
+						className="w-40 invisible xl:visible"
+						src={copykatLogoLong}
+						alt="copykatai_logo"
 					/>
 					<img
 						className="w-9 visible xl:invisible"
-						src={scrptAiLogoShort}
-						alt="scrpt_ai_logo"
-					/> */}
+						src={copykatLogoShort}
+						alt="copykatai_logo"
+					/>
 				</div>
 				<div>
 					<NavLink exact to="/generate">

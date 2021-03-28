@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useEffect } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';

@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { useLottie } from 'lottie-react';
-import loadingDotsAnimation from '../assets/loadingDotsAnimation.json';
+import loadingDotsAnimation from '../lottie/loadingDotsAnimation.json';
 
 const LoadingWidget: FC = (): ReactElement => {
 	const options = {

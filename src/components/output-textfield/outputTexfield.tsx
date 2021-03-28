@@ -5,9 +5,7 @@ import { useParams } from 'react-router-dom';
 import LoadingWidget from '../loadingWidget';
 import NavigationDots from '../navigationDots';
 //hooks
-import { useCharacterState } from '../../hooks/hooks';
 import { useText } from '../../hooks/contexts/summaryContext';
-
 import { useUserData } from '../../hooks/contexts/userContext';
 
 const OutputTextfield: FC = (): ReactElement => {

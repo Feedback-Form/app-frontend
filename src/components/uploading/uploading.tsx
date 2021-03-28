@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { useLottie } from 'lottie-react';
-import docAnimation from '../../assets/docAnimation.json';
+import docAnimation from '../../lottie/docAnimation.json';
 import { UploadingProps } from './uploading-interface';
 
 const Uploading = ({ message }: UploadingProps): ReactElement => {

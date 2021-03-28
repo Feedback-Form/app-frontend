@@ -6,12 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import { useText } from '../hooks/contexts/summaryContext';
 
 const Summarize: FC = (): ReactElement => {
-	const {
-		currentComponent,
-		setCurrentComponent,
-		characterLimitReached,
-		outputArray,
-	} = useText();
+	const { currentComponent, characterLimitReached } = useText();
 
 	useEffect(() => {
 		console.log('rerender');

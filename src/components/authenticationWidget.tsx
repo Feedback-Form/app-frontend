@@ -1,6 +1,6 @@
 import React, { ReactElement, FC } from 'react';
 import { useLottie } from 'lottie-react';
-import docAnimation from '../assets/docAnimation.json';
+import docAnimation from '../lottie/docAnimation.json';
 
 const AuthenticationWidget: FC = (): ReactElement => {
 	const options = {
