@@ -38,9 +38,7 @@ const PasswordForgotPage: FC = (): ReactElement => {
 			{isLoading && <LoadingWidget />}
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
-				<div className="flex justify-center w-full">
-					<img className="w-28 " src={scrptAiLogo} alt="scrpt_ai_logo" />
-				</div>
+				<img className="w-28 mx-auto" src={scrptAiLogo} alt="copykat_ai_logo" />
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
