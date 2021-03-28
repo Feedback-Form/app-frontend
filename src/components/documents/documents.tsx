@@ -329,7 +329,8 @@ const Documents: FC = (): ReactElement => {
 								</h1>
 							</div>
 							<section className="flex w-3/4 h-4/5 overflow-y-auto pb-10 pl-20">
-								<div className="h-1/2 flex gap-6 xs:grid grid-cols-4 flex-wrap">
+								{/* <div className="h-1/2 flex gap-6 xs:grid grid-cols-4 flex-wrap"> */}
+								<div className="h-1/2 flex flex-col space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 md:gap-6">
 									{documents.map((i: Document) => {
 										return (
 											<div
@@ -343,7 +344,9 @@ const Documents: FC = (): ReactElement => {
 													<div
 														className={`relative inline-flex rounded-md  bg-${outputTypeColor(
 															i.outputType,
-														)}-500  text-white font-base text-xs w-full h-full justify-center`}
+														)}-300 text-${outputTypeColor(
+															i.outputType,
+														)}-800   font-base text-xs w-full h-full justify-center`}
 													>
 														{sliceStrings(i)}
 													</div>
