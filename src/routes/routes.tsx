@@ -22,7 +22,8 @@ import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 //interfaces
-import { UserObject } from './interfaces/userObjectInterface';
+import { UserResponseObject } from './interfaces/userObjectResponseInterface';
+import { UserObjectInterface } from './interfaces/userObject';
 
 const Routes: FC = (): ReactElement => {
 	const location = useLocation();
@@ -34,22 +35,15 @@ const Routes: FC = (): ReactElement => {
 	const [isAuthenticating, setIsAuthenticating] = useState(true);
 
 	//PROD
-	const [userObject, setUserObject] = useState({
-		productName: '',
+	const [userObject, setUserObject] = useState<UserObjectInterface>({
+		productId: '',
 		stripeCustomerId: '',
 		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
 		userIsTrial: true,
+		subscriptionStatus: '',
+		currentPeriodEnd: 4110026795,
 	});
-
-	//TEST
-	// const [userObject, setUserObject] = useState({
-	// 	productName: '',
-	// 	stripeCustomerId: '',
-	// 	currentSessionCount: 6,
-	// 	maxMonthlySessionCount: 25,
-	// 	userIsTrial: true,
-	// });
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
@@ -89,30 +83,39 @@ const Routes: FC = (): ReactElement => {
 				};
 
 				axios
-					.get<UserObject>(
-						`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`,
-						config,
-					)
+					.get<UserResponseObject>(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`, config)
 					.then(res => {
 						const { currentSessionCount } = res.data.user.usage.sessions;
-						const { productName } = res.data.user.billing.subscription;
+						const { productId, subscriptionStatus, currentPeriodEnd } = res.data.user.billing.subscription;
 						const { stripeCustomerId, userIsTrial } = res.data.user.billing;
 
+						//timestamp related
+						const currentPeriodEndInSeconds = new Date(currentPeriodEnd * 1000);
+
+						const today = new Date();
+
 						setUserObject({
-							productName,
+							productId,
 							stripeCustomerId,
 							currentSessionCount,
 							userIsTrial,
-							maxMonthlySessionCount:
-								res.data.user.usage.sessions.maxMonthlySessionCount,
+							subscriptionStatus,
+							currentPeriodEnd,
+							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
 						});
 
 						//triggers if the user has used up all trial sessions
-						if (
-							currentSessionCount >= 50 &&
-							productName !== 'SCRPTAI_BASIC_PLAN'
-						) {
+						if (currentSessionCount >= 50 && userIsTrial === true) {
 							setEndredTrialRedirect(true);
+						}
+
+						//if the user is on a paid plan
+						//gives a buffer of 1 day (currentDate - 1 day)
+
+						if (today > currentPeriodEndInSeconds && userIsTrial === false) {
+							///
+							// TODO 🚀restrict access & redirect user to customer portal'
+							///
 						}
 
 						setIsAuthenticating(false);
@@ -156,46 +159,16 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/document/:id" render={() => <SingleDocPage />} />
 				<Route exact path="/plans" render={() => <DummyPlans />} />
 				<Route exact path="/generate" render={() => <ChooseTypePage />} />
-				<Route
-					exact
-					path="/generate/:type/"
-					render={() => <ChooseLanguagePage />}
-				/>
-				<Route
-					exact
-					path="/generate/:type/:language"
-					render={() => <GenerateTextPage />}
-				/>
+				<Route exact path="/generate/:type/" render={() => <ChooseLanguagePage />} />
+				<Route exact path="/generate/:type/:language" render={() => <GenerateTextPage />} />
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/signup" render={() => <SignUpPage />} />
-				<Route
-					exact
-					path="/user/verify/:userId/:token"
-					render={() => <VerifyAccountPage />}
-				/>
-				<Route
-					exact
-					path="/password/reset/initiate"
-					render={() => <PasswordForgotPage />}
-				/>
-				<Route
-					exact
-					path="/password/reset/:userId/:token"
-					render={() => <PasswordChangePage />}
-				/>
+				<Route exact path="/user/verify/:userId/:token" render={() => <VerifyAccountPage />} />
+				<Route exact path="/password/reset/initiate" render={() => <PasswordForgotPage />} />
+				<Route exact path="/password/reset/:userId/:token" render={() => <PasswordChangePage />} />
 
-				<Route
-					path="/success"
-					render={() => (
-						<StatusPage success={true} destinationPathName={'summarize'} />
-					)}
-				/>
-				<Route
-					path="/cancelled"
-					render={() => (
-						<StatusPage success={false} destinationPathName={'summarize'} />
-					)}
-				/>
+				<Route path="/success" render={() => <StatusPage success={true} destinationPathName={'generate'} />} />
+				<Route path="/cancelled" render={() => <StatusPage success={false} destinationPathName={'generate'} />} />
 			</UserContext.Provider>
 		</Switch>
 	);

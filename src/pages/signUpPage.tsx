@@ -33,8 +33,7 @@ const SignUpPage: FC = (): ReactElement => {
 				stripeCustomerId: '',
 				userIsTrial: true,
 				subscription: {
-					productName: 'trial',
-					active: true,
+					subscriptionStatus: '',
 					productId: '',
 					currentPeriodEnd: null,
 				},
@@ -84,19 +83,13 @@ const SignUpPage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img
-						className="w-48 mx-auto"
-						src={copykatLogoLong}
-						alt="copykat_ai_logo"
-					/>
+					<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 				</div>
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
 						<form autoComplete="on">
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								E-mail*
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">E-mail*</label>
 							<input
 								value={email}
 								onChange={e => {
@@ -106,9 +99,7 @@ const SignUpPage: FC = (): ReactElement => {
 								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
 							/>
 
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Name*
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Name*</label>
 							<input
 								value={name}
 								onChange={e => {
@@ -117,9 +108,7 @@ const SignUpPage: FC = (): ReactElement => {
 								type="text"
 								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
 							/>
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Company
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Company</label>
 							<input
 								value={company}
 								onChange={e => {
@@ -129,9 +118,7 @@ const SignUpPage: FC = (): ReactElement => {
 								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
 							/>
 
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Password*
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Password*</label>
 							<input
 								value={password}
 								onChange={e => {
@@ -144,13 +131,7 @@ const SignUpPage: FC = (): ReactElement => {
 								onClick={() => {
 									signUpUser();
 								}}
-								disabled={
-									isLoading ||
-									email === '' ||
-									name === '' ||
-									password === '' ||
-									password.length < 7
-								}
+								disabled={isLoading || email === '' || name === '' || password === '' || password.length < 7}
 								type="button"
 								className="disabled:cursor-not-allowed transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
 							>
@@ -158,18 +139,8 @@ const SignUpPage: FC = (): ReactElement => {
 							</button>
 						</form>
 						{showResponseMessage && (
-							<div
-								className={`flex space-x-2 items-center ${
-									isError === true ? 'text-red-500' : 'text-green-500'
-								} pt-2`}
-							>
-								<svg
-									className="w-5 h-5"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
+							<div className={`flex space-x-2 items-center ${isError === true ? 'text-red-500' : 'text-green-500'} pt-2`}>
+								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"

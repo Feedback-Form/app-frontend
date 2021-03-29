@@ -1,10 +1,12 @@
-export interface UserObject {
+export interface UserResponseObject {
 	user: {
 		billing: {
 			stripeCustomerId: string;
 			userIsTrial: boolean;
 			subscription: {
-				productName: string;
+				productId: string;
+				subscriptionStatus: string;
+				currentPeriodEnd: number;
 			};
 		};
 

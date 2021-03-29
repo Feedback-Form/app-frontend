@@ -12,11 +12,7 @@ import { checkoutHandler } from '../../modules/checkoutHandler';
 
 declare class Stripe {
 	constructor(publicKey: string);
-	redirectToCheckout({
-		sessionId,
-	}: {
-		sessionId: string;
-	}): Promise<{ error: Error }>;
+	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
 }
 
 const Sidebar: FC = (): ReactElement => {
@@ -35,13 +31,8 @@ const Sidebar: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.post(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`,
-				req,
-				config,
-			)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`, req, config)
 			.then((res: any) => {
-				// console.log(res.data);
 				window.location.href = res.data.url;
 			})
 			.catch((err: any) => {
@@ -70,27 +61,17 @@ const Sidebar: FC = (): ReactElement => {
 	return (
 		<nav className="bg-gray-50 w-20 xl:w-auto flex-shrink-0 h-full flex flex-col justify-between absolute">
 			{/* Group 1 */}
-
+			{redirect && <Redirect to="/login" />}
 			<div className="space-y-3">
 				<div className="pt-10 pb-20 pl-5 xl:pl-3 ">
-					<img
-						className="w-40 invisible xl:visible"
-						src={copykatLogoLong}
-						alt="copykatai_logo"
-					/>
-					<img
-						className="w-9 visible xl:invisible"
-						src={copykatLogoShort}
-						alt="copykatai_logo"
-					/>
+					<img className="w-40 invisible xl:visible" src={copykatLogoLong} alt="copykatai_logo" />
+					<img className="w-9 visible xl:invisible" src={copykatLogoShort} alt="copykatai_logo" />
 				</div>
 				<div>
 					<NavLink exact to="/generate">
 						<li
 							className={`${
-								pathname === '/generate'
-									? 'text-teal-700 hover:text-teal-600 '
-									: ' hover:text-teal-600 text-gray-500'
+								pathname === '/generate' ? 'text-teal-700 hover:text-teal-600 ' : ' hover:text-teal-600 text-gray-500'
 							}    list-none block xl:flex items-center  
                 			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer  `}
 						>
@@ -109,9 +90,7 @@ const Sidebar: FC = (): ReactElement => {
 								/>
 							</svg>
 
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Generate
-							</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Generate</h1>
 						</li>
 					</NavLink>
 				</div>
@@ -139,9 +118,7 @@ const Sidebar: FC = (): ReactElement => {
 					<NavLink exact to="/documents" activeClassName="bg-teal-200">
 						<li
 							className={`${
-								pathname === '/documents'
-									? 'text-teal-700 hover:text-teal-600 '
-									: ' hover:text-teal-600'
+								pathname === '/documents' ? 'text-teal-700 hover:text-teal-600 ' : ' hover:text-teal-600'
 							} text-gray-500 list-none block xl:flex items-center  
                 			transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer`}
 						>
@@ -159,9 +136,7 @@ const Sidebar: FC = (): ReactElement => {
 									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Documents
-							</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Documents</h1>
 						</li>
 					</NavLink>
 				</div>
@@ -190,23 +165,20 @@ const Sidebar: FC = (): ReactElement => {
 									d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Logout
-							</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Logout</h1>
 						</button>
 					</li>
 				</div>
-				<div>
+				<div className="pb-3">
 					{/* <NavLink exact to="/settings"> */}
 					<li className="list-none">
 						<button
-							disabled={userObject.stripeCustomerId !== 'xxxx'}
+							disabled={userObject.stripeCustomerId === ''}
 							onClick={() => {
 								customerPortalHandler();
 							}}
 							className={` ${
-								userObject.stripeCustomerId !== 'xxx' &&
-								'text-gray-500 hover:text-gray-600 cursor-not-allowed '
+								userObject.stripeCustomerId === '' && 'text-gray-500 hover:text-gray-600 cursor-not-allowed '
 							}   block xl:flex items-center disabled:opacity-50 
             				transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full`}
 						>
@@ -224,25 +196,23 @@ const Sidebar: FC = (): ReactElement => {
 									d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
 								/>
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Manage Billing
-							</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Manage Billing</h1>
 						</button>
 					</li>
 
 					{/* </NavLink> */}
 				</div>
-				<div>
+				{/* <div>
 					<li className="list-none">
 						<button
-							disabled={userObject.productName !== 'SCRPTAI_BASIC_PLAN'}
+							disabled={userObject.productId !== ''}
 							onClick={() => {
 								checkoutHandler();
 							}}
 							className={` ${
-								userObject.productName !== 'SCRPTAI_BASIC_PLAN'
-									? 'text-gray-500 bg-gray-300  hover:text-gray-400 opacity-50 cursor-not-allowed'
-									: 'text-yellow-600 bg-yellow-200  hover:text-yellow-700 '
+								userObject.productId === ''
+									? 'text-yellow-600 bg-yellow-200  hover:text-yellow-700 '
+									: 'text-gray-500 bg-gray-300  hover:text-gray-400 opacity-50 cursor-not-allowed'
 							}  list-none block xl:flex items-center 
             	transition-all duration-200 ease-in-out   pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full `}
 						>
@@ -253,21 +223,13 @@ const Sidebar: FC = (): ReactElement => {
 								viewBox="0 0 24 24"
 								stroke="currentColor"
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M13 10V3L4 14h7v7l9-11h-7z"
-								/>
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
 							</svg>
-							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">
-								Upgrade
-							</h1>
+							<h1 className="invisible xl:visible font-medium pl-2 text-base tracking-wide">Upgrade</h1>
 						</button>
 					</li>
-				</div>
+				</div> */}
 			</div>
-			{redirect && <Redirect to="/login" />}
 		</nav>
 	);
 };

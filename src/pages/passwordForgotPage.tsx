@@ -38,18 +38,11 @@ const PasswordForgotPage: FC = (): ReactElement => {
 			{isLoading && <LoadingWidget />}
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
-				<img
-					className="w-48 mx-auto"
-					src={copykatLogoLong}
-					alt="copykat_ai_logo"
-				/>
+				<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
-						{/* <form autoComplete="on"> */}
-						<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-							E-mail
-						</label>
+						<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">E-mail</label>
 						<input
 							value={email}
 							onChange={e => {
@@ -69,22 +62,14 @@ const PasswordForgotPage: FC = (): ReactElement => {
 						>
 							<span className="inline-block mr-2">Send reset email</span>
 						</button>
-						{/* </form> */}
+
 						{responseMessage !== '' && (
 							<div
 								className={`flex space-x-2 items-center  ${
-									responseMessage === 'Oops, something went wrong.'
-										? 'text-red-500'
-										: 'text-green-500'
+									responseMessage === 'Oops, something went wrong.' ? 'text-red-500' : 'text-green-500'
 								} pt-2`}
 							>
-								<svg
-									className="w-5 h-5"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
+								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"

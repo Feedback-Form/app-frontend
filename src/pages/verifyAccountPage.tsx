@@ -14,9 +14,7 @@ const VerifyAccountPage: FC = (): ReactElement => {
 
 	useEffect(() => {
 		axios
-			.post(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/verify/${userId}/${token}`,
-			)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/verify/${userId}/${token}`)
 			.then((res: any) => {
 				console.log('res', res);
 				setResponseMessage(res.data.message);
@@ -34,19 +32,13 @@ const VerifyAccountPage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img
-						className="w-48 mx-auto"
-						src={copykatLogoLong}
-						alt="copykat_ai_logo"
-					/>
+					<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 				</div>
 
 				<div className="space-y-4">
 					<p
 						className={`${
-							responseMessage === `You've successfully verified your account!`
-								? 'text-green-500'
-								: 'text-red-500'
+							responseMessage === `You've successfully verified your account!` ? 'text-green-500' : 'text-red-500'
 						} font-medium text-xl text-center`}
 					>
 						{responseMessage}
@@ -65,9 +57,8 @@ const VerifyAccountPage: FC = (): ReactElement => {
 
 					{responseMessage === `You've successfully verified your account!` && (
 						<div>
-							<p className="text-md font-base text-gray-700 py-5">
-								You may close this window and log in again. or click on the
-								button to navigate to the login page.
+							<p className="text-md font-base text-gray-700 py-5 text-center">
+								You may close this window and log in again. or click on the button to navigate to the login page.
 							</p>
 
 							<NavLink to="/login">
@@ -75,7 +66,7 @@ const VerifyAccountPage: FC = (): ReactElement => {
 									className="transition-all
                                  duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600
                                    focus:outline-none  text-white w-full py-3 rounded-lg text-base
-                                    tracking-wide shadow-sm hover:shadow-md font-medium text-center  disabled:opacity-50"
+                                    tracking-wide shadow-sm hover:shadow-md font-medium text-center disabled:opacity-50"
 								>
 									<span className="inline-block mr-2">Go to login</span>
 								</button>
