@@ -46,29 +46,30 @@ const PasswordForgotPage: FC = (): ReactElement => {
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
-						<form autoComplete="on">
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								E-mail
-							</label>
-							<input
-								value={email}
-								onChange={e => {
-									handleEmailChange(e);
-								}}
-								type="text"
-								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
-							/>
+						{/* <form autoComplete="on"> */}
+						<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
+							E-mail
+						</label>
+						<input
+							value={email}
+							onChange={e => {
+								handleEmailChange(e);
+							}}
+							type="text"
+							className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
+						/>
 
-							<button
-								onClick={() => {
-									sendResetPasswordEmail();
-								}}
-								disabled={isLoading}
-								className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
-							>
-								<span className="inline-block mr-2">Send reset email</span>
-							</button>
-						</form>
+						<button
+							type="button"
+							onClick={() => {
+								sendResetPasswordEmail();
+							}}
+							disabled={isLoading}
+							className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
+						>
+							<span className="inline-block mr-2">Send reset email</span>
+						</button>
+						{/* </form> */}
 						{responseMessage !== '' && (
 							<div
 								className={`flex space-x-2 items-center  ${

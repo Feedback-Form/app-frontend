@@ -151,6 +151,7 @@ const SignUpPage: FC = (): ReactElement => {
 									password === '' ||
 									password.length < 7
 								}
+								type="button"
 								className="disabled:cursor-not-allowed transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3 rounded-lg text-base tracking-wide shadow-sm hover:shadow-md font-medium text-center inline-block disabled:opacity-50"
 							>
 								<span className="inline-block mr-2">Create account</span>
