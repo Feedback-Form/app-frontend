@@ -4,12 +4,17 @@ declare class Stripe {
 	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
 }
 const stripe = new Stripe('pk_test_51IDXKLIy6PlSkETF0Aog8XohbZ7mtE8LQln3iQ3rH8RPuEXPQWKgsRsznHXWGQr0Y4ehrRn9iGruDVeA24RX5lEu00IMNMmRkK');
-export function checkoutHandler(): void {
+export function checkoutHandler(token: string): void {
 	const req = {
 		priceId: 'price_1IaJkoIy6PlSkETFQYIK7859',
 	};
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
 	axios
-		.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`, req)
+		.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/create-checkout-session`, req, config)
 		.then((res: any) => {
 			//redirect to checkout session
 			stripe

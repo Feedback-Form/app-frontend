@@ -8,14 +8,12 @@ import { checkoutHandler } from '../modules/checkoutHandler';
 
 const UserSessionBar: FC = (): ReactElement => {
 	//userContext
-	const { userObject } = useUserData();
+	const { userObject, token } = useUserData();
 	const { currentSessionCount, maxMonthlySessionCount } = userObject;
 
 	const percentage = (currentSessionCount / maxMonthlySessionCount) * 100;
 	const [barWidthCurrent, setBarCurrentMax] = useState(`${percentage}%`);
-	const [barWidthMax, setBarWidthMax] = useState(
-		`${percentage !== 100 ? 100 - percentage : 0}%`,
-	);
+	const [barWidthMax, setBarWidthMax] = useState(`${percentage !== 100 ? 100 - percentage : 0}%`);
 
 	return (
 		<div className="absolute invisible md:visible w-full h-20 top-0 z-50">
@@ -28,22 +26,18 @@ const UserSessionBar: FC = (): ReactElement => {
 						<div className="w-64 flex h-4">
 							<div
 								style={{ width: barWidthCurrent }}
-								className={`bg-teal-700   ${
-									barWidthMax === '0%' ? 'rounded-xl' : 'rounded-l-xl'
-								}`}
+								className={`bg-teal-700   ${barWidthMax === '0%' ? 'rounded-xl' : 'rounded-l-xl'}`}
 							></div>
 							<div
 								style={{ width: barWidthMax }}
-								className={`bg-gray-200   ${
-									barWidthMax === '100%' ? 'rounded-xl' : 'rounded-r-xl'
-								}`}
+								className={`bg-gray-200   ${barWidthMax === '100%' ? 'rounded-xl' : 'rounded-r-xl'}`}
 							></div>
 						</div>
 					</div>
 
 					<button
 						onClick={() => {
-							checkoutHandler();
+							checkoutHandler(token);
 						}}
 						className="flex justify-center bg-yellow-400 hover:bg-yellow-300 focus:outline-none text-white rounded-lg
 					 py-2 font-medium tracking-wide text-sm transition-all ease-in-out duration-200 w-32"

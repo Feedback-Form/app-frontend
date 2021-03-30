@@ -179,7 +179,7 @@ const Sidebar: FC = (): ReactElement => {
 							}}
 							className={` ${
 								userObject.stripeCustomerId === '' && 'text-gray-500 hover:text-gray-600 cursor-not-allowed '
-							}   block xl:flex items-center disabled:opacity-50 
+							}   block xl:flex items-center disabled:opacity-50 text-gray-500 hover:text-teal-600
             				transition-all duration-200 ease-in-out rounded-r-md pt-6 xl:py-2 xl:pr-14 pl-6 xl:pl-3 cursor-pointer w-full`}
 						>
 							<svg

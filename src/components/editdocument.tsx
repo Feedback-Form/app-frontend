@@ -10,24 +10,9 @@ import LoadingWidget from './loadingWidget';
 const EditDocument: FC = (): ReactElement => {
 	const { title, inputText, generatedOutput, docId } = useSingleDocContext();
 
-	const [
-		summaryLocal,
-		characterCountOne,
-		handleWordChangeOne,
-		resetWordsOne,
-	] = useCharacterState(inputText);
-	const [
-		transcriptLocal,
-		characterCountTwo,
-		handleWordChangeTwo,
-		resetWordsTwo,
-	] = useCharacterState(generatedOutput);
-	const [
-		titleLocal,
-		characterCountThree,
-		handleWordChangeThree,
-		resetWordsThree,
-	] = useCharacterState(title);
+	const [summaryLocal, characterCountOne, handleWordChangeOne, resetWordsOne] = useCharacterState(inputText);
+	const [transcriptLocal, characterCountTwo, handleWordChangeTwo, resetWordsTwo] = useCharacterState(generatedOutput);
+	const [titleLocal, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState(title);
 	const { token } = useUserData();
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -47,11 +32,7 @@ const EditDocument: FC = (): ReactElement => {
 			},
 		};
 		axios
-			.patch(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/edit/${docId}`,
-				req,
-				config,
-			)
+			.patch(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/edit/${docId}`, req, config)
 			.then((res: any) => {
 				console.log('patch res', res);
 				setIsLoading(false);
@@ -80,9 +61,7 @@ const EditDocument: FC = (): ReactElement => {
 				</div>
 				<section className="flex flex-col w-3/4 h-full space-y-6 mb-5">
 					<div className="flex items-end">
-						<h1 className="tracking-wide text-2xl text-gray-500 font-normal">
-							Your input
-						</h1>
+						<h1 className="tracking-wide text-2xl text-gray-500 font-normal">Your input</h1>
 					</div>
 					<div className="flex flex-col h-1/2 shadow-md rounded-lg ">
 						<textarea
@@ -96,9 +75,7 @@ const EditDocument: FC = (): ReactElement => {
 						/>
 					</div>
 					<div className="flex items-end ">
-						<h1 className="tracking-wide text-2xl text-gray-500 font-normal">
-							The generated text
-						</h1>
+						<h1 className="tracking-wide text-2xl text-gray-500 font-normal">The generated text</h1>
 					</div>
 					<div className="flex flex-col h-1/2 shadow-md rounded-lg">
 						<textarea
