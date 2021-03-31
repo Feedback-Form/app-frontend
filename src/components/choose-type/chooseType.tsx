@@ -38,14 +38,17 @@ const ChooseType: FC = (): ReactElement => {
 			route: 'catchyemailsubjectlines',
 			icon: '📬',
 		},
+		{
+			text: 'Marketing Campaign Ideas',
+			route: 'marketingcampaignideas',
+			icon: '🦄',
+		},
 	];
 
 	return (
 		<section className="flex-shrink flex flex-col items-center justify-center  h-full w-full">
 			<div className="flex flex-col w-3/4 h-1/5 justify-center ">
-				<h1 className="tracking-wide text-3xl text-gray-900 font-medium md:pl-20">
-					Choose content type
-				</h1>
+				<h1 className="tracking-wide text-3xl text-gray-900 font-medium md:pl-20">Choose content type</h1>
 			</div>
 			<div className="flex flex-col w-3/4 h-4/5 items-center space-y-10 overflow-y-auto ">
 				{types.map((item, index) => {

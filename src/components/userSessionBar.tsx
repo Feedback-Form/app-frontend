@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useState, useEffect } from 'react';
 
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
@@ -8,8 +8,8 @@ import { checkoutHandler } from '../modules/checkoutHandler';
 
 const UserSessionBar: FC = (): ReactElement => {
 	//userContext
-	const { userObject, token } = useUserData();
-	const { currentSessionCount, maxMonthlySessionCount } = userObject;
+	const { userObject, token, currentSessionCount } = useUserData();
+	const { maxMonthlySessionCount } = userObject;
 
 	const percentage = (currentSessionCount / maxMonthlySessionCount) * 100;
 	const [barWidthCurrent, setBarCurrentMax] = useState(`${percentage}%`);

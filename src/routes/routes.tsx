@@ -33,12 +33,12 @@ const Routes: FC = (): ReactElement => {
 	const [jwtReceived, setJwtReceived] = useState(false);
 	const [redirect, setRedirect] = useState(false);
 	const [isAuthenticating, setIsAuthenticating] = useState(true);
+	const [currentSessionCount, setCurrentSessionCount] = useState(0);
 
 	//PROD
 	const [userObject, setUserObject] = useState<UserObjectInterface>({
 		productId: '',
 		stripeCustomerId: '',
-		currentSessionCount: 0,
 		maxMonthlySessionCount: 0,
 		userIsTrial: true,
 		subscriptionStatus: '',
@@ -98,12 +98,12 @@ const Routes: FC = (): ReactElement => {
 						setUserObject({
 							productId,
 							stripeCustomerId,
-							currentSessionCount,
 							userIsTrial,
 							subscriptionStatus,
 							currentPeriodEnd,
 							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
 						});
+						setCurrentSessionCount(currentSessionCount);
 
 						//triggers if the user has used up all trial sessions
 						if (currentSessionCount >= 50 && userIsTrial === true) {
@@ -142,6 +142,8 @@ const Routes: FC = (): ReactElement => {
 					setIsAuthenticating,
 					userObject,
 					setUserObject,
+					currentSessionCount,
+					setCurrentSessionCount,
 				}}
 			>
 				{redirect && <Redirect to="/login" />}

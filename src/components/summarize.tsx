@@ -14,21 +14,11 @@ const Summarize: FC = (): ReactElement => {
 
 	return (
 		<main className="flex-1 flex flex-col bg-white text-gray-900  items-center space-y-10">
-			<CSSTransition
-				in={currentComponent === 1}
-				timeout={400}
-				classNames="menu-primary"
-				unmountOnExit
-			>
+			<CSSTransition in={currentComponent === 1} timeout={400} classNames="menu-primary" unmountOnExit>
 				<InputTextfield />
 			</CSSTransition>
 
-			<CSSTransition
-				in={currentComponent === 2}
-				timeout={400}
-				classNames="menu-primary"
-				unmountOnExit
-			>
+			<CSSTransition in={currentComponent === 2} timeout={400} classNames="menu-primary" unmountOnExit>
 				<OutputTextfield />
 			</CSSTransition>
 

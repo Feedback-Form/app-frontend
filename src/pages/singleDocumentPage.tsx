@@ -86,12 +86,8 @@ const SingleDocPage: FC = (): ReactElement => {
 		>
 			<section className="h-screen w-full flex font-scrptai overflow-y-auto">
 				<Sidebar />
-				{userObject.userIsTrial === true && <UserSessionBar />}
-				{isLoading ? (
-					<Uploading message="Getting document" />
-				) : (
-					<EditDocument />
-				)}
+				{/* {userObject.userIsTrial === true && <UserSessionBar />} */}
+				{isLoading ? <Uploading message="Getting document" /> : <EditDocument />}
 			</section>
 		</SingleDocContext.Provider>
 	);

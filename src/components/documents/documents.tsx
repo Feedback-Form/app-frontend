@@ -282,6 +282,8 @@ const Documents: FC = (): ReactElement => {
 				return 'indigo';
 			case 'productdescription':
 				return 'rose';
+			case 'marketingcampaignideas':
+				return 'emerald';
 			default:
 				return 'gray';
 		}
@@ -297,6 +299,8 @@ const Documents: FC = (): ReactElement => {
 				break;
 			case 'productdescription':
 				return 'productdesc';
+			case 'marketingcampaignideas':
+				return 'ideas';
 			default:
 				return outputType;
 		}
@@ -324,9 +328,7 @@ const Documents: FC = (): ReactElement => {
 					) : (
 						<>
 							<div className="flex flex-col w-3/4 h-1/5 justify-center">
-								<h1 className="tracking-wide text-3xl text-gray-900 font-medium pl-20">
-									Documents
-								</h1>
+								<h1 className="tracking-wide text-3xl text-gray-900 font-medium pl-20">Documents</h1>
 							</div>
 							<section className="flex w-3/4 h-4/5 overflow-y-auto pb-10 pl-20">
 								{/* <div className="h-1/2 flex gap-6 xs:grid grid-cols-4 flex-wrap"> */}
@@ -342,25 +344,16 @@ const Documents: FC = (): ReactElement => {
 											>
 												<span className="flex absolute h-5 w-20 top-0 right-0 ">
 													<div
-														className={`relative inline-flex rounded-md  bg-${outputTypeColor(
-															i.outputType,
-														)}-300 text-${outputTypeColor(
+														className={`relative inline-flex rounded-md  bg-${outputTypeColor(i.outputType)}-300 text-${outputTypeColor(
 															i.outputType,
 														)}-800   font-base text-xs w-full h-full justify-center`}
 													>
 														{sliceStrings(i)}
 													</div>
 												</span>
-												<div
-													onClick={() => openDocument(i._id)}
-													className="cursor-pointer justify-evenly flex flex-col h-3/4"
-												>
-													<h1 className="w-full text-lg trackin-wide truncate">
-														{i.title}
-													</h1>
-													<p className=" text-sm font-thin truncate">
-														{i.generatedOutput}
-													</p>
+												<div onClick={() => openDocument(i._id)} className="cursor-pointer justify-evenly flex flex-col h-3/4">
+													<h1 className="w-full text-lg trackin-wide truncate">{i.title}</h1>
+													<p className=" text-sm font-thin truncate">{i.generatedOutput}</p>
 												</div>
 
 												<div className="flex items-end justify-end text-gray-400 hover:text-red-500 ">

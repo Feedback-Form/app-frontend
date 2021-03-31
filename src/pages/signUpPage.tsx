@@ -38,7 +38,6 @@ const SignUpPage: FC = (): ReactElement => {
 					currentPeriodEnd: null,
 				},
 			},
-			userIsVerified: false,
 			usage: {
 				sessions: {
 					currentSessionCount: 0,
