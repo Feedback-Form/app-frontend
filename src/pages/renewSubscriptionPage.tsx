@@ -12,14 +12,14 @@ import { checkoutHandler } from '../modules/checkoutHandler';
 
 import { customerPortalHandler } from '../modules/customerPortalHandler';
 
-const TrialEndedPage: FC = (): ReactElement => {
+const RenewSubscriptionPage: FC = (): ReactElement => {
 	const { token, userObject } = useUserData();
 
 	return (
 		<section className="h-screen w-full flex flex-col font-scrptai overflow-y-auto bg-gray-50 justify-center">
 			<div className="text-center space-y-16 ">
 				<div className="space-y-8 ">
-					<h1 className="font-semibold text-teal-700 text-4xl">You&apos;ve used up all your free sessions.</h1>
+					<h1 className="font-semibold text-teal-700 text-4xl">Your subscription has ended.</h1>
 
 					<div className="flex justify-center">
 						<p className="font-base text-gray-700 text-xl md:w-1/2 max-w-2xl">Resume access access for CopykatAI by upgrading your plan.</p>
@@ -38,18 +38,15 @@ const TrialEndedPage: FC = (): ReactElement => {
 				</div>
 				<button
 					onClick={() => {
-						if (userObject.stripeCustomerId === '') {
-							checkoutHandler(token);
-						}
 						customerPortalHandler(token, userObject.stripeCustomerId);
 					}}
 					className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
 				>
-					{userObject.stripeCustomerId === '' ? 'Upgrade now' : 'Update your payment information now.'}
+					Update your payment information now.
 				</button>
 			</div>
 		</section>
 	);
 };
 
-export default TrialEndedPage;
+export default RenewSubscriptionPage;

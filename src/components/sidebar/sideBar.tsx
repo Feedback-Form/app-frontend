@@ -8,8 +8,7 @@ import axios from 'axios';
 import { useUserData } from '../../hooks/contexts/userContext';
 
 //modules
-import { checkoutHandler } from '../../modules/checkoutHandler';
-
+import { customerPortalHandler } from '../../modules/customerPortalHandler';
 declare class Stripe {
 	constructor(publicKey: string);
 	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
@@ -20,25 +19,6 @@ const Sidebar: FC = (): ReactElement => {
 	const { token, userObject } = useUserData();
 	const location = useLocation();
 	const [pathname, setPathname] = useState(location.pathname);
-	function customerPortalHandler(): void {
-		const req = {
-			stripeCustomerId: userObject.stripeCustomerId,
-		};
-
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/customer-portal`, req, config)
-			.then((res: any) => {
-				window.location.href = res.data.url;
-			})
-			.catch((err: any) => {
-				console.log('err', err);
-			});
-	}
 
 	function logOutUser(): void {
 		const config = {
@@ -175,7 +155,7 @@ const Sidebar: FC = (): ReactElement => {
 						<button
 							disabled={userObject.stripeCustomerId === ''}
 							onClick={() => {
-								customerPortalHandler();
+								customerPortalHandler(token, userObject.stripeCustomerId);
 							}}
 							className={` ${
 								userObject.stripeCustomerId === '' && 'text-gray-500 hover:text-gray-600 cursor-not-allowed '

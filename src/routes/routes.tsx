@@ -8,7 +8,6 @@ import GenerateTextPage from '../pages/generateTextPage';
 import DocumentsPage from '../pages/documentsPage';
 import SingleDocPage from '../pages/singleDocumentPage';
 import LoginPage from '../pages/loginPage';
-import DummyPlans from '../components/dummyPlans';
 import StatusPage from '../components/status-page/statusPage';
 import TrialEndedPage from '../pages/trialEndedPage';
 import SignUpPage from '../pages/signUpPage';
@@ -17,6 +16,7 @@ import PasswordChangePage from '../pages/passwordChangePage';
 import ChooseLanguagePage from '../pages/chooseLanguagePage';
 import ChooseTypePage from '../pages/chooseTypePage';
 import VerifyAccountPage from '../pages/verifyAccountPage';
+import RenewSubscriptionPage from '../pages/renewSubscriptionPage';
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -46,6 +46,7 @@ const Routes: FC = (): ReactElement => {
 	});
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
+	const [endedSubscriptionRedirect, setEndedSubscriptionRedirect] = useState(false);
 	//console.log('jwt received 🍀', jwtReceived);
 	useEffect(() => {
 		// /////
@@ -109,13 +110,10 @@ const Routes: FC = (): ReactElement => {
 							setEndredTrialRedirect(true);
 						}
 
-						//if the user is on a paid plan
-						//gives a buffer of 1 day (currentDate - 1 day)
-
+						//if the user is on a paid plan && plan is expired
+						//redirect user to page, where he can navigate to customer portal
 						if (today > currentPeriodEndInSeconds && userIsTrial === false) {
-							///
-							// TODO 🚀restrict access & redirect user to customer portal'
-							///
+							setEndedSubscriptionRedirect(true);
 						}
 
 						setIsAuthenticating(false);
@@ -148,6 +146,7 @@ const Routes: FC = (): ReactElement => {
 			>
 				{redirect && <Redirect to="/login" />}
 				{endedTrialRedirect && <Redirect to="/trial/ended" />}
+				{endedSubscriptionRedirect && <Redirect to="/subscription/ended" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 
 				{/* remove in PROD */}
@@ -157,11 +156,11 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route exact path="/document/:id" render={() => <SingleDocPage />} />
-				<Route exact path="/plans" render={() => <DummyPlans />} />
 				<Route exact path="/generate" render={() => <ChooseTypePage />} />
 				<Route exact path="/generate/:type/" render={() => <ChooseLanguagePage />} />
 				<Route exact path="/generate/:type/:language" render={() => <GenerateTextPage />} />
 				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
+				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />
 				<Route exact path="/signup" render={() => <SignUpPage />} />
 				<Route exact path="/user/verify/:userId/:token" render={() => <VerifyAccountPage />} />
 				<Route exact path="/password/reset/initiate" render={() => <PasswordForgotPage />} />
