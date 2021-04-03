@@ -2,46 +2,66 @@ import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const ChooseType: FC = (): ReactElement => {
-	const types: Array<{ text: string; route: string; icon: string }> = [
+	const types: Array<{ text: string; description: string; route: string; icon: string }> = [
 		{
-			text: 'Digital Ad Copy',
-			route: 'adcopy',
+			text: 'Google Ad Headlines',
+			description: 'Write the headline for your PPC Ad on Google.',
+			route: 'googleadheadlines',
 			icon: '💸',
 		},
-		// {
-		// 	text: 'Instagram Captions',
-		// 	route: 'captions',
-		// 	icon: '🦄',
-		// },
 		{
-			text: 'Headlines',
-			route: 'headlines',
+			text: 'Google Ad Descriptions',
+			description: 'Write a compelling description of your ad for Google Adwords.',
+			route: 'googleaddescriptions',
+			icon: '🦄',
+		},
+		{
+			text: 'Facebook Ad Headlines',
+			description: 'Write Facebook ad headlines that fit the theme of your ad.',
+			route: 'facebookheadlines',
 			icon: '💥',
 		},
 		{
 			text: 'Value Propositions',
+			description: `Write out your product's purpose and value to your customers.`,
 			route: 'valuepropositions',
-			icon: '💡',
+			icon: '✨',
 		},
 		{
 			text: 'Slogans',
+			description: `Create the perfect slogan for your company or brand.`,
 			route: 'slogans',
 			icon: '📣',
 		},
 		{
 			text: 'Product Descriptions',
-			route: 'productdescription',
+			description: 'Create better product descriptions for your ecommerce store.',
+			route: 'productdescriptions',
 			icon: '🎯',
 		},
 		{
-			text: 'Catchy Email Subjectlines',
-			route: 'catchyemailsubjectlines',
-			icon: '📬',
+			text: 'Product Names',
+			description: 'Give your ecommerce product a name.',
+			route: 'productnames',
+			icon: '🎉',
 		},
 		{
-			text: 'Marketing Campaign Ideas',
-			route: 'marketingcampaignideas',
-			icon: '🦄',
+			text: 'Taglines',
+			description: 'Pitch your product in 4-7 words.',
+			route: 'taglines',
+			icon: '💭',
+		},
+		{
+			text: 'Articlea Headlines',
+			description: 'Take an article you may have written and use it to translate the content into a headline.',
+			route: 'articleheadlines',
+			icon: '💯',
+		},
+		{
+			text: 'Article Ideas',
+			description: 'Use your core message and blog to expand on your content.',
+			route: 'articleideas',
+			icon: '💡',
 		},
 	];
 
@@ -54,16 +74,19 @@ const ChooseType: FC = (): ReactElement => {
 				{types.map((item, index) => {
 					return (
 						<NavLink exact to={`/generate/${item.route}`} key={index}>
-							<button
-								className="w-64 md:w-96 py-6 bg-teal-700 rounded-lg capitalize hover:bg-teal-600 text-white
+							<div
+								className="flex flex-col space-y-4 bg-teal-50 rounded-lg capitalize 
 									  transition-all ease-in-out duration-200 text-lg md:text-xl font-medium tracking-wide
 									 focus:outline-none"
 							>
-								<p>
-									<span className="pr-2 md:pr-4">{item.icon}</span>
-									{item.text}
-								</p>
-							</button>
+								<div className="text-lg text-gray-900 tacking-wide">
+									<h1>{item.text}</h1>{' '}
+									<span role="image" aria-label={`${item.icon}`}>
+										{item.icon}
+									</span>
+								</div>
+								<p className="text-base text-gray-700">{item.description}</p>
+							</div>
 						</NavLink>
 					);
 				})}

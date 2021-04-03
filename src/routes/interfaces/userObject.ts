@@ -5,4 +5,5 @@ export interface UserObjectInterface {
 	userIsTrial: boolean;
 	subscriptionStatus: string;
 	currentPeriodEnd: number;
+	maxTrialSessionCount: number;
 }

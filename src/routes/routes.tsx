@@ -43,6 +43,7 @@ const Routes: FC = (): ReactElement => {
 		userIsTrial: true,
 		subscriptionStatus: '',
 		currentPeriodEnd: 4110026795,
+		maxTrialSessionCount: 50,
 	});
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
@@ -87,6 +88,7 @@ const Routes: FC = (): ReactElement => {
 					.get<UserResponseObject>(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`, config)
 					.then(res => {
 						const { currentSessionCount } = res.data.user.usage.sessions;
+						const { maxTrialSessionCount } = res.data.user.usage;
 						const { productId, subscriptionStatus, currentPeriodEnd } = res.data.user.billing.subscription;
 						const { stripeCustomerId, userIsTrial } = res.data.user.billing;
 
@@ -102,11 +104,12 @@ const Routes: FC = (): ReactElement => {
 							subscriptionStatus,
 							currentPeriodEnd,
 							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
+							maxTrialSessionCount,
 						});
 						setCurrentSessionCount(currentSessionCount);
 
 						//triggers if the user has used up all trial sessions
-						if (currentSessionCount >= 50 && userIsTrial === true) {
+						if (currentSessionCount >= maxTrialSessionCount && userIsTrial === true) {
 							setEndredTrialRedirect(true);
 						}
 

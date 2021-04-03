@@ -20,19 +20,6 @@ const OutputTextfield: FC = (): ReactElement => {
 	const [errWidget, setErrWidget] = useState(false);
 	const [resMessage, setResMessage] = useState('');
 
-	////
-	//REMOVE IN PROD
-	////
-	// useEffect(() => {
-	// 	setOutputArray([
-	// 		'1. linkedin ad for sonect',
-	// 		'2. linkedin ad for sonect',
-	// 		'3. linkedin ad for sonect and also for linkedin',
-	// 		'4. linkedin ad for sonect and also for linkedin dsadsadsa',
-	// 		'5. linkedin ad for sonect and also for linkedin dsadsadsadsadsa',
-	// 	]);
-	// }, []);
-
 	function postDocument(): void {
 		setIsLoading(true);
 		const config = {

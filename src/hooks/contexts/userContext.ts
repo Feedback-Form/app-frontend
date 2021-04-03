@@ -11,6 +11,7 @@ export interface UserContextType {
 		productId: string;
 		stripeCustomerId: string;
 		maxMonthlySessionCount: number;
+		maxTrialSessionCount: number;
 		userIsTrial: boolean;
 		subscriptionStatus: string;
 		currentPeriodEnd: number;
@@ -32,6 +33,7 @@ export const UserContext = createContext<UserContextType>({
 	userObject: {
 		productId: '',
 		stripeCustomerId: '',
+		maxTrialSessionCount: 50,
 		maxMonthlySessionCount: 0,
 		userIsTrial: true,
 		subscriptionStatus: 'active',

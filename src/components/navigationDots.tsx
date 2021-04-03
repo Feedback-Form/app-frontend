@@ -4,12 +4,7 @@ import React, { FC, ReactElement } from 'react';
 import { useText } from '../hooks/contexts/summaryContext';
 
 const NavigationDots: FC = (): ReactElement => {
-	const {
-		characterLimitReached,
-		setCurrentComponent,
-		currentComponent,
-		outputArray,
-	} = useText();
+	const { characterLimitReached, setCurrentComponent, currentComponent, outputArray } = useText();
 	return (
 		<div className="w-full items-center justify-center flex  space-x-6 ">
 			<button
@@ -17,9 +12,7 @@ const NavigationDots: FC = (): ReactElement => {
 				onClick={() => {
 					setCurrentComponent(1);
 				}}
-				className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${
-					currentComponent === 1 ? 'bg-teal-700' : 'bg-gray-300'
-				}`}
+				className={`focus:outline-none disabled:opacity-50 rounded-full h-5 w-5 ${currentComponent === 1 ? 'bg-teal-700' : 'bg-gray-300'}`}
 			></button>
 			<button
 				disabled={outputArray.length < 1}

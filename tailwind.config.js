@@ -15,6 +15,15 @@ module.exports = {
 					// 'Times',
 					// 'serif'
 				],
+				emoji: [
+					'Apple Color Emoji',
+					'Segoe UI Emoji',
+					'NotoColorEmoji',
+					'Noto Color Emoji',
+					'Segoe UI Symbol',
+					'Android Emoji',
+					'EmojiSymbols',
+				],
 			},
 
 			colors: {

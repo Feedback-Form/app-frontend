@@ -11,6 +11,7 @@ export interface UserResponseObject {
 		};
 
 		usage: {
+			maxTrialSessionCount: number;
 			sessions: {
 				currentSessionCount: number;
 				maxMonthlySessionCount: number;

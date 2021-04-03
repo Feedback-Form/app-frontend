@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, useEffect } from 'react';
 
-import InputTextfield from './input-textfield/inputTextfield';
-import OutputTextfield from './output-textfield/outputTexfield';
+import InputTextfield from '../input-textfield/inputTextfield';
+import OutputTextfield from '../output-textfield/outputTexfield';
 import { CSSTransition } from 'react-transition-group';
-import { useText } from '../hooks/contexts/summaryContext';
+import { useText } from '../../hooks/contexts/summaryContext';
 
-const Summarize: FC = (): ReactElement => {
+const GenerateText: FC = (): ReactElement => {
 	const { currentComponent, characterLimitReached } = useText();
 
 	useEffect(() => {
@@ -44,4 +44,4 @@ const Summarize: FC = (): ReactElement => {
 	);
 };
 
-export default Summarize;
+export default GenerateText;

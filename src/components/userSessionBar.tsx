@@ -9,9 +9,11 @@ import { checkoutHandler } from '../modules/checkoutHandler';
 const UserSessionBar: FC = (): ReactElement => {
 	//userContext
 	const { userObject, token, currentSessionCount } = useUserData();
-	const { maxMonthlySessionCount } = userObject;
+	const { maxMonthlySessionCount, maxTrialSessionCount, userIsTrial } = userObject;
 
-	const percentage = (currentSessionCount / maxMonthlySessionCount) * 100;
+	//decide if user is trial or not and choose max accordingly
+	const sessionMax = userIsTrial === true ? maxTrialSessionCount : maxMonthlySessionCount;
+	const percentage = (currentSessionCount / sessionMax) * 100;
 	const [barWidthCurrent, setBarCurrentMax] = useState(`${percentage}%`);
 	const [barWidthMax, setBarWidthMax] = useState(`${percentage !== 100 ? 100 - percentage : 0}%`);
 
@@ -20,9 +22,7 @@ const UserSessionBar: FC = (): ReactElement => {
 			<div className="flex justify-center items-center h-full  w-full space-x-4 ">
 				<div className="flex  bg-gray-100 max-w-md  items-center px-4 py-2  rounded-lg space-x-4 ">
 					<div className="flex flex-col space-y-2 items-center justify-center">
-						<h1 className="text-gray-900 text-center text-sm">
-							{`You've used up ${currentSessionCount} of ${maxMonthlySessionCount} free sessions`}
-						</h1>
+						<h1 className="text-gray-900 text-center text-sm">{`You've used up ${currentSessionCount} of ${sessionMax} free sessions`}</h1>
 						<div className="w-64 flex h-4">
 							<div
 								style={{ width: barWidthCurrent }}

@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState } from 'react';
 
 //components
 import Sidebar from '../components/sidebar/sideBar';
-import Summarize from '../components/summarize';
+import GenerateText from '../components/generateText/generateText';
 import AuthenticationWidget from '../components/authenticationWidget';
 import UserSessionBar from '../components/userSessionBar';
 
@@ -50,7 +50,7 @@ const GenerateTextPage: FC = (): ReactElement => {
 				<section className="h-screen w-full flex overflow-hidden font-scrptai">
 					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
-					<Summarize />
+					<GenerateText />
 				</section>
 			)}
 		</SummaryContext.Provider>

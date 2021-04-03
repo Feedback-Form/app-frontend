@@ -38,12 +38,6 @@ const SignUpPage: FC = (): ReactElement => {
 					currentPeriodEnd: null,
 				},
 			},
-			usage: {
-				sessions: {
-					currentSessionCount: 0,
-					maxMonthlySessionCount: 50,
-				},
-			},
 		};
 
 		axios
