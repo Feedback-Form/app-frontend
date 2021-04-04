@@ -48,30 +48,22 @@ const Routes: FC = (): ReactElement => {
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	const [endedSubscriptionRedirect, setEndedSubscriptionRedirect] = useState(false);
-	//console.log('jwt received 🍀', jwtReceived);
-	useEffect(() => {
-		// /////
-		// //REMOVE in PROD
-		// ////
-		// setIsAuthenticating(false);
-		// return;
-		// //
-		// ////
 
+	useEffect(() => {
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
 
 		if (
-			shortPath[0] !== '/login' &&
+			// shortPath[0] !== '/login' &&
 			shortPath[0] !== '/plans' &&
 			shortPath[0] !== '/success' &&
 			shortPath[0] !== '/cancelled' &&
 			shortPath[0] !== '/signup' &&
-			shortPath[0] !== '/password' &&
-			shortPath[0] !== '/user'
+			shortPath[0] !== '/password'
+			// shortPath[0] !== '/user'
 		) {
+			console.log('token', token);
 			if (token === '' || token === undefined || token === null) {
-				console.log('REDIRECT USER TO LOGIN PAGE 🚨');
 				//activate redirect if authentication failes and user was in one of the following routes
 				// /summarize, /documents & /document/:id
 				setRedirect(true);
@@ -122,7 +114,6 @@ const Routes: FC = (): ReactElement => {
 						setIsAuthenticating(false);
 					})
 					.catch((err: any) => {
-						console.log('err', err);
 						//activate redirect if authentication failes and user was in one of the following routes
 						// /summarize, /documents & /document/:id
 						setRedirect(true);
@@ -153,11 +144,6 @@ const Routes: FC = (): ReactElement => {
 				{endedTrialRedirect && <Redirect to="/trial/ended" />}
 				{endedSubscriptionRedirect && <Redirect to="/subscription/ended" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
-
-				{/* remove in PROD */}
-				{/* <Redirect to="/" />
-				<Route exact path="/" render={() => <ChooseTypePage />} /> */}
-				{/* ---- */}
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/documents" render={() => <DocumentsPage />} />
 				<Route exact path="/document/:id" render={() => <SingleDocPage />} />

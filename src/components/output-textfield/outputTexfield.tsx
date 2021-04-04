@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 //components
 import LoadingWidget from '../loadingWidget';
 import NavigationDots from '../navigationDots';
@@ -17,8 +17,10 @@ const OutputTextfield: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoadingTwo, setIsLoadingTwo] = useState(false);
 	const { token, setCurrentSessionCount } = useUserData();
-	const [errWidget, setErrWidget] = useState(false);
+	const [responseWidget, setResponseWidget] = useState(false);
 	const [resMessage, setResMessage] = useState('');
+	const [isSuccessMessage, setIsSuccessMessage] = useState(false);
+	const history = useHistory();
 
 	function postDocument(): void {
 		setIsLoading(true);
@@ -37,12 +39,30 @@ const OutputTextfield: FC = (): ReactElement => {
 		axios
 			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/create`, req, config)
 			.then((res: any) => {
-				console.log('POST res', res);
 				setIsLoading(false);
+
+				//response Widget related
+				setResMessage('Successfully saved document.');
+				setIsSuccessMessage(true);
+				setResponseWidget(true);
+
+				setTimeout(() => {
+					setResponseWidget(false);
+				}, 1000);
+				setTimeout(() => {
+					history.push('/generate');
+				}, 200);
 			})
 			.catch((err: any) => {
-				console.log('err', err);
 				setIsLoading(false);
+				//response Widget related
+				setResMessage(err.response.data.error.message);
+				setIsSuccessMessage(false);
+				setResponseWidget(true);
+
+				setTimeout(() => {
+					setResponseWidget(false);
+				}, 1000);
 			});
 	}
 
@@ -79,18 +99,21 @@ const OutputTextfield: FC = (): ReactElement => {
 			.catch((err: any) => {
 				//setCurrentComponent(2);
 				setIsLoadingTwo(false);
+
+				//response Widget related
 				setResMessage(err.response.data.error.message);
-				setErrWidget(true);
+				setIsSuccessMessage(false);
+				setResponseWidget(true);
 
 				setTimeout(() => {
-					setErrWidget(false);
+					setResponseWidget(false);
 				}, 5000);
 			});
 	}
 
 	return (
 		<>
-			{errWidget && <ResponseWidget success={false} response={resMessage} />}
+			{responseWidget && <ResponseWidget success={isSuccessMessage} response={resMessage} />}
 
 			{isLoadingTwo ? (
 				<Uploading message="Generating results... 🤖" />

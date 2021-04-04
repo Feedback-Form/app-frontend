@@ -43,7 +43,6 @@ const LoginPage: FC = (): ReactElement => {
 				//setRedirect(true);
 			})
 			.catch((err: any) => {
-				console.log('🚀', err);
 				setErrorMessage(err.response.data.message);
 				setShowErrorMessage(true);
 				setIsLoading(false);
@@ -59,22 +58,16 @@ const LoginPage: FC = (): ReactElement => {
 	}
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12 font-scrptai ">
+		<div className="min-h-screen bg-gray-50 flex flex-col justify-center sm:py-12 font-scrptai ">
 			{isLoading && <LoadingWidget />}
 			{/* {jwtReceived && <Redirect to="/summarize" />} */}
 			<div className="p-10 sm:p-0 mx-auto md:w-full md:max-w-md space-y-6 ">
-				<img
-					className="w-48 mx-auto"
-					src={copykatLogoLong}
-					alt="copykat_ai_logo"
-				/>
+				<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
 						<form autoComplete="on">
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								E-mail
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">E-mail</label>
 							<input
 								value={email}
 								onChange={e => {
@@ -83,9 +76,7 @@ const LoginPage: FC = (): ReactElement => {
 								type="text"
 								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
 							/>
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Password
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Password</label>
 							<span className="relative inline-flex w-full">
 								<input
 									value={password}
@@ -102,12 +93,7 @@ const LoginPage: FC = (): ReactElement => {
 									className="flex flex-col justify-center absolute right-0 h-full mr-3 text-gray-600 w-6 cursor-pointer transition-all duration-200 ease-in-out"
 								>
 									{showPassword ? (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -116,18 +102,8 @@ const LoginPage: FC = (): ReactElement => {
 											/>
 										</svg>
 									) : (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-											/>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -155,13 +131,7 @@ const LoginPage: FC = (): ReactElement => {
 						</form>
 						{showErrorMessage && (
 							<div className="flex space-x-2 items-center text-red-500 pt-2">
-								<svg
-									className="w-5 h-5"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
+								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -174,28 +144,52 @@ const LoginPage: FC = (): ReactElement => {
 						)}
 					</div>
 					<div className="py-5">
-						<div className="grid grid-cols-1 gap-1">
-							<div className="text-center  whitespace-nowrap">
-								<NavLink to="/password/reset/initiate">
-									<button className="transition-all duration-200 ease-in-out mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-											className="w-4 h-4 inline-block align-text-top"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
-											/>
-										</svg>
-										<span className="inline-block ml-1">Forgot Password</span>
-									</button>
-								</NavLink>
+						<div className="grid grid-cols-1 grid-rows-2 gap-6">
+							<div className="flex flex-col md:flex-row ">
+								<div className="text-center whitespace-nowrap">
+									<NavLink to="/password/reset/initiate">
+										<button className="transition-all duration-200 ease-in-out mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+												className="w-4 h-4 inline-block align-text-top"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth="2"
+													d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
+												/>
+											</svg>
+											<span className="inline-block ml-1">Forgot Password</span>
+										</button>
+									</NavLink>
+								</div>
+								<div className="text-center whitespace-nowrap">
+									<NavLink to="/signup">
+										<button className="transition-all duration-200 ease-in-out mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="w-4 h-4 inline-block align-text-top"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth="2"
+													d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+												/>
+											</svg>
+											<span className="inline-block ml-1">Create an account</span>
+										</button>
+									</NavLink>
+								</div>
 							</div>
+
 							<div className="text-center  whitespace-nowrap">
 								<span className="inline-block ml-1 text-wrap text-sm text-gray-500">
 									<p>Need help?</p>

@@ -265,42 +265,59 @@ const Documents: FC = (): ReactElement => {
 
 	function outputTypeColor(outputType: string): string {
 		switch (outputType) {
-			case 'adcopy':
+			case 'googleadheadlines':
 				return 'purple';
 				break;
-			case 'captions':
+			case 'googleaddescriptions':
 				return 'yellow';
 				break;
 			case 'headlines':
 				return 'lime';
 				break;
-			case 'valuepropositions':
+			case 'facebookheadlines':
 				return 'cyan';
-			case 'slogans':
+				break;
+			case 'valuepropositions':
 				return 'teal';
-			case 'catchyemailsubjectlines':
+				break;
+			case 'slogans':
 				return 'indigo';
-			case 'productdescription':
+				break;
+			case 'productdescriptions':
 				return 'rose';
-			case 'marketingcampaignideas':
+				break;
+			case 'productnames':
 				return 'emerald';
+				break;
+			case 'taglines':
+				return 'red';
+				break;
+			case 'articleheadlines':
+				return 'blue';
+				break;
+			case 'articleideas':
+				return 'purple';
+				break;
 			default:
 				return 'gray';
+				break;
 		}
 	}
 	function sliceStrings(document: Document): string {
 		const { outputType } = document;
 		switch (outputType) {
-			case 'valuepropositions':
-				return 'valueprop';
+			case 'googleadheadlines':
+				return 'googlehead';
 				break;
-			case 'catchyemailsubjectlines':
-				return 'catchyemail';
+			case 'googleaddescriptions':
+				return 'googledesc';
 				break;
-			case 'productdescription':
+			case 'facebookheadlines':
+				return 'facebookhead';
+			case 'productdescriptions':
 				return 'productdesc';
-			case 'marketingcampaignideas':
-				return 'ideas';
+			case 'articleheadlines':
+				return 'articlehead';
 			default:
 				return outputType;
 		}

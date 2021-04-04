@@ -30,7 +30,7 @@ const ChooseLanguage: FC = (): ReactElement => {
 	];
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full">
-			<div className="flex flex-col w-3/4 h-1/5 justify-center">
+			<div className="flex flex-col w-3/4 h-1/5 justify-center max-w-screen-lg">
 				<h1 className="flex justify-center md:justify-start tracking-wide text-3xl text-gray-900 font-medium md:pl-20">Choose language</h1>
 			</div>
 
@@ -41,7 +41,7 @@ const ChooseLanguage: FC = (): ReactElement => {
 							<NavLink exact to={`/generate/${type}/${item.language}`} key={index}>
 								<div
 									key={index}
-									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2  h-36 lg:h-44  border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
+									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2  h-36 lg:h-full  border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
 								>
 									<span
 										role="image"

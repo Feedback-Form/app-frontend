@@ -31,9 +31,7 @@ const VerifyAccountPage: FC = (): ReactElement => {
 			{isLoading && <LoadingWidget />}
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
-				<div className="flex justify-center w-full">
-					<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
-				</div>
+				<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 
 				<div className="space-y-4">
 					<p

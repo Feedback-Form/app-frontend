@@ -21,9 +21,9 @@ const InputTextfield: FC = (): ReactElement => {
 		characterLimitReached,
 	} = useText();
 
-	const [fullText, handleTexthange, setText, resetText] = useWordState(inputText);
+	const [fullText, handleTextChange, setText, resetText] = useWordState(inputText);
 
-	const [currentCharacterLimit, setCurrentCharacterLimit] = useState(0);
+	const [currentCharacterCount, setCurrentCharacterCount] = useState(0);
 
 	const { token, userObject, setCurrentSessionCount } = useUserData();
 	const [errWidget, setErrWidget] = useState(false);
@@ -33,14 +33,13 @@ const InputTextfield: FC = (): ReactElement => {
 	const params = useParams<{ type: string; language: string }>();
 	const { type, language } = params;
 
-	//adjust currentCharacterLimit
-	useEffect(() => {
-		setCurrentCharacterLimit(fullText.length);
-	}, [fullText]);
-
 	useEffect(() => {
 		setInputText(fullText);
 	}, [fullText]);
+
+	useEffect(() => {
+		setCharacterLimitReached(currentCharacterCount > 400);
+	}, [currentCharacterCount]);
 
 	function generateOutput(): void {
 		//setCurrentComponent(3);
@@ -94,21 +93,20 @@ const InputTextfield: FC = (): ReactElement => {
 						<div className="flex flex-col shadow-md h-1/2 rounded-lg">
 							<textarea
 								value={fullText}
-								onChange={e => {
-									handleTexthange(e);
-									// setInputText(fullText);
+								onChange={(e: any) => {
+									handleTextChange(e);
 
-									setCharacterLimitReached(currentCharacterLimit > 400);
+									setCurrentCharacterCount(e.target.value.length);
 								}}
 								onPaste={e => {
-									setText((existingText: string) => existingText.concat(e.clipboardData.getData('Text')));
-									// setInputText(fullText);
-									setCharacterLimitReached(currentCharacterLimit > 400);
+									const pastedText = e.clipboardData.getData('Text');
+									setText((existingText: string) => existingText.concat(pastedText));
+
+									setCurrentCharacterCount(pastedText.length);
 									e.preventDefault();
 								}}
 								onCut={(e: any) => {
 									setText(e.target.value);
-									// setInputText(fullText);
 								}}
 								className="w-full h-full rounded-lg resize-none break-words  p-6 font-thin text-lg tracking-wide
 					focus:outline-none focus:ring-2 focus:ring-teal-700 transition-all ease-in-out duration-200
@@ -124,13 +122,13 @@ const InputTextfield: FC = (): ReactElement => {
 									generateOutput();
 								}}
 								className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg
-								 px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
+								 px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								Generate output
 							</button>
 							<div className="rounded-lg bg-gray-300 text-gray-600 py-2 px-3">
 								<span className="tracking-wider font-medium ">
-									{currentCharacterLimit} / {400} characters
+									{currentCharacterCount} / {400} characters
 								</span>
 							</div>
 						</div>
