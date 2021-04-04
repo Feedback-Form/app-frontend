@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
-
+import { usePercentageState } from '../hooks/hooks';
 //modules
 import { checkoutHandler } from '../modules/checkoutHandler';
 
@@ -13,9 +13,31 @@ const UserSessionBar: FC = (): ReactElement => {
 
 	//decide if user is trial or not and choose max accordingly
 	const sessionMax = userIsTrial === true ? maxTrialSessionCount : maxMonthlySessionCount;
-	const percentage = (currentSessionCount / sessionMax) * 100;
+	//const percentage = (currentSessionCount / sessionMax) * 100;
+	const [percentage, setPercentage] = usePercentageState(currentSessionCount, sessionMax);
 	const [barWidthCurrent, setBarCurrentMax] = useState(`${percentage}%`);
 	const [barWidthMax, setBarWidthMax] = useState(`${percentage !== 100 ? 100 - percentage : 0}%`);
+	const barWidthCurrentStyle = { width: barWidthCurrent };
+	const barWidthMaxStyle = { width: barWidthMax };
+	// const [barWidthCurrentStyle, setBarWidthCurrentStyle] = useState<any>({ width: barWidthCurrent });
+	// const [barWidthMaxStyle, setBarWidthMaxStyle] = useState<any>({ width: barWidthMax });
+
+	// function updatePercentage(): void {
+	// 	setPercentage(currentSessionCount, sessionMax);
+	// 	setBarCurrentMax(`${percentage}%`);
+	// 	setBarWidthMax(`${percentage !== 100 ? 100 - percentage : 0}%`);
+	// 	// setBarWidthCurrentStyle({ width: barWidthCurrent });
+	// 	// setBarWidthMaxStyle({ width: barWidthMax });
+	// 	console.log({
+	// 		percentage,
+	// 		barWidthCurrent,
+	// 		barWidthMax,
+	// 	});
+	// }
+
+	// useEffect(() => {
+	// 	updatePercentage();
+	// }, [currentSessionCount]);
 
 	return (
 		<div className="absolute invisible md:visible w-full h-20 top-0 z-50">
@@ -24,14 +46,8 @@ const UserSessionBar: FC = (): ReactElement => {
 					<div className="flex flex-col space-y-2 items-center justify-center">
 						<h1 className="text-gray-900 text-center text-sm">{`You've used up ${currentSessionCount} of ${sessionMax} free sessions`}</h1>
 						<div className="w-64 flex h-4">
-							<div
-								style={{ width: barWidthCurrent }}
-								className={`bg-teal-700   ${barWidthMax === '0%' ? 'rounded-xl' : 'rounded-l-xl'}`}
-							></div>
-							<div
-								style={{ width: barWidthMax }}
-								className={`bg-gray-200   ${barWidthMax === '100%' ? 'rounded-xl' : 'rounded-r-xl'}`}
-							></div>
+							<div style={barWidthCurrentStyle} className={`bg-teal-700   ${barWidthMax === '0%' ? 'rounded-xl' : 'rounded-l-xl'}`}></div>
+							<div style={barWidthMaxStyle} className={`bg-gray-200   ${barWidthMax === '100%' ? 'rounded-xl' : 'rounded-r-xl'}`}></div>
 						</div>
 					</div>
 

@@ -27,7 +27,7 @@ const VerifyAccountPage: FC = (): ReactElement => {
 			});
 	}, []);
 	return (
-		<section className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12 font-scrptai">
+		<section className="min-h-screen bg-gray-50 flex flex-col justify-center sm:py-12 font-scrptai">
 			{isLoading && <LoadingWidget />}
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">

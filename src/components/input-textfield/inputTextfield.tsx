@@ -87,7 +87,7 @@ const InputTextfield: FC = (): ReactElement => {
 			) : (
 				<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full max-w-4xl">
 					<div className="flex flex-col w-3/4 h-1/5 justify-center">
-						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Describe your product or service.</h1>
+						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Describe your product, service or company.</h1>
 					</div>
 					<div className="flex flex-col w-3/4 h-4/5 space-y-20 ">
 						<div className="flex flex-col shadow-md h-1/2 rounded-lg">
