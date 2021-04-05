@@ -27,14 +27,9 @@ const LoginPage: FC = (): ReactElement => {
 				password,
 			})
 			.then((res: any) => {
-				console.log('res', res.data.token);
-
-				// setToken(res.data.token);
 				//saves the jwt token to the localstorage
 
-				// localStorage.setItem('auth_token', res.data.token);
 				setToken(res.data.token);
-				console.log('login_token', token);
 
 				setJwtReceived(true);
 				setIsLoading(false);

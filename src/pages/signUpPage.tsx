@@ -44,7 +44,6 @@ const SignUpPage: FC = (): ReactElement => {
 		axios
 			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/create`, req)
 			.then((res: any) => {
-				console.log(res);
 				setToken(res.data.token);
 
 				setJwtReceived(true);

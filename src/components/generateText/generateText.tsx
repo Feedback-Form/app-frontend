@@ -8,9 +8,7 @@ import { useText } from '../../hooks/contexts/summaryContext';
 const GenerateText: FC = (): ReactElement => {
 	const { currentComponent, characterLimitReached } = useText();
 
-	useEffect(() => {
-		console.log('rerender');
-	}, [characterLimitReached]);
+	// useEffect(() => {}, [characterLimitReached]);
 
 	return (
 		<main className="flex-1 flex flex-col bg-white text-gray-900  items-center space-y-10">

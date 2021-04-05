@@ -62,7 +62,6 @@ const Routes: FC = (): ReactElement => {
 			shortPath[0] !== '/password'
 			// shortPath[0] !== '/user'
 		) {
-			console.log('token', token);
 			if (token === '' || token === undefined || token === null) {
 				//activate redirect if authentication failes and user was in one of the following routes
 				// /summarize, /documents & /document/:id

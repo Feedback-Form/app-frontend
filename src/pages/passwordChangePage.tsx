@@ -26,12 +26,9 @@ const PasswordChangePage: FC = (): ReactElement => {
 		const { userId, token } = params;
 
 		axios
-			.post(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/password/update/${userId}/${token}`,
-				{
-					userPw: password,
-				},
-			)
+			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/password/update/${userId}/${token}`, {
+				userPw: password,
+			})
 			.then((res: any) => {
 				setJwtReceived(true);
 				setIsLoading(false);
@@ -58,19 +55,13 @@ const PasswordChangePage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img
-						className="w-48 mx-auto"
-						src={copykatLogoLong}
-						alt="copykat_ai_logo"
-					/>
+					<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
 				</div>
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
 						<form autoComplete="on">
-							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">
-								Password
-							</label>
+							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Password</label>
 							<span className="relative inline-flex w-full">
 								<input
 									value={password}
@@ -87,12 +78,7 @@ const PasswordChangePage: FC = (): ReactElement => {
 									className="flex flex-col justify-center absolute right-0 h-full mr-3 text-gray-600 w-6 cursor-pointer transition-all duration-200 ease-in-out"
 								>
 									{showPassword ? (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -101,18 +87,8 @@ const PasswordChangePage: FC = (): ReactElement => {
 											/>
 										</svg>
 									) : (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-											/>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -139,18 +115,10 @@ const PasswordChangePage: FC = (): ReactElement => {
 						{responseMessage !== '' && (
 							<div
 								className={`flex space-x-2 items-center  ${
-									responseMessage === 'Oops, something went wrong.'
-										? 'text-red-500'
-										: 'text-green-500'
+									responseMessage === 'Oops, something went wrong.' ? 'text-red-500' : 'text-green-500'
 								} pt-2`}
 							>
-								<svg
-									className="w-5 h-5"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
+								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"

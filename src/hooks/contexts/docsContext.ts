@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createContext, useContext } from 'react';
 
 export interface docsContextType {

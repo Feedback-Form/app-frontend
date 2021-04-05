@@ -14,7 +14,5 @@ export function customerPortalHandler(token: string, stripeCustomerId: string): 
 		.then((res: any) => {
 			window.location.href = res.data.url;
 		})
-		.catch((err: any) => {
-			console.log('err', err);
-		});
+		.catch();
 }

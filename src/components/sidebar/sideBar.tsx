@@ -33,9 +33,7 @@ const Sidebar: FC = (): ReactElement => {
 				localStorage.clear();
 				setRedirect(true);
 			})
-			.catch((err: any) => {
-				console.log('err', err);
-			});
+			.catch();
 	}
 
 	return (

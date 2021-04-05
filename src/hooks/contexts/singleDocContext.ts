@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createContext, useContext } from 'react';
 
 export interface SingleDocumentContextType {
@@ -22,11 +23,9 @@ export const SingleDocContext = createContext<SingleDocumentContextType>({
 	generatedOutput: '',
 	outputType: '',
 	outputLanguage: '',
-	setOutputLanguage: (outputLanguage: string) =>
-		console.warn('outputLanguage_missing'),
+	setOutputLanguage: (outputLanguage: string) => console.warn('outputLanguage_missing'),
 	setOutputType: outputType => console.warn('outputType_missing'),
-	setGeneratedOutput: generatedOutput =>
-		console.warn('generatedOutput_missing'),
+	setGeneratedOutput: generatedOutput => console.warn('generatedOutput_missing'),
 	setTitle: title => console.warn('title_missing'),
 	setInputText: (inputText: string) => console.warn('input_missing'),
 	setDocId: docId => console.warn('docId_missing'),

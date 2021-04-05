@@ -35,7 +35,6 @@ const EditDocument: FC = (): ReactElement => {
 		axios
 			.patch(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/edit/${docId}`, req, config)
 			.then((res: any) => {
-				console.log('patch res', res);
 				setIsLoading(false);
 			})
 			.catch((err: any) => {

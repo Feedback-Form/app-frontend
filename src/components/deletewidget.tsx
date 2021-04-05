@@ -15,16 +15,11 @@ const DeleteWidget = (): ReactElement => {
 	function deleteDocument(): void {
 		//add a loading toggler
 		axios
-			.delete(
-				`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/delete/${docId}`,
-				config,
-			)
+			.delete(`${process.env.REACT_APP_SCRPTAI_BACKEND}/document/delete/${docId}`, config)
 			.then((res: any) => {
 				setDeleteRequest(false);
 			})
-			.catch((err: any) => {
-				console.log('err', err);
-			});
+			.catch();
 	}
 
 	return (
@@ -33,12 +28,8 @@ const DeleteWidget = (): ReactElement => {
 				<div className="flex justify-center h-full w-full items-center">
 					<div className="w-3/4 md:w-1/3 xl:w-1/4 bg-white rounded-md px-10 py-8 space-y-6">
 						<div className="space-y-2">
-							<h1 className="tracking-wide font-semibold text-xl text-gray-900">
-								Delete &quot;{docName}&quot;?
-							</h1>
-							<h3 className="text-lg text-gray-800">
-								This action can&apos;t be undone.
-							</h3>
+							<h1 className="tracking-wide font-semibold text-xl text-gray-900">Delete &quot;{docName}&quot;?</h1>
+							<h3 className="text-lg text-gray-800">This action can&apos;t be undone.</h3>
 						</div>
 						<div className="flex space-x-6 justify-end">
 							<button

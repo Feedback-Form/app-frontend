@@ -16,7 +16,6 @@ const VerifyAccountPage: FC = (): ReactElement => {
 		axios
 			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/verify/${userId}/${token}`)
 			.then((res: any) => {
-				console.log('res', res);
 				setResponseMessage(res.data.message);
 				setIsLoading(false);
 			})
