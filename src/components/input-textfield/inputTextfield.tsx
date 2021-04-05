@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 //components
 import ResponseWidget from '../response-widget/responseWidget';
 import Uploading from '../uploading/uploading';
@@ -29,6 +29,8 @@ const InputTextfield: FC = (): ReactElement => {
 	const [errWidget, setErrWidget] = useState(false);
 	const [resMessage, setResMessage] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+
+	const history = useHistory();
 
 	const params = useParams<{ type: string; language: string }>();
 	const { type, language } = params;
@@ -85,9 +87,27 @@ const InputTextfield: FC = (): ReactElement => {
 			{isLoading ? (
 				<Uploading message="Generating results... 🤖" />
 			) : (
-				<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full max-w-4xl">
+				<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full max-w-screen-lg">
 					<div className="flex flex-col w-3/4 h-1/5 justify-center">
-						<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Describe your product, service or company.</h1>
+						<div className="flex items-center justify-center md:justify-start space-x-6">
+							<span
+								onClick={() => {
+									history.goBack();
+								}}
+								className="p-2 bg-gray-100 hover:bg-teal-50 rounded-lg text-gray-600 hover:text-teal-700 cursor-pointer transition-all duration-200 ease-in-out"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-7 w-7 text-current  "
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+								</svg>
+							</span>
+							<h1 className=" tracking-wide text-3xl text-gray-900 font-medium ">Describe your product, service or company.</h1>
+						</div>
 					</div>
 					<div className="flex flex-col w-3/4 h-4/5 space-y-20 ">
 						<div className="flex flex-col shadow-md h-1/2 rounded-lg">
@@ -126,7 +146,7 @@ const InputTextfield: FC = (): ReactElement => {
 							>
 								Generate output
 							</button>
-							<div className="rounded-lg bg-gray-300 text-gray-600 py-2 px-3">
+							<div className="rounded-lg bg-gray-200 text-gray-700 py-2 px-3">
 								<span className="tracking-wider font-medium ">
 									{currentCharacterCount} / {400} characters
 								</span>

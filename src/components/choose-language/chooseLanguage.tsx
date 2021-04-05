@@ -1,11 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 //hooks
 
 const ChooseLanguage: FC = (): ReactElement => {
 	const params = useParams<{ type: string }>();
 	const { type } = params;
+	const history = useHistory();
 	const languages: Array<any> = [
 		{
 			language: 'english',
@@ -31,7 +32,25 @@ const ChooseLanguage: FC = (): ReactElement => {
 	return (
 		<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full">
 			<div className="flex flex-col w-3/4 h-1/5 justify-center max-w-screen-lg">
-				<h1 className="flex justify-center md:justify-start tracking-wide text-3xl text-gray-900 font-medium md:pl-20">Choose language</h1>
+				<div className="flex items-center md:pl-20 justify-center md:justify-start space-x-6">
+					<span
+						onClick={() => {
+							history.push('/generate');
+						}}
+						className="p-2 bg-gray-100 hover:bg-teal-50 rounded-lg text-gray-600 hover:text-teal-700 cursor-pointer transition-all duration-200 ease-in-out"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-7 w-7 text-current  "
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+						</svg>
+					</span>
+					<h1 className=" tracking-wide text-3xl text-gray-900 font-medium ">Choose language</h1>
+				</div>
 			</div>
 
 			<section className="flex justify-center md:justify-start w-3/4 h-4/5 overflow-y-auto pb-10 md:pl-20  max-w-screen-lg">
