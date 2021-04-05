@@ -165,7 +165,7 @@ const OutputTextfield: FC = (): ReactElement => {
 								onClick={() => {
 									generateOutput();
 								}}
-								className="flex space-x-2 items-center bg-gray-200 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-300 duration-200 ease-in-out transition-all"
+								className="flex space-x-2 items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 duration-200 ease-in-out transition-all"
 							>
 								<h1>Generate again</h1>
 								<svg className="w-5 text-current " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

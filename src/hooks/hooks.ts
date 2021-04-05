@@ -52,5 +52,9 @@ export const usePercentageState = (x: number, y: number): any => {
 	const res: number = (x / y) * 100;
 	const [percentage, setPercentage] = useState<number>(res);
 
-	return [percentage, setPercentage] as const;
+	const handlePercentageChange = () => {
+		setPercentage(res);
+	};
+
+	return [percentage, setPercentage, handlePercentageChange] as const;
 };
