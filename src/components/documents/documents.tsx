@@ -58,40 +58,39 @@ const Documents: FC = (): ReactElement => {
 		switch (outputType) {
 			case 'googleadheadlines':
 				return 'purple';
-				break;
+
 			case 'googleaddescriptions':
 				return 'yellow';
-				break;
+
 			case 'headlines':
 				return 'lime';
-				break;
+
 			case 'facebookheadlines':
 				return 'cyan';
-				break;
+
 			case 'valuepropositions':
 				return 'teal';
-				break;
+
 			case 'slogans':
 				return 'indigo';
-				break;
+
 			case 'productdescriptions':
 				return 'rose';
-				break;
+
 			case 'productnames':
 				return 'emerald';
-				break;
+
 			case 'taglines':
 				return 'red';
-				break;
+
 			case 'articleheadlines':
 				return 'blue';
-				break;
+
 			case 'articleideas':
 				return 'purple';
-				break;
+
 			default:
 				return 'gray';
-				break;
 		}
 	}
 	function sliceStrings(document: Document): string {
@@ -99,10 +98,10 @@ const Documents: FC = (): ReactElement => {
 		switch (outputType) {
 			case 'googleadheadlines':
 				return 'googlehead';
-				break;
+
 			case 'googleaddescriptions':
 				return 'googledesc';
-				break;
+
 			case 'facebookheadlines':
 				return 'facebookhead';
 			case 'productdescriptions':
@@ -152,9 +151,9 @@ const Documents: FC = (): ReactElement => {
 											>
 												<span className="flex absolute h-5 w-20 top-0 right-0 ">
 													<div
-														className={`relative inline-flex rounded-md  bg-${outputTypeColor(i.outputType)}-300 text-${outputTypeColor(
+														className={`relative inline-flex rounded-md bg-${outputTypeColor(i.outputType)}-300 text-${outputTypeColor(
 															i.outputType,
-														)}-800   font-base text-xs w-full h-full justify-center`}
+														)}-800 font-base text-xs w-full h-full justify-center`}
 													>
 														{sliceStrings(i)}
 													</div>

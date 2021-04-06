@@ -3,13 +3,6 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
-//components
-import ResponseWidget from '../components/response-widget/responseWidget';
-import LoadingWidget from '../components/loadingWidget';
-
-//modules
-import { checkoutHandler } from '../modules/checkoutHandler';
-
 import { customerPortalHandler } from '../modules/customerPortalHandler';
 
 const RenewSubscriptionPage: FC = (): ReactElement => {
