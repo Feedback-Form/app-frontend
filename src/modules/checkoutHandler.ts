@@ -6,7 +6,7 @@ declare class Stripe {
 const stripe = new Stripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 export function checkoutHandler(token: string): void {
 	const req = {
-		priceId: 'price_1IaJkoIy6PlSkETFQYIK7859',
+		priceId: 'price_1IdEDjIy6PlSkETFTJ8kLJhv',
 	};
 	const config = {
 		headers: {
