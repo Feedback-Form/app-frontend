@@ -10,8 +10,13 @@ const ChooseLanguage: FC = (): ReactElement => {
 	const languages: Array<{ language: string; param: string; icon: string }> = [
 		{
 			language: 'english',
-			param: 'en',
-			icon: '🇺🇸/🇬🇧',
+			param: 'en-us',
+			icon: '🇺🇸',
+		},
+		{
+			language: 'english',
+			param: 'en-gb',
+			icon: '🇬🇧',
 		},
 		{
 			language: 'german',
@@ -99,13 +104,13 @@ const ChooseLanguage: FC = (): ReactElement => {
 			</div>
 
 			<section className="flex justify-center md:justify-start w-3/4 h-4/5 overflow-y-auto pb-10 md:pl-20  max-w-screen-lg">
-				<div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 gap-4 w-3/4 md:w-full max-h-screen transition-all duration-150 ">
+				<div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 gap-4 w-3/4 md:w-full h-screen transition-all duration-150 ">
 					{languages.map((item, index) => {
 						return (
 							<NavLink exact to={`/generate/${type}/${item.param}`} key={index}>
 								<div
 									key={index}
-									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2  h-36 lg:h-full  border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
+									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2 h-36 lg:h-full border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
 								>
 									<span
 										role="image"
