@@ -87,7 +87,7 @@ const LoginPage: FC = (): ReactElement => {
 									}}
 									className="flex flex-col justify-center absolute right-0 h-full mr-3 text-gray-600 w-6 cursor-pointer transition-all duration-200 ease-in-out"
 								>
-									{showPassword ? (
+									{!showPassword ? (
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path
 												strokeLinecap="round"

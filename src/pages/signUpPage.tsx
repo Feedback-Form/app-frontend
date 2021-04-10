@@ -30,15 +30,6 @@ const SignUpPage: FC = (): ReactElement => {
 			company,
 			email,
 			password,
-			billing: {
-				stripeCustomerId: '',
-				userIsTrial: true,
-				subscription: {
-					subscriptionStatus: '',
-					productId: '',
-					currentPeriodEnd: null,
-				},
-			},
 		};
 
 		axios
@@ -132,7 +123,7 @@ const SignUpPage: FC = (): ReactElement => {
 									}}
 									className="flex flex-col justify-center absolute right-0 h-full mr-3 text-gray-600 w-6 cursor-pointer transition-all duration-200 ease-in-out"
 								>
-									{showPassword ? (
+									{!showPassword ? (
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path
 												strokeLinecap="round"
@@ -165,6 +156,25 @@ const SignUpPage: FC = (): ReactElement => {
 								<span className="inline-block mr-2">Create account</span>
 							</button>
 						</form>
+						<div>
+							<span className="text-xs text-gray-700 ">
+								By signing up, you agree to CopyKatAI&apos;s{' '}
+								<a
+									className="text-teal-700 hover:text-teal-600 ease-in-out duration-200 transition-all"
+									href="https://www.copykat.ai/terms"
+								>
+									terms of service
+								</a>{' '}
+								and
+								<a
+									className="text-teal-700 hover:text-teal-600 ease-in-out duration-200 transition-all"
+									href="https://www.copykat.ai/privacy"
+								>
+									{' '}
+									privacy policy
+								</a>
+							</span>
+						</div>
 						{showResponseMessage && (
 							<div className={`flex space-x-2 items-center ${isError === true ? 'text-red-500' : 'text-green-500'} pt-2`}>
 								<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
