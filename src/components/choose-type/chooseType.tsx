@@ -1,25 +1,26 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import googleIcon from '../../images/google-icon.png';
+import facebookIcon from '../../images/fb-icon.svg';
 const ChooseType: FC = (): ReactElement => {
 	const types: Array<{ title: string; description: string; route: string; icon: string }> = [
 		{
 			title: 'Google Ad Headlines',
 			description: 'Write the headline for your PPC Ad on Google.',
 			route: 'googleadheadlines',
-			icon: '💸',
+			icon: 'google',
 		},
 		{
 			title: 'Google Ad Descriptions',
 			description: 'Write a compelling description of your ad for Google Adwords.',
 			route: 'googleaddescriptions',
-			icon: '🦄',
+			icon: 'google',
 		},
 		{
 			title: 'Facebook Ad Headlines',
 			description: 'Write Facebook ad headlines that fit the theme of your ad.',
 			route: 'facebookheadlines',
-			icon: '💥',
+			icon: 'facebook',
 		},
 		{
 			title: 'Value Propositions',
@@ -65,6 +66,23 @@ const ChooseType: FC = (): ReactElement => {
 		},
 	];
 
+	function showFeatureIcon(icon: string): JSX.Element {
+		switch (icon) {
+			case 'google':
+				return <img src={googleIcon} alt="google icon" className="w-14 p-3 bg-teal-100 rounded-lg"></img>;
+
+			case 'facebook':
+				return <img src={facebookIcon} alt="facebook icon" className="w-14 p-3 bg-teal-100 rounded-lg"></img>;
+			default:
+				return (
+					<div className="w-14 p-3 rounded-lg bg-teal-100 flex justify-center">
+						<div role="image" aria-label={`${icon}`} className="font-emoji   text-base lg:text-lg 2xl:text-xl">
+							{icon}
+						</div>
+					</div>
+				);
+		}
+	}
 	return (
 		<section className="flex-shrink flex flex-col items-center justify-center  h-full w-full">
 			<div className="flex flex-col w-3/4 h-1/5 justify-center  max-w-screen-lg">
@@ -75,21 +93,23 @@ const ChooseType: FC = (): ReactElement => {
 			<section className="flex justify-center md:justify-start w-3/4 h-4/5 overflow-y-auto pb-10 md:pl-20  max-w-screen-lg">
 				<div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 gap-4 w-3/4 md:w-full h-screen transition-all duration-150 ">
 					{types.map((item, index) => {
+						const { route, icon, title, description } = item;
 						return (
-							<NavLink exact to={`/generate/${item.route}`} key={index}>
+							<NavLink exact to={`/generate/${route}`} key={index}>
 								<div
 									key={index}
 									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2  h-36 lg:h-full  border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
 								>
-									<span
+									{/* <span
 										role="image"
 										aria-label={`${item.icon}`}
 										className="font-emoji bg-teal-100 py-2 px-3 lg:py-2 lg:px-4 rounded-lg text-base lg:text-lg 2xl:text-xl"
 									>
 										{item.icon}
-									</span>
-									<h1 className="text-gray-900 tracking-wide font-medium  text-sm lg:text-base 2xl:text-lg text-center">{item.title}</h1>
-									<p className="text-gray-700 text-center text-xs lg:text-sm 2xl:text-base">{item.description}</p>
+									</span> */}
+									{showFeatureIcon(icon)}
+									<h1 className="text-gray-900 tracking-wide font-medium  text-sm lg:text-base 2xl:text-lg text-center">{title}</h1>
+									<p className="text-gray-700 text-center text-xs lg:text-sm 2xl:text-base">{description}</p>
 								</div>
 							</NavLink>
 						);
