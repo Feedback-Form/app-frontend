@@ -7,7 +7,7 @@ import { useInputState } from '../hooks/hooks';
 import { useUserData } from '../hooks/contexts/userContext';
 //components
 import LoadingWidget from '../components/loadingWidget';
-
+import TagManager from 'react-gtm-module';
 const SignUpPage: FC = (): ReactElement => {
 	const history = useHistory();
 	const [email, handleEmailChange, resetEmail] = useInputState('');
@@ -21,6 +21,12 @@ const SignUpPage: FC = (): ReactElement => {
 	const { setToken, setJwtReceived, token, jwtReceived } = useUserData();
 	const [isError, setIsError] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
+	const tagManagerArgs = {
+		gtmId: 'GTM-KPDSD3L',
+		dataLayer: {
+			event: 'user_signed_up',
+		},
+	};
 
 	function signUpUser(): void {
 		setIsLoading(true);
@@ -42,8 +48,10 @@ const SignUpPage: FC = (): ReactElement => {
 
 				setResponseMessage(res.data.message);
 				setShowResponseMessage(true);
-				//history.push('/summarize');
 
+				//fire signedup event
+				TagManager.initialize(tagManagerArgs);
+				//history.push('/summarize');
 				//setRedirect(true);
 			})
 			.catch((err: any) => {

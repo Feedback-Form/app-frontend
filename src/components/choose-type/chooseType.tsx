@@ -59,9 +59,15 @@ const ChooseType: FC = (): ReactElement => {
 			icon: '💯',
 		},
 		{
-			title: 'Article Ideas',
+			title: 'Blog Ideas',
 			description: 'Get some inspiration for your next article.',
 			route: 'articleideas',
+			icon: '💡',
+		},
+		{
+			title: 'A Blog Intro',
+			description: 'Get an up to 400 characters long intro for your blog idea.',
+			route: 'blogintro',
 			icon: '💡',
 		},
 	];
