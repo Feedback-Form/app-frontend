@@ -21,7 +21,7 @@ const UserSessionBar: FC = (): ReactElement => {
 
 	return (
 		// 2xl:inset-0 2xl:w-full
-		<div className="absolute invisible md:visible  right-0  h-20 top-0 z-50 ">
+		<div className="fixed invisible md:visible  right-0  h-20 top-0 z-50 ">
 			<div className="flex justify-center items-center h-full  w-full space-x-4 ">
 				<div className="flex  bg-gray-100 max-w-md  items-center px-4 py-2  rounded-lg space-x-4 ">
 					<div className="flex flex-col space-y-2 items-center justify-center">

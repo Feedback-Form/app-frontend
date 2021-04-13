@@ -16,7 +16,7 @@ const ChooseTypePage: FC = (): ReactElement => {
 			{isAuthenticating ? (
 				<AuthenticationWidget />
 			) : (
-				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+				<section className="w-full font-scrptai">
 					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
 					<ChooseType />

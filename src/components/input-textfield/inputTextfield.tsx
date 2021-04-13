@@ -142,12 +142,12 @@ const InputTextfield: FC = (): ReactElement => {
 									generateOutput();
 								}}
 								className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg
-								 px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+								 px-4 md:px-16 py-2 font-medium tracking-wide text-base md:text-lg transition-all ease-in-out duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								Generate output
 							</button>
-							<div className="rounded-lg bg-gray-200 text-gray-700 py-2 px-3">
-								<span className="tracking-wider font-medium ">
+							<div className="rounded-lg bg-gray-200 text-gray-700 py-2 px-3 text-center text-sm md:text-base">
+								<span className="tracking-wider font-medium">
 									{currentCharacterCount} / {400} characters
 								</span>
 							</div>

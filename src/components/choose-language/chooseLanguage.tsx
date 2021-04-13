@@ -9,12 +9,12 @@ const ChooseLanguage: FC = (): ReactElement => {
 	const history = useHistory();
 	const languages: Array<{ language: string; param: string; icon: string }> = [
 		{
-			language: 'english',
+			language: 'english US',
 			param: 'en-us',
 			icon: '🇺🇸',
 		},
 		{
-			language: 'english',
+			language: 'english UK',
 			param: 'en-gb',
 			icon: '🇬🇧',
 		},
@@ -80,8 +80,8 @@ const ChooseLanguage: FC = (): ReactElement => {
 		},
 	];
 	return (
-		<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full">
-			<div className="flex flex-col w-3/4 h-1/5 justify-center max-w-screen-lg">
+		<section className="flex-shrink flex flex-col items-center justify-center space-y-10 w-full overflow-y-scroll">
+			<div className="flex flex-col w-3/4 h-1/5 justify-center max-w-screen-lg pt-24">
 				<div className="flex items-center md:pl-20 justify-center md:justify-start space-x-6">
 					<span
 						onClick={() => {
@@ -103,14 +103,14 @@ const ChooseLanguage: FC = (): ReactElement => {
 				</div>
 			</div>
 
-			<section className="flex justify-center md:justify-start w-3/4 h-4/5 overflow-y-auto pb-10 md:pl-20  max-w-screen-lg">
-				<div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 gap-4 w-3/4 md:w-full h-screen transition-all duration-150 ">
+			<section className="flex justify-center md:justify-start w-3/4  h-4/5 pb-10 md:pl-20  max-w-screen-lg">
+				<div className="grid grid-flow-row grid-cols-1 md:grid-cols-3 lg:grid-cols-4  lg:grid-rows-6  gap-4 w-3/4 md:w-full h-screen transition-all duration-150 ">
 					{languages.map((item, index) => {
 						return (
 							<NavLink exact to={`/generate/${type}/${item.param}`} key={index}>
 								<div
 									key={index}
-									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2 h-36 lg:h-full border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
+									className="flex flex-col justify-center space-y-1 lg:space-y-3 items-center rounded-lg py-2 md:py-6 px-2 h-full border-2 border-gray-100 hover:border-teal-700 duration-200 transition-all ease-in-out shadow-md"
 								>
 									<span
 										role="image"
@@ -122,7 +122,6 @@ const ChooseLanguage: FC = (): ReactElement => {
 									<h1 className="text-gray-900 tracking-wide font-medium  text-sm lg:text-base 2xl:text-lg text-center capitalize">
 										{item.language}
 									</h1>
-									{/* <p className="text-gray-700 text-center text-xs lg:text-sm 2xl:text-base">{item.description}</p> */}
 								</div>
 							</NavLink>
 						);
