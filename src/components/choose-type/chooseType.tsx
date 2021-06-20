@@ -23,6 +23,18 @@ const ChooseType: FC = (): ReactElement => {
 			icon: 'facebook',
 		},
 		{
+			title: 'Facebook Ad Primary',
+			description: 'Write Facebook ad primary texts that fit the theme of your ad.',
+			route: 'facebookprimary',
+			icon: 'facebook',
+		},
+		{
+			title: 'Facebook Ad Link Descriptions',
+			description: 'Write Facebook ad link descriptions that fit the theme of your URL.',
+			route: 'facebooklinkdescription',
+			icon: 'facebook',
+		},
+		{
 			title: 'Value Propositions',
 			description: `Write out your product's purpose and value to your customers.`,
 			route: 'valuepropositions',
