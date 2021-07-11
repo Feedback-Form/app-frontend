@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 //components
 import ResponseWidget from '../response-widget/responseWidget';
-import Uploading from '../uploading/uploading';
 import NavigationDots from '../navigationDots';
 //hooks
 import { useWordState } from '../../hooks/hooks';
@@ -85,7 +84,7 @@ const InputTextfield: FC = (): ReactElement => {
 		<>
 			{errWidget && <ResponseWidget success={false} response={resMessage} />}
 			{isLoading ? (
-				<Uploading message="Generating results... 🤖" />
+				<h1>fetching docs</h1>
 			) : (
 				<section className="flex-shrink  flex flex-col items-center justify-center h-full w-full max-w-screen-lg">
 					<div className="flex flex-col w-3/4 h-1/5 justify-center">

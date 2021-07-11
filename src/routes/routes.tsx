@@ -4,19 +4,15 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 //pages
-import GenerateTextPage from '../pages/generateTextPage';
-import DocumentsPage from '../pages/documentsPage';
-import SingleDocPage from '../pages/singleDocumentPage';
+import FormsPage from '../pages/formsPage';
 import LoginPage from '../pages/loginPage';
 import StatusPage from '../components/status-page/statusPage';
-import TrialEndedPage from '../pages/trialEndedPage';
-import SignUpPage from '../pages/signUpPage';
-import PasswordForgotPage from '../pages/passwordForgotPage';
-import PasswordChangePage from '../pages/passwordChangePage';
-import ChooseLanguagePage from '../pages/chooseLanguagePage';
-import ChooseTypePage from '../pages/chooseTypePage';
-import VerifyAccountPage from '../pages/verifyAccountPage';
-import RenewSubscriptionPage from '../pages/renewSubscriptionPage';
+// import TrialEndedPage from '../pages/trialEndedPage';
+// import SignUpPage from '../pages/signUpPage';
+// import PasswordForgotPage from '../pages/passwordForgotPage';
+// import PasswordChangePage from '../pages/passwordChangePage';
+// import VerifyAccountPage from '../pages/verifyAccountPage';
+// import RenewSubscriptionPage from '../pages/renewSubscriptionPage';
 //hooks
 import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -50,6 +46,8 @@ const Routes: FC = (): ReactElement => {
 	const [endedSubscriptionRedirect, setEndedSubscriptionRedirect] = useState(false);
 
 	useEffect(() => {
+		setIsAuthenticating(false);
+		return;
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
 
@@ -144,17 +142,14 @@ const Routes: FC = (): ReactElement => {
 				{endedSubscriptionRedirect && <Redirect to="/subscription/ended" />}
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 				<Route exact path="/login" render={() => <LoginPage />} />
-				<Route exact path="/documents" render={() => <DocumentsPage />} />
-				<Route exact path="/document/:id" render={() => <SingleDocPage />} />
-				<Route exact path="/generate" render={() => <ChooseTypePage />} />
-				<Route exact path="/generate/:type/" render={() => <ChooseLanguagePage />} />
-				<Route exact path="/generate/:type/:language" render={() => <GenerateTextPage />} />
-				<Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
+				<Route exact path="/forms" render={() => <FormsPage />} />
+
+				{/* <Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />
-				<Route exact path="/signup" render={() => <SignUpPage />} />
-				<Route exact path="/user/verify/:userId/:token" render={() => <VerifyAccountPage />} />
-				<Route exact path="/password/reset/initiate" render={() => <PasswordForgotPage />} />
-				<Route exact path="/password/reset/:userId/:token" render={() => <PasswordChangePage />} />
+				<Route exact path="/signup" render={() => <SignUpPage />} /> */}
+				{/* <Route exact path="/user/verify/:userId/:token" render={() => <VerifyAccountPage />} /> */}
+				{/* <Route exact path="/password/reset/initiate" render={() => <PasswordForgotPage />} />
+				<Route exact path="/password/reset/:userId/:token" render={() => <PasswordChangePage />} /> */}
 
 				<Route path="/success" render={() => <StatusPage success={true} destinationPathName={'generate'} />} />
 				<Route path="/cancelled" render={() => <StatusPage success={false} destinationPathName={'generate'} />} />

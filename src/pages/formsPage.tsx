@@ -3,13 +3,13 @@ import React, { FC, ReactElement } from 'react';
 //components
 import Sidebar from '../components/sidebar/sideBar';
 
-import Documents from '../components/documents/documents';
+import Forms from '../components/forms/forms';
 import AuthenticationWidget from '../components/authenticationWidget';
 import UserSessionBar from '../components/userSessionBar';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
-const DocumentsPage: FC = (): ReactElement => {
+const FormsPage: FC = (): ReactElement => {
 	const { isAuthenticating, userObject } = useUserData();
 
 	return (
@@ -17,13 +17,13 @@ const DocumentsPage: FC = (): ReactElement => {
 			{isAuthenticating ? (
 				<AuthenticationWidget />
 			) : (
-				<section className="h-screen w-full flex overflow-hidden font-scrptai">
+				<section className="flex overflow-hidden font-scrptai">
 					{userObject.userIsTrial === true && <UserSessionBar />}
 					<Sidebar />
-					<Documents />
+					<Forms />
 				</section>
 			)}
 		</>
 	);
 };
-export default DocumentsPage;
+export default FormsPage;
