@@ -44,7 +44,20 @@ const FormBuilder: FC = (): ReactElement => {
 					<h1>fetching</h1>
 				) : (
 					<>
-						<div className="flex w-3/4 justify-end pt-20">
+						<div className={`flex w-3/4 ${currentPage !== 1 ? 'justify-between' : 'justify-end'} pt-20`}>
+							{currentPage !== 1 && (
+								<svg
+									onClick={() => previousPage()}
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-10 w-10 text-gray-400 cursor-pointer hover:text-gray-800 ease-in-out transition-all duration-100"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+								</svg>
+							)}
+
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-10 w-10 text-gray-400 cursor-pointer hover:text-red-500 ease-in-out transition-all duration-100"
