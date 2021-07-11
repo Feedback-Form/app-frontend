@@ -7,6 +7,7 @@ import axios from 'axios';
 import FormsPage from '../pages/formsPage';
 import LoginPage from '../pages/loginPage';
 import StatusPage from '../components/status-page/statusPage';
+import FormBuilderPage from '../pages/formbuilderPage';
 // import TrialEndedPage from '../pages/trialEndedPage';
 // import SignUpPage from '../pages/signUpPage';
 // import PasswordForgotPage from '../pages/passwordForgotPage';
@@ -143,6 +144,7 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/" render={() => <Redirect to="/login" />} />
 				<Route exact path="/login" render={() => <LoginPage />} />
 				<Route exact path="/forms" render={() => <FormsPage />} />
+				<Route exact path="/form/new" render={() => <FormBuilderPage />} />
 
 				{/* <Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />
