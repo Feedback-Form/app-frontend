@@ -1,17 +1,36 @@
 import React, { FC, ReactElement, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { stringify, v4 as uuidv4 } from 'uuid';
 //components
 import Toggler from '../../components/toggler/toggler';
 import QuestionField from '../question-field/questionField';
 //hooks
 import { useCharacterState } from '../../hooks/hooks';
 
+//helper functions
+import { postForm } from '../../services/appService';
+
+//interfaces/types
+import { FormQuestion } from '../../services/interfaces/formBodyInterface';
 const FormBuilder: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [titleLocal, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState('Lukas Form v1');
 	const [currentPage, setCurrentPage] = useState(1);
-	const idOne = uuidv4();
-	const [questions, setQuestions] = useState<string[]>([idOne]);
+	const [questions, setQuestions] = useState<{ id: string; value: string }[]>([{ id: uuidv4(), value: '' }]);
+	const [aiSuggestions, setAiSuggestions] = useState(false);
+	const [allowPersonalDetails, setAllowPersonalDetails] = useState(false);
+	const [toggleFields, setToggleFields] = useState<{ toggleFieldId: string; toggleFieldDescription: string }[]>([
+		{
+			toggleFieldId: 'aiSuggestions',
+			toggleFieldDescription: 'Allow AI generated response suggestions',
+		},
+		{
+			toggleFieldId: 'personalDetails',
+			toggleFieldDescription: 'Enable personal response details',
+		},
+	]);
+	const [authToken, setAuthToken] = useState(
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYwOTEzMjMsImV4cCI6MTYyODY4MzMyM30.oCHH23R-A_HWQ133OtgYOiXnV4T8FVayeq_3BE8s3tw',
+	);
 
 	function nextPage(): void {
 		if (currentPage === 4) {
@@ -28,14 +47,56 @@ const FormBuilder: FC = (): ReactElement => {
 	}
 
 	function addNewQuestion(): void {
-		const newQuestion = uuidv4();
+		const newQuestion = { id: uuidv4(), value: '' };
 		setQuestions([...questions, newQuestion]);
 	}
 
-	const removeQuestion = (question: string) => {
-		const newArray = questions.filter(item => item !== question);
+	const removeQuestion = (questionId: string): void => {
+		const newArray = questions.filter(question => question.id !== questionId);
 		setQuestions(newArray);
 	};
+	const getFormValue = (questionId: string, input: string) => {
+		const newQuestions = questions;
+		newQuestions.forEach((question, index) => {
+			if (question.id === questionId) {
+				return (newQuestions[index].value = input);
+			}
+			setQuestions(newQuestions);
+		});
+	};
+	const getToggleFieldValue = (toggleFieldId: string, toggleFieldValue: boolean): void => {
+		if (toggleFieldId === 'aiSuggestions') {
+			setAiSuggestions(toggleFieldValue);
+		}
+
+		if (toggleFieldId === 'personalDetails') {
+			setAllowPersonalDetails(toggleFieldValue);
+		}
+	};
+
+	async function postForm_() {
+		try {
+			const updatedQuestions: FormQuestion[] = [];
+			questions.forEach(question => {
+				updatedQuestions.push({
+					question: question.value,
+					responseType: 'string',
+					maxRating: 5,
+				});
+			});
+			const newForm = await postForm(authToken, {
+				formName: titleLocal,
+				aiSuggestions,
+				allowPersonalDetails,
+				questions: updatedQuestions,
+			});
+			// eslint-disable-next-line no-console
+			console.log(newForm);
+		} catch (err) {
+			// eslint-disable-next-line no-console
+			console.log(err);
+		}
+	}
 
 	return (
 		<>
@@ -87,26 +148,30 @@ const FormBuilder: FC = (): ReactElement => {
 									<div className="pb-16">
 										<h1 className="tracking-wide text-3xl text-gray-900 font-medium pb-10">Settings</h1>
 
-										<div>
-											<div className="flex space-x-1 items-center">
-												<Toggler />
-												<span>Allow AI generated response suggestions</span>
-											</div>
+										<div className="flex flex-col space-y-6">
+											{toggleFields.map(field => (
+												<div key={field.toggleFieldId} className="flex space-x-1 items-center">
+													<Toggler togglerId={field.toggleFieldId} getToggleFieldValue={getToggleFieldValue} />
+													<span>{field.toggleFieldDescription}</span>
+												</div>
+											))}
 										</div>
 									</div>
 								</>
 							)}
+
 							{currentPage === 2 && (
 								<>
 									<div className="pb-16">
 										<h1 className="tracking-wide text-3xl text-gray-900 font-medium pb-10">Questions</h1>
 										<div className="flex flex-col space-y-10">
-											{questions.map((questionId, index) => (
+											{questions.map((question, index) => (
 												<QuestionField
-													key={questionId}
-													questionId={questionId}
+													key={question.id}
+													questionId={question.id}
 													questionNumber={index + 1}
-													questionRemoveFunction={() => removeQuestion(questionId)}
+													questionRemoveFunction={() => removeQuestion(question.id)}
+													getFormValue={getFormValue}
 												/>
 											))}
 										</div>
@@ -135,7 +200,11 @@ const FormBuilder: FC = (): ReactElement => {
 							<button
 								onClick={() => {
 									nextPage();
+									if (currentPage === 2) {
+										postForm_();
+									}
 								}}
+								type="button"
 								// disabled={isLoading}
 								className="rounded-lg bg-primary-500 hover:bg-primary-400 focus:bg-primary-400  focus:outline-none text-white px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50
 					"

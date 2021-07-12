@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, useState } from 'react';
 //hooks
 import { useCharacterState } from '../../hooks/hooks';
-import { QuestionProps } from './questionPropsInterface';
-const QuestionField = ({ questionNumber, questionRemoveFunction, questionId }: QuestionProps): ReactElement => {
+import { QuestionProps } from './questionPropsType';
+const QuestionField = ({ questionNumber, questionRemoveFunction, questionId, getFormValue }: QuestionProps): ReactElement => {
 	const [question, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState('');
 	return (
 		<div className="flex space-x-3 items-center">
@@ -11,6 +11,7 @@ const QuestionField = ({ questionNumber, questionRemoveFunction, questionId }: Q
 				value={question}
 				onChange={e => {
 					handleWordChangeThree(e);
+					getFormValue(questionId, e.target.value);
 				}}
 				type="text"
 				placeholder="Type your question here"

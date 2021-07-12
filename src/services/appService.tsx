@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FormBodyInterface } from './interfaces/formBodyInterface';
 const backendUrl = 'http://localhost:5000';
 
-const postForm = async (bearerToken: string, requestBody: FormBodyInterface): Promise<any> => {
+export const postForm = async (bearerToken: string, requestBody: FormBodyInterface): Promise<any> => {
 	try {
 		const config = {
 			headers: {

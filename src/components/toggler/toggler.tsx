@@ -1,12 +1,15 @@
 import React, { FC, ReactElement, useState } from 'react';
-const Toggler: FC = (): ReactElement => {
-	const [toggleActive, setToggleActive] = useState(false);
+import { ToggleProps } from './togglerPropsType';
+const Toggler = ({ togglerId, getToggleFieldValue }: ToggleProps): ReactElement => {
+	const [isToggleActive, setIsToggleActive] = useState(false);
 
-	function toggleButton() {
-		if (toggleActive === true) {
-			setToggleActive(false);
+	function toggleButton(togglerId: string) {
+		if (isToggleActive === true) {
+			setIsToggleActive(false);
+			getToggleFieldValue(togglerId, false);
 		} else {
-			setToggleActive(true);
+			setIsToggleActive(true);
+			getToggleFieldValue(togglerId, true);
 		}
 	}
 	return (
@@ -23,17 +26,16 @@ const Toggler: FC = (): ReactElement => {
 				</span> */}
 			{/* <!-- Switch Container --> */}
 			<div
+				id={togglerId}
 				className={`w-14 h-7 flex items-center bg-gray-300 rounded-full mx-3 px-1 transition-all duration-150 cursor-pointer ${
-					toggleActive && 'bg-primary-700'
+					isToggleActive && 'bg-primary-700'
 				}`}
 				onClick={() => {
-					toggleButton();
+					toggleButton(togglerId);
 				}}
 			>
 				{/* <!-- Switch --> */}
-				<div
-					className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-all duration-150 ${toggleActive && 'translate-x-7'}`}
-				></div>
+				<div className={`bg-white w-5 h-5 rounded-full  transform transition-all duration-150 ${isToggleActive && 'translate-x-7'}`}></div>
 			</div>
 			{/* <span className="">
 					<svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
