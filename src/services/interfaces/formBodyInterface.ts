@@ -9,3 +9,8 @@ export interface FormBodyInterface {
 	allowPersonalDetails: boolean;
 	questions: FormQuestion[];
 }
+
+export interface FormBodyResponseInterface extends FormBodyInterface {
+	_id: string;
+	createdAt: string;
+}

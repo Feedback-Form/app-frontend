@@ -34,6 +34,7 @@ module.exports = {
 			opacity: ['disabled'],
 			cursor: ['disabled'],
 			margin: ['last'],
+			scale: ['group-hover'],
 		},
 	},
 	plugins: [],

@@ -36,7 +36,7 @@ const FormBuilder: FC = (): ReactElement => {
 	const [authToken, setAuthToken] = useState(
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYwOTEzMjMsImV4cCI6MTYyODY4MzMyM30.oCHH23R-A_HWQ133OtgYOiXnV4T8FVayeq_3BE8s3tw',
 	);
-	const [widgetIsOpen, setWidgetIsOpen] = useState(false);
+	const [deleteWidgetIsOpen, setDeleteWidgetIsOpen] = useState(false);
 	const history = useHistory();
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -87,7 +87,7 @@ const FormBuilder: FC = (): ReactElement => {
 		}
 	};
 
-	async function postForm_() {
+	async function postForm_(): Promise<void> {
 		try {
 			if (questions.length === 0) {
 				setShowErrorMessage(true);
@@ -121,8 +121,7 @@ const FormBuilder: FC = (): ReactElement => {
 				questions: updatedQuestions,
 			});
 			setIsFormLoading(false);
-			// eslint-disable-next-line no-console
-			console.log(newForm);
+			navigateBack();
 		} catch (err) {
 			// eslint-disable-next-line no-console
 			console.log(err);
@@ -132,9 +131,9 @@ const FormBuilder: FC = (): ReactElement => {
 
 	return (
 		<>
-			{widgetIsOpen && (
+			{deleteWidgetIsOpen && (
 				<DeleteWidget
-					closeWidgetHandlerFunction={() => setWidgetIsOpen(false)}
+					closeWidgetHandlerFunction={() => setDeleteWidgetIsOpen(false)}
 					deleteHandlerFunction={() => navigateBack()}
 					itemName={formTitle}
 				/>
@@ -160,7 +159,7 @@ const FormBuilder: FC = (): ReactElement => {
 							)}
 
 							<svg
-								onClick={() => setWidgetIsOpen(true)}
+								onClick={() => setDeleteWidgetIsOpen(true)}
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-10 w-10 text-gray-400 cursor-pointer hover:text-red-500 ease-in-out transition-all duration-100"
 								fill="none"
