@@ -11,7 +11,7 @@ import LoadingWidget from '../loadingWidget';
 import { deleteForm, getForms } from '../../services/appService';
 
 //interfaces
-import { FormBodyResponse } from '../../services/interfaces/formBodyInterface';
+import { FormBodyResponse } from '../../interfaces/formBodyInterface';
 
 const Forms: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);

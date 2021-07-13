@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useState } from 'react';
 import { useCharacterState } from '../../hooks/hooks';
 import { QuestionProps } from './questionPropsType';
 const QuestionField = ({ questionNumber, questionRemoveFunction, questionId, getFormValue }: QuestionProps): ReactElement => {
-	const [question, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState('');
+	const [question, characterCountThree, handleWordChangeThree, setResponse, resetWordsThree] = useCharacterState('');
 	return (
 		<div className="flex space-x-3 items-center">
 			<h3 className="text-lg text-gray-800 font-normal ">{questionNumber}.</h3>

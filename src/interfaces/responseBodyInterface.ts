@@ -3,6 +3,11 @@ export interface QuestionResponse {
 	response: string;
 	rating: number;
 }
+export interface ResponseSuggestionRequest {
+	question: string;
+	rating: number;
+	maxRating: number;
+}
 
 export interface FormResponseBody {
 	personalDetails: {

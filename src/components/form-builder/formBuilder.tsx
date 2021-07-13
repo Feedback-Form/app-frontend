@@ -14,7 +14,7 @@ import { useCharacterState } from '../../hooks/hooks';
 import { postForm } from '../../services/appService';
 
 //interfaces/types
-import { FormQuestion } from '../../services/interfaces/formBodyInterface';
+import { FormQuestion } from '../../interfaces/formBodyInterface';
 const FormBuilder: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { FormBody, FormBodyResponse } from './interfaces/formBodyInterface';
-import { FormResponseBody, QuestionResponse } from './interfaces/responseBodyInterface';
+import { FormBody, FormBodyResponse } from '../interfaces/formBodyInterface';
+import { FormResponseBody, QuestionResponse, ResponseSuggestionRequest } from '../interfaces/responseBodyInterface';
 const backendUrl = 'http://localhost:5000';
 
 export const postForm = async (bearerToken: string, requestBody: FormBody): Promise<any> => {
@@ -78,7 +78,7 @@ export const rateForm = async (bearerToken: string, formId: string, requestBody:
 	}
 };
 
-export const responseSuggestion = async (bearerToken: string, formId: string, requestBody: QuestionResponse): Promise<any> => {
+export const getResponseSuggestion = async (bearerToken: string, formId: string, requestBody: ResponseSuggestionRequest): Promise<any> => {
 	try {
 		const config = {
 			headers: {

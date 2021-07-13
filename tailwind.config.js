@@ -35,6 +35,7 @@ module.exports = {
 			cursor: ['disabled'],
 			margin: ['last'],
 			scale: ['group-hover'],
+			animation: ['disabled', 'hover'],
 		},
 	},
 	plugins: [],
