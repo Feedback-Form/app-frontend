@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { DocsContext } from '../../hooks/contexts/docsContext';
 import { useUserData } from '../../hooks/contexts/userContext';
 //components
-import DeleteWidget from '../deleteWidget';
+import DeleteWidget from '../delete-widget/deleteWidget';
 import LoadingWidget from '../loadingWidget';
 
 const Forms: FC = (): ReactElement => {
@@ -83,7 +83,7 @@ const Forms: FC = (): ReactElement => {
 					setDocId,
 				}}
 			>
-				{isDeleteRequest && <DeleteWidget />}
+				{/* {isDeleteRequest && <DeleteWidget />} */}
 
 				<section className="w-full flex flex-col items-center justify-center bg-white text-gray-900">
 					{isLoadingTwo && <LoadingWidget />}

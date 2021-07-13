@@ -1,8 +1,12 @@
 import React, { FC, ReactElement, useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { stringify, v4 as uuidv4 } from 'uuid';
 //components
 import Toggler from '../../components/toggler/toggler';
 import QuestionField from '../question-field/questionField';
+import DeleteWidget from '../delete-widget/deleteWidget';
+import Button from '../button/button';
+import LoadingWidget from '../loadingWidget';
 //hooks
 import { useCharacterState } from '../../hooks/hooks';
 
@@ -13,7 +17,8 @@ import { postForm } from '../../services/appService';
 import { FormQuestion } from '../../services/interfaces/formBodyInterface';
 const FormBuilder: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [titleLocal, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState('Lukas Form v1');
+	const [isFormLoading, setIsFormLoading] = useState(false);
+	const [formTitle, characterCountThree, handleWordChangeThree, resetWordsThree] = useCharacterState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [questions, setQuestions] = useState<{ id: string; value: string }[]>([{ id: uuidv4(), value: '' }]);
 	const [aiSuggestions, setAiSuggestions] = useState(false);
@@ -31,9 +36,17 @@ const FormBuilder: FC = (): ReactElement => {
 	const [authToken, setAuthToken] = useState(
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYwOTEzMjMsImV4cCI6MTYyODY4MzMyM30.oCHH23R-A_HWQ133OtgYOiXnV4T8FVayeq_3BE8s3tw',
 	);
+	const [widgetIsOpen, setWidgetIsOpen] = useState(false);
+	const history = useHistory();
+	const [showErrorMessage, setShowErrorMessage] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
+
+	const navigateBack = () => {
+		history.push('/forms');
+	};
 
 	function nextPage(): void {
-		if (currentPage === 4) {
+		if (currentPage === 2) {
 			return;
 		}
 		setCurrentPage(currentPage + 1);
@@ -76,6 +89,23 @@ const FormBuilder: FC = (): ReactElement => {
 
 	async function postForm_() {
 		try {
+			if (questions.length === 0) {
+				setShowErrorMessage(true);
+				setErrorMessage('Please add a question.');
+				setTimeout(() => {
+					setShowErrorMessage(false);
+					setErrorMessage('');
+				}, 5000);
+			}
+			if (formTitle === '') {
+				setShowErrorMessage(true);
+				setErrorMessage('Please give your form a title.');
+				setTimeout(() => {
+					setShowErrorMessage(false);
+					setErrorMessage('');
+				}, 5000);
+			}
+			setIsFormLoading(true);
 			const updatedQuestions: FormQuestion[] = [];
 			questions.forEach(question => {
 				updatedQuestions.push({
@@ -85,22 +115,32 @@ const FormBuilder: FC = (): ReactElement => {
 				});
 			});
 			const newForm = await postForm(authToken, {
-				formName: titleLocal,
+				formName: formTitle,
 				aiSuggestions,
 				allowPersonalDetails,
 				questions: updatedQuestions,
 			});
+			setIsFormLoading(false);
 			// eslint-disable-next-line no-console
 			console.log(newForm);
 		} catch (err) {
 			// eslint-disable-next-line no-console
 			console.log(err);
+			setIsFormLoading(false);
 		}
 	}
 
 	return (
 		<>
+			{widgetIsOpen && (
+				<DeleteWidget
+					closeWidgetHandlerFunction={() => setWidgetIsOpen(false)}
+					deleteHandlerFunction={() => navigateBack()}
+					itemName={formTitle}
+				/>
+			)}
 			<section className="w-full min-h-screen flex flex-col bg-white text-gray-900 items-center">
+				{isFormLoading && <LoadingWidget />}
 				{isLoading ? (
 					<h1>fetching</h1>
 				) : (
@@ -120,6 +160,7 @@ const FormBuilder: FC = (): ReactElement => {
 							)}
 
 							<svg
+								onClick={() => setWidgetIsOpen(true)}
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-10 w-10 text-gray-400 cursor-pointer hover:text-red-500 ease-in-out transition-all duration-100"
 								fill="none"
@@ -135,7 +176,7 @@ const FormBuilder: FC = (): ReactElement => {
 									<div className="pb-16">
 										<h1 className="tracking-wide text-3xl text-gray-900 font-medium pb-10">Give your form a name</h1>
 										<input
-											value={titleLocal}
+											value={formTitle}
 											onChange={e => {
 												handleWordChangeThree(e);
 											}}
@@ -156,6 +197,15 @@ const FormBuilder: FC = (): ReactElement => {
 												</div>
 											))}
 										</div>
+									</div>
+									<div className="flex justify-center">
+										<Button
+											isDisabled={false}
+											label={'next page'}
+											clickHandlerFunction={() => {
+												nextPage();
+											}}
+										/>
 									</div>
 								</>
 							)}
@@ -194,23 +244,30 @@ const FormBuilder: FC = (): ReactElement => {
 											</div>
 										</div>
 									</div>
+									<div className="flex justify-center">
+										<Button
+											isDisabled={isFormLoading}
+											label={'save form'}
+											clickHandlerFunction={() => {
+												postForm_();
+											}}
+										/>
+									</div>
+									{showErrorMessage && (
+										<div className="flex space-x-2 items-center text-red-500 pt-4 justify-center ">
+											<svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth="2"
+													d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+												/>
+											</svg>
+											<span>{errorMessage}</span>
+										</div>
+									)}
 								</>
 							)}
-
-							<button
-								onClick={() => {
-									nextPage();
-									if (currentPage === 2) {
-										postForm_();
-									}
-								}}
-								type="button"
-								// disabled={isLoading}
-								className="rounded-lg bg-primary-500 hover:bg-primary-400 focus:bg-primary-400  focus:outline-none text-white px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50
-					"
-							>
-								next page
-							</button>
 						</main>
 					</>
 				)}
