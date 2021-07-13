@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { FormBodyInterface, FormBodyResponseInterface } from './interfaces/formBodyInterface';
+import { FormBody, FormBodyResponse } from './interfaces/formBodyInterface';
+import { FormResponseBody, QuestionResponse } from './interfaces/responseBodyInterface';
 const backendUrl = 'http://localhost:5000';
 
-export const postForm = async (bearerToken: string, requestBody: FormBodyInterface): Promise<any> => {
+export const postForm = async (bearerToken: string, requestBody: FormBody): Promise<any> => {
 	try {
 		const config = {
 			headers: {
@@ -17,7 +18,7 @@ export const postForm = async (bearerToken: string, requestBody: FormBodyInterfa
 	}
 };
 
-export const getForms = async (bearerToken: string): Promise<FormBodyResponseInterface[]> => {
+export const getForms = async (bearerToken: string): Promise<FormBodyResponse[]> => {
 	try {
 		const config = {
 			headers: {
@@ -41,6 +42,51 @@ export const deleteForm = async (bearerToken: string, formId: string): Promise<a
 		};
 
 		const response = await axios.delete(`${backendUrl}/v1/form/${formId}`, config);
+		return response.data.payload;
+	} catch (err) {
+		return err;
+	}
+};
+
+export const getFormById = async (bearerToken: string, formId: string): Promise<FormBody[]> => {
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${bearerToken}`,
+			},
+		};
+
+		const response = await axios.get(`${backendUrl}/v1/form/${formId}`, config);
+		return response.data.payload.form;
+	} catch (err) {
+		return err;
+	}
+};
+
+export const rateForm = async (bearerToken: string, formId: string, requestBody: FormResponseBody): Promise<any> => {
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${bearerToken}`,
+			},
+		};
+
+		const response = await axios.post(`${backendUrl}/v1/response/${formId}`, requestBody, config);
+		return response.data.payload;
+	} catch (err) {
+		return err;
+	}
+};
+
+export const responseSuggestion = async (bearerToken: string, formId: string, requestBody: QuestionResponse): Promise<any> => {
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${bearerToken}`,
+			},
+		};
+
+		const response = await axios.post(`${backendUrl}/v1/response/suggestion/${formId}`, requestBody, config);
 		return response.data.payload;
 	} catch (err) {
 		return err;

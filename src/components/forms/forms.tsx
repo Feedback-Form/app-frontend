@@ -11,7 +11,7 @@ import LoadingWidget from '../loadingWidget';
 import { deleteForm, getForms } from '../../services/appService';
 
 //interfaces
-import { FormBodyResponseInterface } from '../../services/interfaces/formBodyInterface';
+import { FormBodyResponse } from '../../services/interfaces/formBodyInterface';
 
 const Forms: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,13 +27,13 @@ const Forms: FC = (): ReactElement => {
 	const [authToken, setAuthToken] = useState(
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYwOTEzMjMsImV4cCI6MTYyODY4MzMyM30.oCHH23R-A_HWQ133OtgYOiXnV4T8FVayeq_3BE8s3tw',
 	);
-	const [forms, setForms] = useState<FormBodyResponseInterface[]>([]);
+	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formId, setFormId] = useState('');
 	const [formName, setFormName] = useState('');
 
 	async function getForms_(): Promise<void> {
 		try {
-			const forms: FormBodyResponseInterface[] = await getForms(authToken);
+			const forms: FormBodyResponse[] = await getForms(authToken);
 			setForms(forms);
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -73,7 +73,7 @@ const Forms: FC = (): ReactElement => {
 				) : (
 					<>
 						<div className="flex flex-col w-3/4 h-1/5 justify-center">
-							<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Documents</h1>
+							<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Forms</h1>
 						</div>
 						<section className="flex w-3/4 h-4/5 overflow-y-auto pb-10 ">
 							{/* <div className="h-1/2 flex gap-6 xs:grid grid-cols-4 flex-wrap"> */}
@@ -102,7 +102,7 @@ const Forms: FC = (): ReactElement => {
 									</svg>
 								</div>
 								{/* DOCUMENT CREATED BY USER */}
-								{forms.map((form: FormBodyResponseInterface) => {
+								{forms.map((form: FormBodyResponse) => {
 									return (
 										<div
 											key={form._id}

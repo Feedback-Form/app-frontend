@@ -3,14 +3,14 @@ export type FormQuestion = {
 	responseType: string;
 	maxRating: number;
 };
-export interface FormBodyInterface {
+export interface FormBody {
 	formName: string;
 	aiSuggestions: boolean;
 	allowPersonalDetails: boolean;
 	questions: FormQuestion[];
 }
 
-export interface FormBodyResponseInterface extends FormBodyInterface {
+export interface FormBodyResponse extends FormBody {
 	_id: string;
 	createdAt: string;
 }
