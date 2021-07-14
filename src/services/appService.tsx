@@ -48,7 +48,7 @@ export const deleteForm = async (bearerToken: string, formId: string): Promise<a
 	}
 };
 
-export const getFormById = async (bearerToken: string, formId: string): Promise<FormBody[]> => {
+export const getFormById = async (bearerToken: string, formId: string): Promise<FormBodyResponse> => {
 	try {
 		const config = {
 			headers: {
@@ -78,15 +78,9 @@ export const rateForm = async (bearerToken: string, formId: string, requestBody:
 	}
 };
 
-export const getResponseSuggestion = async (bearerToken: string, formId: string, requestBody: ResponseSuggestionRequest): Promise<any> => {
+export const getResponseSuggestion = async (formId: string, requestBody: ResponseSuggestionRequest): Promise<any> => {
 	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${bearerToken}`,
-			},
-		};
-
-		const response = await axios.post(`${backendUrl}/v1/response/suggestion/${formId}`, requestBody, config);
+		const response = await axios.post(`${backendUrl}/v1/response/suggestion/${formId}`, requestBody);
 		return response.data.payload;
 	} catch (err) {
 		return err;

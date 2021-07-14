@@ -2,6 +2,7 @@ export type FormQuestion = {
 	question: string;
 	responseType: string;
 	maxRating: number;
+	_id: string;
 };
 export interface FormBody {
 	formName: string;

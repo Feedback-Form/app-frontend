@@ -112,6 +112,7 @@ const FormBuilder: FC = (): ReactElement => {
 					question: question.value,
 					responseType: 'string',
 					maxRating: 5,
+					_id: '',
 				});
 			});
 			const newForm = await postForm(authToken, {
