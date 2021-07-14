@@ -2,7 +2,6 @@ export type FormQuestion = {
 	question: string;
 	responseType: string;
 	maxRating: number;
-	_id: string;
 };
 export interface FormBody {
 	formName: string;
@@ -11,7 +10,15 @@ export interface FormBody {
 	questions: FormQuestion[];
 }
 
-export interface FormBodyResponse extends FormBody {
+export interface FormQuestionResponse extends FormQuestion {
 	_id: string;
+}
+
+export interface FormBodyResponse {
+	formName: string;
+	aiSuggestions: boolean;
+	allowPersonalDetails: boolean;
+	questions: FormQuestionResponse[];
 	createdAt: string;
+	_id: string;
 }

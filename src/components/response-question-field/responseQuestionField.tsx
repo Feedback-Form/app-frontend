@@ -14,6 +14,7 @@ const ResponseQuestionField = ({
 	formId,
 	questionNumber,
 	authToken,
+	getQuestionValue,
 }: ResponseQuestionFieldProps): // { question, maxRating }: ResponseSuggestionRequest,
 
 ReactElement => {
@@ -31,6 +32,9 @@ ReactElement => {
 				maxRating,
 			});
 			setResponse(response.suggestedResponse);
+
+			getQuestionValue(questionId, response, 'response');
+
 			setIsLoading(false);
 		} catch (err) {
 			setIsLoading(false);
@@ -64,6 +68,7 @@ ReactElement => {
 							if (aiSuggestions) {
 								getResponseSuggestion_(star);
 							}
+							getQuestionValue(questionId, star, 'rating');
 						}}
 						disabled={isLoading}
 						className="focus:outline-none disabled:animate-pulse "
@@ -84,7 +89,7 @@ ReactElement => {
 				value={response}
 				onChange={e => {
 					handleWordChangeThree(e);
-					// getFormValue(questionId, e.target.value);
+					getQuestionValue(questionId, e.target.value, 'response');
 				}}
 				placeholder="Type your question here"
 				disabled={isLoading}

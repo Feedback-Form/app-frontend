@@ -25,7 +25,7 @@ const Forms: FC = (): ReactElement => {
 
 	const { token } = useUserData();
 	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYwOTEzMjMsImV4cCI6MTYyODY4MzMyM30.oCHH23R-A_HWQ133OtgYOiXnV4T8FVayeq_3BE8s3tw',
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYyOTQwNzAsImV4cCI6MTYyODg4NjA3MH0.SwfbjueUZ5cJZ2rMeT7v8x5h7JmRUb2q83nS7t4fyDk',
 	);
 	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formId, setFormId] = useState('');

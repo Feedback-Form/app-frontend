@@ -2,6 +2,7 @@ export interface QuestionResponse {
 	question: string;
 	response: string;
 	rating: number;
+	questionId: string;
 }
 export interface ResponseSuggestionRequest {
 	question: string;
