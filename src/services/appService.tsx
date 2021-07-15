@@ -63,15 +63,9 @@ export const getFormById = async (bearerToken: string, formId: string): Promise<
 	}
 };
 
-export const rateForm = async (bearerToken: string, formId: string, requestBody: FormResponseBody): Promise<any> => {
+export const rateForm = async (formId: string, requestBody: FormResponseBody): Promise<any> => {
 	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${bearerToken}`,
-			},
-		};
-
-		const response = await axios.post(`${backendUrl}/v1/response/${formId}`, requestBody, config);
+		const response = await axios.post(`${backendUrl}/v1/response/${formId}`, requestBody);
 		return response.data.payload;
 	} catch (err) {
 		return err;

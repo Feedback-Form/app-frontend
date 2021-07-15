@@ -10,12 +10,15 @@ export interface ResponseSuggestionRequest {
 	maxRating: number;
 }
 
-export interface FormResponseBody {
+export interface PersonalDetails {
 	personalDetails: {
 		firstName: string;
 		lastName: string;
 		linkedInProfile: string;
 	};
 	allowPublishing: boolean;
+}
+
+export interface FormResponseBody extends PersonalDetails {
 	questionResponses: QuestionResponse[];
 }

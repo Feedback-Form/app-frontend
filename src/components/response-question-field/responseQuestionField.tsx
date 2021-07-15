@@ -26,14 +26,14 @@ ReactElement => {
 	async function getResponseSuggestion_(rating: number): Promise<void> {
 		try {
 			setIsLoading(true);
-			const response = await getResponseSuggestion(formId, {
+			const res = await getResponseSuggestion(formId, {
 				question,
 				rating,
 				maxRating,
 			});
-			setResponse(response.suggestedResponse);
+			setResponse(res.suggestedResponse);
 
-			getQuestionValue(questionId, response, 'response');
+			getQuestionValue(questionId, res.suggestedResponse, 'response');
 
 			setIsLoading(false);
 		} catch (err) {
