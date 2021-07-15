@@ -171,8 +171,6 @@ const RatingPage: FC = (): ReactElement => {
 	//initiate the component
 	useEffect(() => {
 		getFormById_();
-
-		// setTimeToFinishForm(estimateTimeToFinish(form?.questions || [], form?.allowPersonalDetails || false));
 	}, [formId]);
 
 	return (

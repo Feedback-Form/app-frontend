@@ -14,7 +14,7 @@ const DeleteWidget = ({ closeWidgetHandlerFunction, deleteHandlerFunction, itemN
 							<button
 								onClick={closeWidgetHandlerFunction}
 								className="py-2 px-6 bg-gray-100 text-gray-900 rounded-md hover:bg-gray-200 
-                        focus:outline-none focus:ring-2 focus:ring-teal-700 transition-all ease-in-out duration-200
+                        focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all ease-in-out duration-200
                         tracking-wide font-medium
                         "
 							>

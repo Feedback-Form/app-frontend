@@ -18,7 +18,7 @@ const FormsPage: FC = (): ReactElement => {
 				<AuthenticationWidget />
 			) : (
 				<section className="flex overflow-hidden font-scrptai">
-					{userObject.userIsTrial === true && <UserSessionBar />}
+					{/* {userObject.userIsTrial === true && <UserSessionBar />} */}
 					<Sidebar />
 					<Forms />
 				</section>

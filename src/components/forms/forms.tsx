@@ -25,11 +25,12 @@ const Forms: FC = (): ReactElement => {
 
 	const { token } = useUserData();
 	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYyOTQwNzAsImV4cCI6MTYyODg4NjA3MH0.SwfbjueUZ5cJZ2rMeT7v8x5h7JmRUb2q83nS7t4fyDk',
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYzNjM5ODYsImV4cCI6MTYyODk1NTk4Nn0.iq5uP8Q3l4u0JfDndAzVKXp_UCbxeUjen4blyh5rHe8',
 	);
 	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formId, setFormId] = useState('');
 	const [formName, setFormName] = useState('');
+	const [copiedToClipboard, SetCopiedToClipboard] = useState(false);
 
 	async function getForms_(): Promise<void> {
 		try {
@@ -114,41 +115,55 @@ const Forms: FC = (): ReactElement => {
 											</div>
 
 											<div className="flex items-end justify-end text-gray-400  space-x-3 ">
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													className="h-5 w-5 cursor-pointer hover:text-gray-500 ease-in-out transition-all duration-100 hover:scale-110 transform"
-													fill="none"
-													viewBox="0 0 24 24"
-													stroke="currentColor"
+												<span
+													onClick={() => {
+														SetCopiedToClipboard(true);
+														navigator.clipboard.writeText(`${process.env.REACT_APP_FRONTEND_URL}/rate/${form._id}`);
+														setTimeout(() => {
+															SetCopiedToClipboard(false);
+														}, 150);
+													}}
+													className={`${copiedToClipboard && ' bg-gray-100'} p-1 rounded-md ease-in-out transition-all duration-100`}
 												>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth="2"
-														d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-													/>
-												</svg>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														className={`$ h-5 w-5 cursor-pointer hover:text-gray-500 ease-in-out transition-all duration-100 hover:scale-110 transform `}
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke="currentColor"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth="2"
+															d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+														/>
+													</svg>
+												</span>
 
-												<svg
-													id={'x'}
+												<span
 													onClick={() => {
 														setFormName(form.formName);
 														setFormId(form._id);
 														setDeleteWidgetIsOpen(true);
 													}}
-													className="w-5 h-5 cursor-pointer hover:text-red-500 ease-in-out transition-all duration-100 hover:scale-110  transform "
-													xmlns="http://www.w3.org/2000/svg"
-													fill="none"
-													viewBox="0 0 24 24"
-													stroke="currentColor"
+													className="p-1 rounded-md"
 												>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth="2"
-														d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-													/>
-												</svg>
+													<svg
+														className="w-5 h-5 cursor-pointer hover:text-red-500 ease-in-out transition-all duration-100 hover:scale-110  transform "
+														xmlns="http://www.w3.org/2000/svg"
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke="currentColor"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth="2"
+															d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+														/>
+													</svg>
+												</span>
 											</div>
 										</div>
 									);
