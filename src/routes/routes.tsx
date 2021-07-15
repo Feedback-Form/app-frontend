@@ -9,6 +9,7 @@ import LoginPage from '../pages/loginPage';
 import StatusPage from '../components/status-page/statusPage';
 import FormBuilderPage from '../pages/formbuilderPage';
 import RatingPage from '../pages/ratingPage';
+import ResponsesPage from '../pages/responsesPage';
 // import TrialEndedPage from '../pages/trialEndedPage';
 // import SignUpPage from '../pages/signUpPage';
 // import PasswordForgotPage from '../pages/passwordForgotPage';
@@ -149,6 +150,7 @@ const Routes: FC = (): ReactElement => {
 				{/* <Route exact path="/form/edit/:formId" render={() => <h1>edit an existing form</h1>} /> */}
 				<Route exact path="/rate/:formId" render={() => <RatingPage />} />
 				<Route exact path="/dashboard" render={() => <h1>edit existing form</h1>} />
+				<Route exact path="/responses" render={() => <ResponsesPage />} />
 
 				{/* <Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />

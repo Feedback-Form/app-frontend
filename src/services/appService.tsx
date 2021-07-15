@@ -80,3 +80,17 @@ export const getResponseSuggestion = async (formId: string, requestBody: Respons
 		return err;
 	}
 };
+
+export const getFormResponses = async (bearerToken: string, formId: string): Promise<any> => {
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${bearerToken}`,
+			},
+		};
+		const response = await axios.get(`${backendUrl}/v1/responses/${formId}`, config);
+		return response.data.payload.responses;
+	} catch (err) {
+		return err;
+	}
+};
