@@ -2,6 +2,7 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 
 //hooks
 import { useParams } from 'react-router-dom';
+
 //services
 import { getFormById, rateForm } from '../services/appService';
 
@@ -33,7 +34,9 @@ const RatingPage: FC = (): ReactElement => {
 	const [linkedInProfile, setLinkedInProfile] = useState('');
 	const [allowPublishing, setAllowPublishing] = useState(false);
 	const [personalDetailFields, setPersonalDetailFields] = useState(['first name', 'last name', 'linkedIn profile']);
-
+	const [responseString, setResponseString] = useState('');
+	const [responseType, setResponseType] = useState<'error' | 'success' | ''>('');
+	const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
 	const getPersonalFieldValue = (fieldName: string, fieldValue: string): void => {
 		if (fieldName === 'first name') {
 			setFirstName(fieldValue);
@@ -129,9 +132,8 @@ const RatingPage: FC = (): ReactElement => {
 				return;
 			}
 			setIsRequestLoading(true);
-			// eslint-disable-next-line no-console
-			console.log(responses);
-			const res = await rateForm(formId, {
+
+			await rateForm(formId, {
 				personalDetails: {
 					firstName,
 					lastName,
@@ -140,10 +142,18 @@ const RatingPage: FC = (): ReactElement => {
 				allowPublishing,
 				questionResponses: responses,
 			});
-			// eslint-disable-next-line no-console
-			console.log(res);
+			setResponseString(`You've successfully submitted your feedback!`);
+			setResponseType('success');
+			setTimeout(() => {
+				setResponseType('');
+			}, 5000);
 			setIsRequestLoading(false);
 		} catch (err) {
+			setResponseString(`Oops, something went wrong. Please try again.`);
+			setResponseType('error');
+			setTimeout(() => {
+				setResponseType('');
+			}, 5000);
 			setIsRequestLoading(false);
 		}
 	}
@@ -164,11 +174,12 @@ const RatingPage: FC = (): ReactElement => {
 
 		// setTimeToFinishForm(estimateTimeToFinish(form?.questions || [], form?.allowPersonalDetails || false));
 	}, [formId]);
+
 	return (
 		<>
 			<section className="w-full min-h-screen flex flex-col bg-white text-gray-900 items-center ">
 				{isRequestLoading && <LoadingWidget />}
-				{isLoading && <h1>fetching</h1>}
+				{isLoading && <LoadingWidget />}
 				{!isLoading && !isError && (
 					<>
 						<main className="flex flex-col w-3/4 max-w-xl flex-grow justify-center">
@@ -200,7 +211,7 @@ const RatingPage: FC = (): ReactElement => {
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 										</svg>
-										<span>takes around {timeToFinishForm} min to complete</span>
+										<span>it takes around {timeToFinishForm} min to complete</span>
 									</div>
 								</div>
 							</div>
@@ -238,7 +249,10 @@ const RatingPage: FC = (): ReactElement => {
 									</div>
 								</>
 							)}
-							<Button label={getButtonLabel()} isDisabled={false} clickHandlerFunction={() => formButtonClickHandler()} />
+							<Button label={getButtonLabel()} isDisabled={buttonIsDisabled} clickHandlerFunction={() => formButtonClickHandler()} />
+							{responseType !== '' && (
+								<div className={`pt-4 ${responseType === 'success' ? 'text-green-500' : 'text-red-500'} font-medium`}>{responseString}</div>
+							)}
 						</main>
 					</>
 				)}
