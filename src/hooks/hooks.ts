@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router';
+
 export const useCharacterState = (initialCharacters: string): any => {
 	//count the words based on the initialWords input
 	const [words, setWords] = useState(initialCharacters);
@@ -57,8 +57,4 @@ export const usePercentageState = (x: number, y: number): any => {
 	};
 
 	return [percentage, setPercentage, handlePercentageChange] as const;
-};
-
-export const useQuery = () => {
-	return new URLSearchParams(useLocation().search);
 };

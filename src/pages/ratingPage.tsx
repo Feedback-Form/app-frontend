@@ -12,6 +12,8 @@ import { FormBodyResponse, FormQuestionResponse, FormQuestion } from '../interfa
 //components
 import ResponseQuestionField from '../components/response-question-field/responseQuestionField';
 import LoadingWidget from '../components/loadingWidget';
+import Button from '../components/button/button';
+import Toggler from '../components/toggler/toggler';
 const RatingPage: FC = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isRequestLoading, setIsRequestLoading] = useState(false);
@@ -21,6 +23,8 @@ const RatingPage: FC = (): ReactElement => {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYyOTQwNzAsImV4cCI6MTYyODg4NjA3MH0.SwfbjueUZ5cJZ2rMeT7v8x5h7JmRUb2q83nS7t4fyDk',
 	);
 	const [responses, setResponses] = useState<QuestionResponse[]>([]);
+	const [timeToFinishForm, setTimeToFinishForm] = useState(0);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	async function getFormById_(): Promise<void> {
 		try {
@@ -28,7 +32,8 @@ const RatingPage: FC = (): ReactElement => {
 			const response = await getFormById(authToken, formId);
 			setForm(response);
 			document.title = `rate ${form?.formName}` || '';
-
+			setTimeToFinishForm(estimateTimeToFinish(response.questions, response.allowPersonalDetails));
+			setResponses(createQuestionResponsesArray(response.questions));
 			setIsLoading(false);
 		} catch (err) {
 			setIsLoading(false);
@@ -79,10 +84,35 @@ const RatingPage: FC = (): ReactElement => {
 		console.log(responses);
 	};
 
+	function estimateTimeToFinish(questions: FormQuestionResponse[], allowPersonalDetails: boolean): number {
+		let number = 0;
+
+		//2min for each question
+		questions.forEach(() => {
+			number = number + 2;
+		});
+
+		//2min to fill in personal details
+		if (allowPersonalDetails) {
+			return (number = number + 2);
+		}
+
+		return number;
+	}
+
+	function nextPage(): void {
+		// eslint-disable-next-line no-console
+		console.log(currentPage === 1 && form?.allowPersonalDetails);
+		if (currentPage === 1 && form?.allowPersonalDetails) {
+			setCurrentPage(2);
+		}
+	}
+
 	//initiate the component
 	useEffect(() => {
 		getFormById_();
-		setResponses(createQuestionResponsesArray(form?.questions || []));
+
+		// setTimeToFinishForm(estimateTimeToFinish(form?.questions || [], form?.allowPersonalDetails || false));
 	}, [formId]);
 	return (
 		<>
@@ -93,28 +123,45 @@ const RatingPage: FC = (): ReactElement => {
 				) : (
 					<>
 						<main className="flex flex-col w-3/4 max-w-xl flex-grow justify-center">
-							<div className="flex space-x-6 pb-12 items-center">
+							<div className="flex space-x-6  items-center">
 								<h1 className="text-4xl font-semibold capitalize text-gray-900 ">{form?.formName}</h1>
 								<div className="bg-primary-300 text-primary-900 rounded-full font-medium text-center px-4 py-1 text-base items-center">
 									<span>{form?.questions.length} Questions</span>
 								</div>
 							</div>
 
-							<div className="flex flex-col space-y-10 ">
-								{form?.questions.map((item: FormQuestionResponse, index) => (
-									<ResponseQuestionField
-										key={item._id}
-										question={item.question}
-										maxRating={item.maxRating}
-										aiSuggestions={form?.aiSuggestions || false}
-										questionId={item._id}
-										questionNumber={index + 1}
-										authToken={authToken}
-										formId={formId}
-										getQuestionValue={getQuestionValue}
-									/>
-								))}
-							</div>
+							{currentPage == 1 && (
+								<>
+									<div className="flex space-x-2 text-base font-normal text-gray-500 pb-12 pt-5">
+										<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+										</svg>
+										<span>takes around {timeToFinishForm} min to complete</span>
+									</div>
+
+									<div className="flex flex-col space-y-10 ">
+										{form?.questions.map((item: FormQuestionResponse, index) => (
+											<ResponseQuestionField
+												key={item._id}
+												question={item.question}
+												maxRating={item.maxRating}
+												aiSuggestions={form?.aiSuggestions || false}
+												questionId={item._id}
+												questionNumber={index + 1}
+												authToken={authToken}
+												formId={formId}
+												getQuestionValue={getQuestionValue}
+											/>
+										))}
+									</div>
+								</>
+							)}
+
+							<Button
+								label={currentPage === 1 && !form?.allowPersonalDetails ? 'submit form' : 'next page'}
+								isDisabled={false}
+								clickHandlerFunction={() => nextPage()}
+							/>
 						</main>
 					</>
 				)}
