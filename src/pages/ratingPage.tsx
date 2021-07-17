@@ -141,6 +141,7 @@ const RatingPage: FC = (): ReactElement => {
 					linkedInProfile,
 				},
 				allowPublishing,
+				aiSuggestions: form?.aiSuggestions || false,
 				questionResponses: responses,
 			});
 			setResponseString(`You've successfully submitted your feedback!`);

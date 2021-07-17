@@ -6,12 +6,13 @@ import { useUserData } from '../../hooks/contexts/userContext';
 //components
 import LoadingWidget from '../loadingWidget';
 import ResponseCard from '../response-card/responseCard';
+import ResponseDetailsCard from '../response-details-card/responseDetailCard';
 //services
 import { getForms, getFormResponses } from '../../services/appService';
 
 //interfaces
 import { FormBodyResponse } from '../../interfaces/formBodyInterface';
-import { RatingResponseBody, QuestionResponse } from '../../interfaces/responseInterface';
+import { RatingResponseBody, QuestionResponse, PersonalDetails } from '../../interfaces/responseInterface';
 
 const Responses: FC = (): ReactElement => {
 	const [authToken, setAuthToken] = useState(
@@ -21,6 +22,23 @@ const Responses: FC = (): ReactElement => {
 	const [formResponses, setResponses] = useState<RatingResponseBody[]>([]);
 	const [currentFormId, setCurrentFormId] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+	const [showReponseDetailsCard, setShowResponseDetailsCard] = useState(false);
+	const [personalDetails, setPersonalDetails] = useState<PersonalDetails>({
+		personalDetails: { firstName: '', lastName: '', linkedInProfile: '' },
+	});
+	const [responseCreatedAt, setResponseCreatedAt] = useState<string>('');
+	const [questionResponses, setQuestionResponses] = useState<QuestionResponse[]>([
+		{
+			tags: [''],
+			_id: '',
+			questionId: '',
+			rating: 5,
+			maxRating: 5,
+			response: '',
+			question: '',
+		},
+	]);
+	const [allowPublishing, setAllowPublishing] = useState(false);
 
 	async function getForms_(): Promise<void> {
 		try {
@@ -67,8 +85,31 @@ const Responses: FC = (): ReactElement => {
 		const roundedAverage = Math.round(ratingSum / questions.length);
 		return roundedAverage;
 	}
+
+	function getFormIndex(formId: string): number {
+		forms.forEach((form, index) => {
+			if (form._id === formId) {
+				return index;
+			}
+		});
+		return 0;
+	}
 	return (
 		<>
+			{showReponseDetailsCard && (
+				<ResponseDetailsCard
+					closeCardHandlerFunction={() => {
+						setShowResponseDetailsCard(false);
+					}}
+					_id={''}
+					formId={''}
+					allowPublishing={allowPublishing}
+					aiSuggestions={forms[getFormIndex(currentFormId)].aiSuggestions}
+					personalDetails={personalDetails.personalDetails}
+					createdAt={responseCreatedAt}
+					questionResponses={questionResponses}
+				/>
+			)}
 			{isLoading && <LoadingWidget />}
 			<section className="w-full flex flex-col items-center justify-center  bg-white text-gray-900">
 				<div className="flex w-3/4 justify-end">
@@ -116,6 +157,13 @@ const Responses: FC = (): ReactElement => {
 										maxRating={response.questionResponses[0].maxRating}
 										averageRating={getAverageRating(response.questionResponses)}
 										tags={response.questionResponses[0].tags}
+										clickHandlerFunction={() => {
+											setPersonalDetails({ personalDetails: response.personalDetails });
+											setResponseCreatedAt(response.createdAt);
+											setQuestionResponses(response.questionResponses);
+											setAllowPublishing(response.allowPublishing);
+											setShowResponseDetailsCard(true);
+										}}
 									/>
 								);
 							})}

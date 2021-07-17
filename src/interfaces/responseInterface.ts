@@ -8,15 +8,19 @@ export interface QuestionResponse {
 	question: string;
 }
 
-export interface RatingResponseBody {
+export interface PersonalDetails {
 	personalDetails: {
 		firstName: string;
 		lastName: string;
 		linkedInProfile: string;
 	};
+}
+
+export interface RatingResponseBody extends PersonalDetails {
 	allowPublishing: boolean;
 	_id: string;
-	formdI: string;
+	formId: string;
 	createdAt: string;
+	aiSuggestions: boolean;
 	questionResponses: QuestionResponse[];
 }

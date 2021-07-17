@@ -3,7 +3,15 @@ import dateFormat from 'dateformat';
 
 //interfaces
 import { ResponseCardProps } from './responseCardProps';
-const ResponseCard = ({ createdAt, firstName, lastName, averageRating, maxRating, tags }: ResponseCardProps): ReactElement => {
+const ResponseCard = ({
+	createdAt,
+	firstName,
+	lastName,
+	averageRating,
+	maxRating,
+	tags,
+	clickHandlerFunction,
+}: ResponseCardProps): ReactElement => {
 	const [maxStars, setMaxStars] = useState<number[]>([1, 2, 3, 4, 5]);
 	const [selectedStar, setSelectedStar] = useState<number>(3);
 	// const [tags, setTags] = useState(['sleek design', 'good quality', 'affordable']);
@@ -23,7 +31,10 @@ const ResponseCard = ({ createdAt, firstName, lastName, averageRating, maxRating
 		return `${firstName} ${lastName}`;
 	}
 	return (
-		<div className="flex justify-between rounded-lg   p-7 space-x-10 border-2 border-gray-100 hover:border-primary-500 transition-all duration-100 ease-in-out cursor-pointer">
+		<div
+			onClick={clickHandlerFunction}
+			className="flex justify-between rounded-lg   p-7 space-x-10 border-2 border-gray-100 hover:border-primary-500 transition-all duration-100 ease-in-out cursor-pointer"
+		>
 			{/* left side */}
 			<div className="flex flex-col justify-between space-y-4">
 				<div>

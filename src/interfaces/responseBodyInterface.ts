@@ -22,4 +22,5 @@ export interface PersonalDetails {
 
 export interface FormResponseBody extends PersonalDetails {
 	questionResponses: QuestionResponse[];
+	aiSuggestions: boolean;
 }

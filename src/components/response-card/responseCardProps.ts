@@ -5,4 +5,5 @@ export interface ResponseCardProps {
 	averageRating: number;
 	maxRating: number;
 	tags: string[];
+	clickHandlerFunction: any;
 }
