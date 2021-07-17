@@ -37,7 +37,7 @@ const Sidebar: FC = (): ReactElement => {
 	}
 
 	return (
-		<nav id="sidebar" className="bg-gray-50 w-32 flex-shrink-0 h-screen block ">
+		<nav id="sidebar" className="bg-gray-50 w-16 xl:w-32 flex-shrink-0 h-screen block ">
 			{/* Group 1 */}
 			{redirect && <Redirect to="/login" />}
 			<div className="space-y-6">
@@ -55,7 +55,7 @@ const Sidebar: FC = (): ReactElement => {
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="w-7 h-7 stroke-current stroke-2 "
+								className="w-6 h-6 xl:w-7 xl:h-7 stroke-current stroke-2 "
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -81,7 +81,7 @@ const Sidebar: FC = (): ReactElement => {
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="w-7 h-7 stroke-current stroke-2 "
+								className="w-6 h-6 xl:w-7 xl:h-7 stroke-current stroke-2 "
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -107,7 +107,7 @@ const Sidebar: FC = (): ReactElement => {
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="w-7 h-7 stroke-current stroke-2 "
+								className="w-6 h-6 xl:w-7 xl:h-7 stroke-current stroke-2 "
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"

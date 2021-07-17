@@ -55,7 +55,7 @@ ReactElement => {
 
 	return (
 		<div className="flex flex-col space-y-5 ">
-			<h3 className="text-xl text-gray-800 font-semibold ">
+			<h3 className="text-xl text-gray-800 font-semibold capitalize ">
 				{questionNumber}. {question}
 			</h3>
 			<div className="flex space-x-1">

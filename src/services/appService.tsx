@@ -1,6 +1,8 @@
 import axios from 'axios';
+//services
 import { FormBody, FormBodyResponse } from '../interfaces/formBodyInterface';
 import { FormResponseBody, QuestionResponse, ResponseSuggestionRequest } from '../interfaces/responseBodyInterface';
+import { RatingResponseBody } from '../interfaces/responseInterface';
 const backendUrl = 'http://localhost:5000';
 
 export const postForm = async (bearerToken: string, requestBody: FormBody): Promise<any> => {
@@ -27,7 +29,7 @@ export const getForms = async (bearerToken: string): Promise<FormBodyResponse[]>
 		};
 
 		const response = await axios.get(`${backendUrl}/v1/forms`, config);
-		return response.data.payload.documents;
+		return response.data.payload.forms;
 	} catch (err) {
 		return err;
 	}
@@ -81,7 +83,7 @@ export const getResponseSuggestion = async (formId: string, requestBody: Respons
 	}
 };
 
-export const getFormResponses = async (bearerToken: string, formId: string): Promise<any> => {
+export const getFormResponses = async (bearerToken: string, formId: string): Promise<RatingResponseBody[]> => {
 	try {
 		const config = {
 			headers: {

@@ -1,25 +1,22 @@
 export interface QuestionResponse {
-	question: string;
-	response: string;
-	rating: number;
-	maxRating: number;
+	tags: string[];
+	_id: string;
 	questionId: string;
-}
-export interface ResponseSuggestionRequest {
-	question: string;
 	rating: number;
 	maxRating: number;
+	response: string;
+	question: string;
 }
 
-export interface PersonalDetails {
+export interface RatingResponseBody {
 	personalDetails: {
 		firstName: string;
 		lastName: string;
 		linkedInProfile: string;
 	};
 	allowPublishing: boolean;
-}
-
-export interface FormResponseBody extends PersonalDetails {
+	_id: string;
+	formdI: string;
+	createdAt: string;
 	questionResponses: QuestionResponse[];
 }

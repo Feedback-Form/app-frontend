@@ -77,6 +77,7 @@ const RatingPage: FC = (): ReactElement => {
 				rating: 0,
 				response: '',
 				question: question.question,
+				maxRating: question.maxRating,
 			});
 		});
 

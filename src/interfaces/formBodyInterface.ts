@@ -1,8 +1,8 @@
-export type FormQuestion = {
+export interface FormQuestion {
 	question: string;
 	responseType: string;
 	maxRating: number;
-};
+}
 export interface FormBody {
 	formName: string;
 	aiSuggestions: boolean;
