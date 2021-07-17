@@ -30,7 +30,7 @@ const Forms: FC = (): ReactElement => {
 	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formId, setFormId] = useState('');
 	const [formName, setFormName] = useState('');
-	const [copiedToClipboard, SetCopiedToClipboard] = useState(false);
+	const [copiedToClipboard, SetCopiedToClipboard] = useState('');
 
 	async function getForms_(): Promise<void> {
 		try {
@@ -117,13 +117,15 @@ const Forms: FC = (): ReactElement => {
 											<div className="flex items-end justify-end text-gray-400  space-x-3 ">
 												<span
 													onClick={() => {
-														SetCopiedToClipboard(true);
+														SetCopiedToClipboard(form._id);
 														navigator.clipboard.writeText(`${process.env.REACT_APP_FRONTEND_URL}/rate/${form._id}`);
 														setTimeout(() => {
-															SetCopiedToClipboard(false);
+															SetCopiedToClipboard('');
 														}, 150);
 													}}
-													className={`${copiedToClipboard && ' bg-gray-100'} p-1 rounded-md ease-in-out transition-all duration-100`}
+													className={`${
+														copiedToClipboard == form._id && ' bg-gray-100'
+													} p-1 rounded-md ease-in-out transition-all duration-100`}
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"

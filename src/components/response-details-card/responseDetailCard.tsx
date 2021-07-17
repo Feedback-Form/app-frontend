@@ -29,7 +29,7 @@ const ResponseDetailsCard = ({
 		<section className="absolute min-h-screen w-full ">
 			<div className="absolute w-full h-full z-50">
 				<div className="flex justify-center h-full w-full items-center">
-					<div className="w-3/4 bg-white rounded-md px-10 py-8 space-y-6">
+					<div className="w-full md:w-3/4 bg-white rounded-md px-10 py-16 space-y-6">
 						<div className="flex justify-end">
 							<svg
 								onClick={closeCardHandlerFunction}
@@ -44,37 +44,39 @@ const ResponseDetailsCard = ({
 						</div>
 						{/* SECTION 1 */}
 						<div className="flex justify-between">
-							<div className="flex flex-col justify-start space-y-2">
+							<div className="flex flex-col justify-start space-y-3">
 								<h2 className="text-gray-900 font-semibold text-lg">{getName(personalDetails.firstName, personalDetails.lastName)}</h2>
-								<div className="flex space-x-2">
-									<span className="text-gray-500">linkedIn</span>
-									<span className="text-gray-800">{personalDetails.linkedInProfile}</span>
+								<div className="flex flex-col">
+									<div className="text-gray-400 uppercase text-xs font-medium pb-1">linkedIn</div>
+									<div className="text-gray-700 font-medium">{personalDetails.linkedInProfile || 'none'}</div>
 								</div>
 							</div>
 
-							<div className="flex flex-col justify-start space-y-2">
+							<div className="flex flex-col justify-start space-y-3">
 								<div>
-									<span className="text-gray-400 text-xs uppercase font-medium">submitted on</span>
-									<span className="text-gray-700 font-medium text-sm">{dateFormat(createdAt, 'HH:MM tt, dS mmmm yy')}</span>
+									<div className="text-gray-400 text-xs uppercase font-medium pb-1">submitted on</div>
+									<div className="text-gray-700 font-medium text-sm">{dateFormat(createdAt, 'HH:MM tt, dS mmmm yy')}</div>
 								</div>
+
 								<div
 									className={`text-center ${
 										allowPublishing ? 'text-green-700 bg-green-300' : 'text-red-700 bg-red-300'
-									} tracking-wide uppercase font-medium text-sm`}
+									} tracking-wide uppercase font-medium text-xs py-1 rounded-lg w-full `}
 								>
 									{allowPublishing ? 'publishing allowed' : 'publishing forbidden'}
 								</div>
+
 								<div
 									className={`text-center ${
 										aiSuggestions ? 'text-green-700 bg-green-300' : 'text-gray-700 bg-gray-300'
-									} tracking-wide uppercase font-medium text-sm`}
+									} tracking-wide uppercase font-medium text-xs py-1 rounded-lg w-full`}
 								>
 									{aiSuggestions ? 'AI enabled' : 'AI disabled'}
 								</div>
 							</div>
 						</div>
 
-						<div className="flex flex-col space-y-4">
+						<div className="flex flex-col space-y-10">
 							{questionResponses.map((response, index) => {
 								return (
 									<div key={index} className="flex flex-col space-y-2">
@@ -95,7 +97,7 @@ const ResponseDetailsCard = ({
 												</svg>;
 											})}
 										</div>
-										<p className="tracking-wide text-gray-800 break-words">{response.response}</p>
+										<p className="tracking-wide text-gray-700 break-words italic">{`"${response.response}"`}</p>
 										<div className="flex space-x-2 items-end">
 											{response.tags.map((tag, index) => (
 												<div key={index} className="bg-primary-500 uppercase text-white rounded-full px-2 py-1 text-xs  text-center ">
