@@ -111,7 +111,7 @@ export const getResponseStatistics = async (
 				Authorization: `Bearer ${bearerToken}`,
 			},
 		};
-		const response = await axios.get(`${backendUrl}/v1/statistics/reviews/${formId}?start=${startDate}&end=${endDate}`, config);
+		const response = await axios.get(`${backendUrl}/v1/statistics/responses/${formId}?start=${startDate}&end=${endDate}`, config);
 		return response.data.payload;
 	} catch (err) {
 		return err;
