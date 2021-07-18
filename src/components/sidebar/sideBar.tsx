@@ -37,7 +37,7 @@ const Sidebar: FC = (): ReactElement => {
 	}
 
 	return (
-		<nav id="sidebar" className="bg-gray-50 w-16 xl:w-32 flex-shrink-0 h-screen block ">
+		<nav id="sidebar" className="bg-white w-16 xl:w-32 flex-shrink-0 h-screen block ">
 			{/* Group 1 */}
 			{redirect && <Redirect to="/login" />}
 			<div className="space-y-6">

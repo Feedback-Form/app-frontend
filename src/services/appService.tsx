@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FormBody, FormBodyResponse } from '../interfaces/formBodyInterface';
 import { FormResponseBody, QuestionResponse, ResponseSuggestionRequest } from '../interfaces/responseBodyInterface';
 import { RatingResponseBody } from '../interfaces/responseInterface';
+import { ResponseStatisticsBody } from '../interfaces/responseStatisticsInterface';
+
 const backendUrl = 'http://localhost:5000';
 
 export const postForm = async (bearerToken: string, requestBody: FormBody): Promise<any> => {
@@ -92,6 +94,25 @@ export const getFormResponses = async (bearerToken: string, formId: string): Pro
 		};
 		const response = await axios.get(`${backendUrl}/v1/responses/${formId}`, config);
 		return response.data.payload.responses;
+	} catch (err) {
+		return err;
+	}
+};
+
+export const getResponseStatistics = async (
+	bearerToken: string,
+	formId: string,
+	startDate: string,
+	endDate: string,
+): Promise<ResponseStatisticsBody> => {
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${bearerToken}`,
+			},
+		};
+		const response = await axios.get(`${backendUrl}/v1/statistics/reviews/${formId}?start=${startDate}&end=${endDate}`, config);
+		return response.data.payload;
 	} catch (err) {
 		return err;
 	}

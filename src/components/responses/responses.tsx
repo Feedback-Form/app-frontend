@@ -111,7 +111,7 @@ const Responses: FC = (): ReactElement => {
 				/>
 			)}
 			{isLoading && <LoadingWidget />}
-			<section className="w-full flex flex-col items-center justify-center  bg-white text-gray-900">
+			<section className="w-full flex flex-col items-center justify-center  bg-gray-50 text-gray-900">
 				<div className="flex w-3/4 justify-end">
 					<form className="flex items-center justify-end">
 						<select

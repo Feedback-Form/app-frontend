@@ -66,7 +66,7 @@ const Forms: FC = (): ReactElement => {
 				/>
 			)}
 
-			<section className="w-full flex flex-col items-center justify-center bg-white text-gray-900">
+			<section className="w-full flex flex-col items-center justify-center bg-gray-50 text-gray-900">
 				{isLoadingTwo && <LoadingWidget />}
 
 				{isLoading ? (
@@ -129,7 +129,7 @@ const Forms: FC = (): ReactElement => {
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
-														className={`$ h-5 w-5 cursor-pointer hover:text-gray-500 ease-in-out transition-all duration-100 hover:scale-110 transform `}
+														className={`h-5 w-5 cursor-pointer hover:text-gray-500 ease-in-out transition-all duration-100 hover:scale-110 transform`}
 														fill="none"
 														viewBox="0 0 24 24"
 														stroke="currentColor"
