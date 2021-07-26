@@ -1,5 +1,5 @@
 import React, { ReactElement, FC, useState, useEffect } from 'react';
-import copykatLogoLong from '../images/copykat_logo_long.svg';
+// import copykatLogoLong from '../images/copykat_logo_long.svg';
 import axios from 'axios';
 import { Redirect, useHistory } from 'react-router-dom';
 //hooks
@@ -38,7 +38,7 @@ const PasswordForgotPage: FC = (): ReactElement => {
 			{isLoading && <LoadingWidget />}
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
-				<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
+				{/* <img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" /> */}
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">

@@ -22,13 +22,13 @@ import { UserContext } from '../hooks/contexts/userContext';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 //interfaces
-import { UserResponseObject } from './interfaces/userObjectResponseInterface';
-import { UserObjectInterface } from './interfaces/userObject';
+import { UserObjectInterface } from '../interfaces/userObjectInterface';
+
+import { getUserInfo } from '../services/userService';
 
 const Routes: FC = (): ReactElement => {
 	const location = useLocation();
 	const [pathname, setPathname] = useState(location.pathname);
-	const [userPlan, setUserPlan] = useState('');
 	const [token, setToken] = useLocalStorage('authToken', '');
 	const [jwtReceived, setJwtReceived] = useState(false);
 	const [redirect, setRedirect] = useState(false);
@@ -37,21 +37,21 @@ const Routes: FC = (): ReactElement => {
 
 	//PROD
 	const [userObject, setUserObject] = useState<UserObjectInterface>({
-		productId: '',
-		stripeCustomerId: '',
-		maxMonthlySessionCount: 0,
-		userIsTrial: true,
-		subscriptionStatus: '',
-		currentPeriodEnd: 4110026795,
-		maxTrialSessionCount: 50,
+		firstName: '',
+		lastName: '',
+		company: '',
+		email: '',
+		productServiceDescription: '',
+		userIsVerified: false,
+		_id: '',
 	});
 
 	const [endedTrialRedirect, setEndredTrialRedirect] = useState(false);
 	const [endedSubscriptionRedirect, setEndedSubscriptionRedirect] = useState(false);
 
 	useEffect(() => {
-		setIsAuthenticating(false);
-		return;
+		// setIsAuthenticating(false);
+		// return;
 		//if one of the paths below, not AUTH is required.
 		const shortPath = /[^*][^/]*/.exec(pathname)!;
 
@@ -61,9 +61,12 @@ const Routes: FC = (): ReactElement => {
 			shortPath[0] !== '/success' &&
 			shortPath[0] !== '/cancelled' &&
 			shortPath[0] !== '/signup' &&
-			shortPath[0] !== '/password'
+			shortPath[0] !== '/password' &&
+			shortPath[0] !== '/rate'
+
 			// shortPath[0] !== '/user'
 		) {
+			console.log(token);
 			if (token === '' || token === undefined || token === null) {
 				//activate redirect if authentication failes and user was in one of the following routes
 				// /summarize, /documents & /document/:id
@@ -71,54 +74,27 @@ const Routes: FC = (): ReactElement => {
 			} else {
 				setIsAuthenticating(true);
 
-				const config = {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				};
-
-				axios
-					.get<UserResponseObject>(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/info`, config)
-					.then(res => {
-						const { currentSessionCount } = res.data.user.usage.sessions;
-						const { maxTrialSessionCount } = res.data.user.usage;
-						const { productId, subscriptionStatus, currentPeriodEnd } = res.data.user.billing.subscription;
-						const { stripeCustomerId, userIsTrial } = res.data.user.billing;
-
-						//timestamp related
-						const currentPeriodEndInSeconds = new Date(currentPeriodEnd * 1000);
-
-						const today = new Date();
+				(async () => {
+					try {
+						const response = await getUserInfo(token);
+						const { firstName, lastName, company, email, productServiceDescription, userIsVerified, _id } = response.user;
 
 						setUserObject({
-							productId,
-							stripeCustomerId,
-							userIsTrial,
-							subscriptionStatus,
-							currentPeriodEnd,
-							maxMonthlySessionCount: res.data.user.usage.sessions.maxMonthlySessionCount,
-							maxTrialSessionCount,
+							firstName,
+							lastName,
+							company,
+							email,
+							productServiceDescription,
+							userIsVerified,
+							_id,
 						});
-						setCurrentSessionCount(currentSessionCount);
-
-						//triggers if the user has used up all trial sessions
-						if (currentSessionCount >= maxTrialSessionCount && userIsTrial === true) {
-							setEndredTrialRedirect(true);
-						}
-
-						//if the user is on a paid plan && plan is expired
-						//redirect user to page, where he can navigate to customer portal
-						if (today > currentPeriodEndInSeconds && userIsTrial === false) {
-							setEndedSubscriptionRedirect(true);
-						}
-
 						setIsAuthenticating(false);
-					})
-					.catch((err: any) => {
+					} catch (err) {
 						//activate redirect if authentication failes and user was in one of the following routes
 						// /summarize, /documents & /document/:id
 						setRedirect(true);
-					});
+					}
+				})();
 			}
 		}
 	}, [jwtReceived, pathname]);
@@ -127,9 +103,7 @@ const Routes: FC = (): ReactElement => {
 		<Switch>
 			<UserContext.Provider
 				value={{
-					userPlan,
 					token,
-					setUserPlan,
 					setToken,
 					jwtReceived,
 					setJwtReceived,
@@ -137,8 +111,6 @@ const Routes: FC = (): ReactElement => {
 					setIsAuthenticating,
 					userObject,
 					setUserObject,
-					currentSessionCount,
-					setCurrentSessionCount,
 				}}
 			>
 				{redirect && <Redirect to="/login" />}
@@ -152,6 +124,7 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/rate/:formId" render={() => <RatingPage />} />
 				<Route exact path="/dashboard" render={() => <DashboardPage />} />
 				<Route exact path="/responses" render={() => <ResponsesPage />} />
+				<Route exact path="/profile" render={() => <ResponsesPage />} />
 
 				{/* <Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />

@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import dateFormat from 'dateformat';
-
+//hooks
+import { useUserData } from '../../hooks/contexts/userContext';
 //components
 import LoadingWidget from '../loadingWidget';
 import { Line } from 'react-chartjs-2';
@@ -13,9 +14,7 @@ import { ResponseStatisticsBody } from '../../interfaces/responseStatisticsInter
 
 const Dashboards = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYzNjM5ODYsImV4cCI6MTYyODk1NTk4Nn0.iq5uP8Q3l4u0JfDndAzVKXp_UCbxeUjen4blyh5rHe8',
-	);
+	const { token } = useUserData();
 	const [formId, setFormId] = useState('60f30144a02c029c5bb2bd0e');
 	const [startDate, setStartDate] = useState('10-07-2021');
 	const [endDate, setEndDate] = useState('18-07-2021');
@@ -47,7 +46,7 @@ const Dashboards = (): ReactElement => {
 	async function getResponseStatistics_(): Promise<void> {
 		try {
 			setIsLoading(true);
-			const response = await getResponseStatistics(authToken, formId, startDate, endDate);
+			const response = await getResponseStatistics(token, formId, startDate, endDate);
 			setRatingCountDaily({
 				labels: getLabels(response),
 				datasets: [

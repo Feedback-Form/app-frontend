@@ -5,6 +5,5 @@ export interface ResponseQuestionFieldProps {
 	questionId: string;
 	formId: string;
 	questionNumber: number;
-	authToken: string;
 	getQuestionValue: any;
 }

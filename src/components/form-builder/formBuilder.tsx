@@ -9,6 +9,7 @@ import Button from '../button/button';
 import LoadingWidget from '../loadingWidget';
 //hooks
 import { useCharacterState } from '../../hooks/hooks';
+import { useUserData } from '../../hooks/contexts/userContext';
 
 //helper functions
 import { postForm } from '../../services/appService';
@@ -33,9 +34,8 @@ const FormBuilder: FC = (): ReactElement => {
 			toggleFieldDescription: 'Enable personal response details',
 		},
 	]);
-	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYyOTQwNzAsImV4cCI6MTYyODg4NjA3MH0.SwfbjueUZ5cJZ2rMeT7v8x5h7JmRUb2q83nS7t4fyDk',
-	);
+
+	const { token } = useUserData();
 	const [deleteWidgetIsOpen, setDeleteWidgetIsOpen] = useState(false);
 	const history = useHistory();
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -114,7 +114,7 @@ const FormBuilder: FC = (): ReactElement => {
 					maxRating: 5,
 				});
 			});
-			const newForm = await postForm(authToken, {
+			const newForm = await postForm(token, {
 				formName: formTitle,
 				aiSuggestions,
 				allowPersonalDetails,

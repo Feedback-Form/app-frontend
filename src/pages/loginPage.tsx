@@ -1,5 +1,5 @@
 import React, { ReactElement, FC, useState, useEffect } from 'react';
-import copykatLogoLong from '../images/copykat_logo_long.svg';
+// import copykatLogoLong from '../images/copykat_logo_long.svg';
 import axios from 'axios';
 import { useHistory, NavLink } from 'react-router-dom';
 //hooks
@@ -22,18 +22,18 @@ const LoginPage: FC = (): ReactElement => {
 	function loginUser(email: string, password: string): void {
 		setIsLoading(true);
 		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/login`, {
+			.post(`${process.env.REACT_APP_BACKEND}/v1/user/login`, {
 				email,
 				password,
 			})
 			.then((res: any) => {
 				//saves the jwt token to the localstorage
 
-				setToken(res.data.token);
+				setToken(res.data.payload.token);
 
 				setJwtReceived(true);
 				setIsLoading(false);
-				history.push('/generate');
+				history.push('/forms');
 
 				//setRedirect(true);
 			})
@@ -57,7 +57,7 @@ const LoginPage: FC = (): ReactElement => {
 			{isLoading && <LoadingWidget />}
 			{/* {jwtReceived && <Redirect to="/summarize" />} */}
 			<div className="p-10 sm:p-0 mx-auto md:w-full md:max-w-md space-y-6 ">
-				<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
+				{/* <img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" /> */}
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
 					<div className="px-5 py-7">
@@ -69,7 +69,7 @@ const LoginPage: FC = (): ReactElement => {
 									handleEmailChange(e);
 								}}
 								type="text"
-								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
+								className="border rounded-lg px-3 py-3 mt-1 mb-5 text-base w-full focus:ring-2 ring-primary-700 focus:outline-none duration-200 ease-in-out transition-all"
 							/>
 							<label className="text-base tracking-wide font-medium text-gray-600 pb-1 block">Password</label>
 							<span className="relative inline-flex w-full">
@@ -79,7 +79,7 @@ const LoginPage: FC = (): ReactElement => {
 										handlePasswordChange(e);
 									}}
 									type={showPassword ? 'text' : 'password'}
-									className="inline-flex border rounded-lg px-3 py-3 text-base w-full focus:ring-2 ring-teal-700 focus:outline-none duration-200 ease-in-out transition-all"
+									className="inline-flex border rounded-lg px-3 py-3 text-base w-full focus:ring-2 ring-primary-700 focus:outline-none duration-200 ease-in-out transition-all"
 								/>
 								<span
 									onClick={() => {
@@ -117,7 +117,7 @@ const LoginPage: FC = (): ReactElement => {
 								}}
 								type="button"
 								disabled={isLoading}
-								className="transition-all duration-200 bg-teal-700 hover:bg-teal-600 focus:bg-teal-600  focus:outline-none  text-white w-full py-3
+								className="transition-all duration-200 bg-primary-700 hover:bg-primary-600 focus:bg-primary-600  focus:outline-none  text-white w-full py-3
 								 rounded-lg text-base tracking-wide shadow-sm
 								  hover:shadow-md font-medium text-center inline-block disabled:opacity-50 mt-8 mb-4"
 							>
@@ -190,7 +190,7 @@ const LoginPage: FC = (): ReactElement => {
 									<p>Need help?</p>
 									Reach out to
 									<a
-										className="text-teal-700 hover:text-teal-600 ease-in-out duration-200 transition-all pl-1 "
+										className="text-primary-700 hover:text-primary-600 ease-in-out duration-200 transition-all pl-1 "
 										href={`mailto:${process.env.REACT_APP_MAILTO}`}
 									>
 										{process.env.REACT_APP_MAILTO}

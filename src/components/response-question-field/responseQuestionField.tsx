@@ -13,7 +13,6 @@ const ResponseQuestionField = ({
 	questionId,
 	formId,
 	questionNumber,
-	authToken,
 	getQuestionValue,
 }: ResponseQuestionFieldProps): // { question, maxRating }: ResponseSuggestionRequest,
 

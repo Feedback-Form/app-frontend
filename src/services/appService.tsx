@@ -5,8 +5,6 @@ import { FormResponseBody, QuestionResponse, ResponseSuggestionRequest } from '.
 import { RatingResponseBody } from '../interfaces/responseInterface';
 import { ResponseStatisticsBody } from '../interfaces/responseStatisticsInterface';
 
-const backendUrl = 'http://localhost:5000';
-
 export const postForm = async (bearerToken: string, requestBody: FormBody): Promise<any> => {
 	try {
 		const config = {
@@ -15,7 +13,7 @@ export const postForm = async (bearerToken: string, requestBody: FormBody): Prom
 			},
 		};
 
-		const response = await axios.post(`${backendUrl}/v1/form`, requestBody, config);
+		const response = await axios.post(`${process.env.REACT_APP_BACKEND}/v1/form`, requestBody, config);
 		return response.data.payload;
 	} catch (err) {
 		return err;
@@ -30,7 +28,7 @@ export const getForms = async (bearerToken: string): Promise<FormBodyResponse[]>
 			},
 		};
 
-		const response = await axios.get(`${backendUrl}/v1/forms`, config);
+		const response = await axios.get(`${process.env.REACT_APP_BACKEND}/v1/forms`, config);
 		return response.data.payload.forms;
 	} catch (err) {
 		return err;
@@ -45,22 +43,16 @@ export const deleteForm = async (bearerToken: string, formId: string): Promise<a
 			},
 		};
 
-		const response = await axios.delete(`${backendUrl}/v1/form/${formId}`, config);
+		const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/v1/form/${formId}`, config);
 		return response.data.payload;
 	} catch (err) {
 		return err;
 	}
 };
 
-export const getFormById = async (bearerToken: string, formId: string): Promise<FormBodyResponse> => {
+export const getFormById = async (formId: string): Promise<FormBodyResponse> => {
 	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${bearerToken}`,
-			},
-		};
-
-		const response = await axios.get(`${backendUrl}/v1/form/${formId}`, config);
+		const response = await axios.get(`${process.env.REACT_APP_BACKEND}/v1/form/${formId}`);
 		return response.data.payload.form;
 	} catch (err) {
 		return err;
@@ -69,7 +61,7 @@ export const getFormById = async (bearerToken: string, formId: string): Promise<
 
 export const rateForm = async (formId: string, requestBody: FormResponseBody): Promise<any> => {
 	try {
-		const response = await axios.post(`${backendUrl}/v1/response/${formId}`, requestBody);
+		const response = await axios.post(`${process.env.REACT_APP_BACKEND}/v1/response/${formId}`, requestBody);
 		return response.data.payload;
 	} catch (err) {
 		return err;
@@ -78,7 +70,7 @@ export const rateForm = async (formId: string, requestBody: FormResponseBody): P
 
 export const getResponseSuggestion = async (formId: string, requestBody: ResponseSuggestionRequest): Promise<any> => {
 	try {
-		const response = await axios.post(`${backendUrl}/v1/response/suggestion/${formId}`, requestBody);
+		const response = await axios.post(`${process.env.REACT_APP_BACKEND}/v1/response/suggestion/${formId}`, requestBody);
 		return response.data.payload;
 	} catch (err) {
 		return err;
@@ -92,7 +84,7 @@ export const getFormResponses = async (bearerToken: string, formId: string): Pro
 				Authorization: `Bearer ${bearerToken}`,
 			},
 		};
-		const response = await axios.get(`${backendUrl}/v1/responses/${formId}`, config);
+		const response = await axios.get(`${process.env.REACT_APP_BACKEND}/v1/responses/${formId}`, config);
 		return response.data.payload.responses;
 	} catch (err) {
 		return err;
@@ -111,7 +103,10 @@ export const getResponseStatistics = async (
 				Authorization: `Bearer ${bearerToken}`,
 			},
 		};
-		const response = await axios.get(`${backendUrl}/v1/statistics/responses/${formId}?start=${startDate}&end=${endDate}`, config);
+		const response = await axios.get(
+			`${process.env.REACT_APP_BACKEND}/v1/statistics/responses/${formId}?start=${startDate}&end=${endDate}`,
+			config,
+		);
 		return response.data.payload;
 	} catch (err) {
 		return err;

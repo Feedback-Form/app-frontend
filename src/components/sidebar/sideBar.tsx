@@ -1,8 +1,5 @@
 import React, { ReactElement, FC, useState } from 'react';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
-import copykatLogoLong from '../../images/copykat_logo_long.svg';
-import copykatLogoShort from '../../images/copykat_logo_short.svg';
-import axios from 'axios';
 
 //hooks
 import { useUserData } from '../../hooks/contexts/userContext';
@@ -20,29 +17,16 @@ const Sidebar: FC = (): ReactElement => {
 	const location = useLocation();
 	const [pathname, setPathname] = useState(location.pathname);
 
-	function logOutUser(): void {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		axios
-			.post(`${process.env.REACT_APP_SCRPTAI_BACKEND}/user/logout`, {}, config)
-			.then((res: any) => {
-				//clear localStorage
-				localStorage.clear();
-				setRedirect(true);
-			})
-			.catch();
-	}
-
 	return (
-		<nav id="sidebar" className="bg-white w-16 xl:w-32 flex-shrink-0 h-screen block ">
+		<nav id="sidebar" className="bg-white w-16 xl:w-28 flex-shrink-0 h-screen block">
 			{/* Group 1 */}
 			{redirect && <Redirect to="/login" />}
+			<div className="w-full flex justify-center bg-yellow-200 text-yellow-800 rounded-b-sm py-2 uppercase text-xs text-center">
+				alpha version
+			</div>
 			<div className="space-y-6">
 				<div className="pt-10 pb-20 w-full flex justify-center">
-					<img className="w-9 visible " src={copykatLogoShort} alt="logo" />
+					{/* <img className="w-9 visible " src={copykatLogoShort} alt="logo" /> */}
 				</div>
 
 				<div className="flex justify-center w-full  ">
@@ -120,6 +104,32 @@ const Sidebar: FC = (): ReactElement => {
 								/>
 							</svg>
 							<h1 className="invisible xl:visible font-medium text-sm tracking-wide pt-2">Dashboard</h1>
+						</li>
+					</NavLink>
+				</div>
+				<div className="flex justify-center w-full  ">
+					<NavLink exact to="/profile">
+						<li
+							className={`${
+								pathname === '/profile' ? 'text-primary-700 hover:text-primary-500 ' : ' hover:text-primary-500'
+							} text-gray-500 list-none items-center  flex flex-col justify-items-center
+                			transition-all duration-200 ease-in-out xl:py-2 cursor-pointer rounded-md`}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="w-6 h-6 xl:w-7 xl:h-7 stroke-current stroke-2 "
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+							<h1 className="invisible xl:visible font-medium text-sm tracking-wide pt-2">Profile</h1>
 						</li>
 					</NavLink>
 				</div>

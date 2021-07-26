@@ -1,5 +1,5 @@
 import React, { ReactElement, FC, useState } from 'react';
-import copykatLogoLong from '../images/copykat_logo_long.svg';
+
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ const PasswordChangePage: FC = (): ReactElement => {
 
 			<div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md space-y-6">
 				<div className="flex justify-center w-full">
-					<img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" />
+					{/* <img className="w-48 mx-auto" src={copykatLogoLong} alt="copykat_ai_logo" /> */}
 				</div>
 
 				<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">

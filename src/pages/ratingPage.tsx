@@ -21,9 +21,7 @@ const RatingPage: FC = (): ReactElement => {
 	const [isRequestLoading, setIsRequestLoading] = useState(false);
 	const [form, setForm] = useState<FormBodyResponse>();
 	const { formId } = useParams<{ formId: string }>();
-	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYyOTQwNzAsImV4cCI6MTYyODg4NjA3MH0.SwfbjueUZ5cJZ2rMeT7v8x5h7JmRUb2q83nS7t4fyDk',
-	);
+
 	const [responses, setResponses] = useState<QuestionResponse[]>([]);
 	const [timeToFinishForm, setTimeToFinishForm] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -56,7 +54,7 @@ const RatingPage: FC = (): ReactElement => {
 
 	async function getFormById_(): Promise<void> {
 		try {
-			const response = await getFormById(authToken, formId);
+			const response = await getFormById(formId);
 			setForm(response);
 			document.title = `rate ${response.formName}` || '';
 			setTimeToFinishForm(estimateTimeToFinish(response.questions, response.allowPersonalDetails));
@@ -226,7 +224,6 @@ const RatingPage: FC = (): ReactElement => {
 												aiSuggestions={form?.aiSuggestions || false}
 												questionId={item._id}
 												questionNumber={index + 1}
-												authToken={authToken}
 												formId={formId}
 												getQuestionValue={getQuestionValue}
 											/>
@@ -249,7 +246,13 @@ const RatingPage: FC = (): ReactElement => {
 									</div>
 								</>
 							)}
-							<Button label={getButtonLabel()} isDisabled={buttonIsDisabled} clickHandlerFunction={() => formButtonClickHandler()} />
+							<Button
+								label={getButtonLabel()}
+								isDisabled={buttonIsDisabled}
+								clickHandlerFunction={() => {
+									formButtonClickHandler();
+								}}
+							/>
 							{responseType !== '' && (
 								<div className={`pt-4 ${responseType === 'success' ? 'text-green-500' : 'text-red-500'} font-medium`}>{responseString}</div>
 							)}

@@ -8,7 +8,7 @@ import AuthenticationWidget from '../components/authenticationWidget';
 import { useUserData } from '../hooks/contexts/userContext';
 
 const DashboardPage: FC = (): ReactElement => {
-	const { isAuthenticating, userObject } = useUserData();
+	const { isAuthenticating } = useUserData();
 
 	return (
 		<>

@@ -24,9 +24,7 @@ const Forms: FC = (): ReactElement => {
 	const [deleteWidgetIsOpen, setDeleteWidgetIsOpen] = useState(false);
 
 	const { token } = useUserData();
-	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYzNjM5ODYsImV4cCI6MTYyODk1NTk4Nn0.iq5uP8Q3l4u0JfDndAzVKXp_UCbxeUjen4blyh5rHe8',
-	);
+
 	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formId, setFormId] = useState('');
 	const [formName, setFormName] = useState('');
@@ -34,7 +32,7 @@ const Forms: FC = (): ReactElement => {
 
 	async function getForms_(): Promise<void> {
 		try {
-			const forms: FormBodyResponse[] = await getForms(authToken);
+			const forms: FormBodyResponse[] = await getForms(token);
 			setForms(forms);
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -48,7 +46,7 @@ const Forms: FC = (): ReactElement => {
 
 	async function deleteForm_(): Promise<void> {
 		try {
-			await deleteForm(authToken, formId);
+			await deleteForm(token, formId);
 			setDeleteWidgetIsOpen(false);
 		} catch (err) {
 			// eslint-disable-next-line no-console

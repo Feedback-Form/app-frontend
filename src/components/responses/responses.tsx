@@ -15,9 +15,8 @@ import { FormBodyResponse } from '../../interfaces/formBodyInterface';
 import { RatingResponseBody, QuestionResponse, PersonalDetails } from '../../interfaces/responseInterface';
 
 const Responses: FC = (): ReactElement => {
-	const [authToken, setAuthToken] = useState(
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU5ZDVhN2Q1OGFmYjE0MWU0NTY4M2EiLCJpYXQiOjE2MjYzNjM5ODYsImV4cCI6MTYyODk1NTk4Nn0.iq5uP8Q3l4u0JfDndAzVKXp_UCbxeUjen4blyh5rHe8',
-	);
+	const { token } = useUserData();
+
 	const [forms, setForms] = useState<FormBodyResponse[]>([]);
 	const [formResponses, setResponses] = useState<RatingResponseBody[]>([]);
 	const [currentFormId, setCurrentFormId] = useState('');
@@ -44,7 +43,7 @@ const Responses: FC = (): ReactElement => {
 		try {
 			setIsLoading(true);
 			//get all forms
-			const forms_ = await getForms(authToken);
+			const forms_ = await getForms(token);
 			setIsLoading(false);
 			setForms(forms_);
 			setCurrentFormId(forms_[0]._id);
@@ -57,7 +56,7 @@ const Responses: FC = (): ReactElement => {
 		try {
 			setIsLoading(true);
 			//get all responses from a form
-			const responses = await getFormResponses(authToken, currentFormId);
+			const responses = await getFormResponses(token, currentFormId);
 			setIsLoading(false);
 			//save all responses from all forms in array
 			setResponses(responses);
