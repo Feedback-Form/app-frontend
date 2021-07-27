@@ -3,8 +3,6 @@ import React, { FC, ReactElement, useState, useEffect, useRef } from 'react';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 import { usePercentageState } from '../hooks/hooks';
-//modules
-import { checkoutHandler } from '../modules/checkoutHandler';
 
 const UserSessionBar: FC = (): ReactElement => {
 	//userContext
@@ -41,9 +39,6 @@ const UserSessionBar: FC = (): ReactElement => {
 					</div>
 
 					<button
-						onClick={() => {
-							checkoutHandler(token);
-						}}
 						className="flex justify-center bg-yellow-400 hover:bg-yellow-300 focus:outline-none text-white rounded-lg
 					 py-2 font-medium tracking-wide text-sm transition-all ease-in-out duration-200 w-32"
 					>

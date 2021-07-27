@@ -4,13 +4,6 @@ import { NavLink, Redirect, useLocation } from 'react-router-dom';
 //hooks
 import { useUserData } from '../../hooks/contexts/userContext';
 
-//modules
-import { customerPortalHandler } from '../../modules/customerPortalHandler';
-declare class Stripe {
-	constructor(publicKey: string);
-	redirectToCheckout({ sessionId }: { sessionId: string }): Promise<{ error: Error }>;
-}
-
 const Sidebar: FC = (): ReactElement => {
 	const [redirect, setRedirect] = useState(false);
 	const { token, userObject } = useUserData();

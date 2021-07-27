@@ -3,8 +3,6 @@ import React, { FC, ReactElement, useState, useEffect } from 'react';
 //hooks
 import { useUserData } from '../hooks/contexts/userContext';
 
-import { customerPortalHandler } from '../modules/customerPortalHandler';
-
 const RenewSubscriptionPage: FC = (): ReactElement => {
 	const { token, userObject } = useUserData();
 
@@ -29,12 +27,7 @@ const RenewSubscriptionPage: FC = (): ReactElement => {
 						</a>
 					</p>
 				</div>
-				<button
-					onClick={() => {
-						customerPortalHandler(token, userObject.stripeCustomerId);
-					}}
-					className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50"
-				>
+				<button className="bg-teal-700 hover:bg-teal-600 focus:bg-teal-600 focus:outline-none text-white rounded-lg px-16 py-2 font-medium tracking-wide text-lg transition-all ease-in-out duration-200 disabled:opacity-50">
 					Update your payment information now.
 				</button>
 			</div>

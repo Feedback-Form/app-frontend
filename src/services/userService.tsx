@@ -16,6 +16,7 @@ export const getUserInfo = async (bearerToken: string): Promise<UserResponseObje
 		return err;
 	}
 };
+// eslint-disable-next-line
 export const editUser = async (bearerToken: string, requestBody: any): Promise<any> => {
 	try {
 		const config = {
