@@ -56,7 +56,7 @@ const RatingPage: FC = (): ReactElement => {
 		try {
 			const response = await getFormById(formId);
 			setForm(response);
-			document.title = `rate ${response.formName}` || '';
+			document.title = `${response.formName !== undefined ? `rate ${response.formName}` : 'no form'}`;
 			setTimeToFinishForm(estimateTimeToFinish(response.questions, response.allowPersonalDetails));
 			setResponses(createQuestionResponsesArray(response.questions));
 			setIsLoading(false);
@@ -144,17 +144,17 @@ const RatingPage: FC = (): ReactElement => {
 			});
 			setResponseString(`You've successfully submitted your feedback!`);
 			setResponseType('success');
+			setIsRequestLoading(false);
 			setTimeout(() => {
 				setResponseType('');
 			}, 5000);
-			setIsRequestLoading(false);
 		} catch (err) {
 			setResponseString(`Oops, something went wrong. Please try again.`);
 			setResponseType('error');
+			setIsRequestLoading(false);
 			setTimeout(() => {
 				setResponseType('');
 			}, 5000);
-			setIsRequestLoading(false);
 		}
 	}
 
@@ -259,7 +259,13 @@ const RatingPage: FC = (): ReactElement => {
 						</main>
 					</>
 				)}
-				{isError && <div>error</div>}
+				{isError && (
+					<div className="flex flex-col justify-center min-h-screen">
+						<div className="bg-yellow-300 text-yellow-600 text-lg font-medium py-2 px-3 rounded-lg">
+							Oops, there doesn&apos;t seem to be a form.
+						</div>
+					</div>
+				)}
 			</section>
 		</>
 	);

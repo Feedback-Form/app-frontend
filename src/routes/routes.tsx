@@ -11,6 +11,7 @@ import FormBuilderPage from '../pages/formbuilderPage';
 import RatingPage from '../pages/ratingPage';
 import ResponsesPage from '../pages/responsesPage';
 import DashboardPage from '../pages/dashboardPage';
+import ProfilePage from '../pages/profilePage';
 // import TrialEndedPage from '../pages/trialEndedPage';
 // import SignUpPage from '../pages/signUpPage';
 // import PasswordForgotPage from '../pages/passwordForgotPage';
@@ -124,7 +125,7 @@ const Routes: FC = (): ReactElement => {
 				<Route exact path="/rate/:formId" render={() => <RatingPage />} />
 				<Route exact path="/dashboard" render={() => <DashboardPage />} />
 				<Route exact path="/responses" render={() => <ResponsesPage />} />
-				<Route exact path="/profile" render={() => <ResponsesPage />} />
+				<Route exact path="/profile" render={() => <ProfilePage />} />
 
 				{/* <Route exact path="/trial/ended" render={() => <TrialEndedPage />} />
 				<Route exact path="/subscription/ended" render={() => <RenewSubscriptionPage />} />

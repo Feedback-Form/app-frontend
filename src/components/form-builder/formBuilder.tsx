@@ -114,7 +114,7 @@ const FormBuilder: FC = (): ReactElement => {
 					maxRating: 5,
 				});
 			});
-			const newForm = await postForm(token, {
+			await postForm(token, {
 				formName: formTitle,
 				aiSuggestions,
 				allowPersonalDetails,

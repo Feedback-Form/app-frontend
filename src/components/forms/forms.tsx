@@ -72,7 +72,7 @@ const Forms: FC = (): ReactElement => {
 				) : (
 					<>
 						<div className="flex flex-col w-3/4 h-1/5 justify-center">
-							<h1 className="tracking-wide text-3xl text-gray-900 font-medium">Forms</h1>
+							<h1 className="tracking-wide text-2xl text-gray-900 font-medium">Forms</h1>
 						</div>
 						<section className="flex w-3/4 h-4/5 overflow-y-auto pb-10 ">
 							{/* <div className="h-1/2 flex gap-6 xs:grid grid-cols-4 flex-wrap"> */}
