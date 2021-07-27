@@ -90,7 +90,7 @@ ReactElement => {
 					handleWordChangeThree(e);
 					getQuestionValue(questionId, e.target.value, 'response');
 				}}
-				placeholder="Type your question here"
+				placeholder="Type your answer here"
 				disabled={isLoading}
 				className={`bg-white text-md h-64 text-gray-800 font-base tracking-wide ring-2 rounded-lg px-2 py-3 ring-gray-100 w-full
 focus:outline-none hover:ring-primary-400 focus:ring-primary-400 transition-all ease-in-out duration-100 resize-none 
