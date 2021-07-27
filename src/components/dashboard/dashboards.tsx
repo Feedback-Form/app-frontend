@@ -7,22 +7,37 @@ import LoadingWidget from '../loadingWidget';
 import { Line } from 'react-chartjs-2';
 
 //services
-import { getResponseStatistics } from '../../services/appService';
+import { getResponseStatistics, getForms } from '../../services/appService';
 
 //interfaces
 import { ResponseStatisticsBody } from '../../interfaces/responseStatisticsInterface';
+import { FormBodyResponse } from '../../interfaces/formBodyInterface';
 
 const Dashboards = (): ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { token } = useUserData();
-	const [formId, setFormId] = useState('60f30144a02c029c5bb2bd0e');
-	const [startDate, setStartDate] = useState('10-07-2021');
-	const [endDate, setEndDate] = useState('18-07-2021');
+	const [startDate, setStartDate] = useState('01-07-2021');
+	const [endDate, setEndDate] = useState('10-08-2021');
 	const [statistics, setStatistics] = useState<ResponseStatisticsBody>();
 	const [ratingCountDaily, setRatingCountDaily] = useState<any>();
 	const [ratingCountWeekly, setRatingCountWeekly] = useState<any>();
 	const [averageRatingDaily, setAverageRatingDaily] = useState<any>();
 	const [averageRatingWeekly, setAverageRatingWeekly] = useState<any>();
+	const [forms, setForms] = useState<FormBodyResponse[]>([]);
+	const [currentFormId, setCurrentFormId] = useState('');
+
+	async function getForms_(): Promise<void> {
+		try {
+			setIsLoading(true);
+			//get all forms
+			const forms_ = await getForms(token);
+			setForms(forms_);
+			setCurrentFormId(forms_[0]._id);
+			setIsLoading(false);
+		} catch (err) {
+			setIsLoading(false);
+		}
+	}
 
 	function getLabels(data: ResponseStatisticsBody): string[] {
 		return data.reviewsCount.ratingCountDaily.map(i => dateFormat(i.date, 'mmm dd'));
@@ -46,7 +61,7 @@ const Dashboards = (): ReactElement => {
 	async function getResponseStatistics_(): Promise<void> {
 		try {
 			setIsLoading(true);
-			const response = await getResponseStatistics(token, formId, startDate, endDate);
+			const response = await getResponseStatistics(token, currentFormId, startDate, endDate);
 			setRatingCountDaily({
 				labels: getLabels(response),
 				datasets: [
@@ -111,8 +126,14 @@ const Dashboards = (): ReactElement => {
 	}
 
 	useEffect(() => {
-		getResponseStatistics_();
-	}, [startDate, endDate]);
+		getForms_();
+	}, []);
+
+	useEffect(() => {
+		if (currentFormId !== '') {
+			getResponseStatistics_();
+		}
+	}, [currentFormId, startDate, endDate]);
 
 	const options = {
 		parsing: {
@@ -158,6 +179,38 @@ const Dashboards = (): ReactElement => {
 		<>
 			{isLoading && <LoadingWidget />}
 			<section className="w-full flex flex-col items-center justify-center  bg-gray-50 text-gray-900">
+				<div className="flex w-3/4 justify-end">
+					<form className="flex items-center justify-end">
+						<select
+							onChange={e => {
+								setCurrentFormId(e.target.value);
+							}}
+							className="appearance-none bg-transparent text-gray-500 text-lg focus:text-gray-900 transition-colors duration-100 pr-2 py-2 focus:outline-none  "
+						>
+							{forms.length > 0 ? (
+								<>
+									{forms.map((form, index) => (
+										<option key={index} value={form._id}>
+											{form.formName}
+										</option>
+									))}
+								</>
+							) : (
+								<option value={'no_forms_yet'}>no forms yet</option>
+							)}
+						</select>
+
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-6 w-6 text-gray-400  "
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+						</svg>
+					</form>
+				</div>
 				<div className="space-y-10 w-3/4">
 					<div className="flex  justify-center space-y-10 lg:space-y-0 lg:space-x-10 w-full flex-wrap lg:flex-nowrap">
 						<div className="flex flex-col space-y-4  bg-white p-4 rounded-lg ">

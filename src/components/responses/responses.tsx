@@ -44,9 +44,10 @@ const Responses: FC = (): ReactElement => {
 			setIsLoading(true);
 			//get all forms
 			const forms_ = await getForms(token);
-			setIsLoading(false);
+
 			setForms(forms_);
 			setCurrentFormId(forms_[0]._id);
+			setIsLoading(false);
 		} catch (err) {
 			setIsLoading(false);
 		}

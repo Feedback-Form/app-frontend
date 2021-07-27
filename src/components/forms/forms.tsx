@@ -108,7 +108,7 @@ const Forms: FC = (): ReactElement => {
 											className="bg-gray-50 rounded-md w-48 h-48 flex flex-col px-4 py-8 justify-between border-2 cursor-pointer hover:border-primary-500 ease-in transition-all duration-200"
 										>
 											<div>
-												<h1 className="font-semibold text-gray-800 tracking-wide text-base">{form.formName}1</h1>
+												<h1 className="font-semibold text-gray-800 tracking-wide text-base">{form.formName}</h1>
 												<h4 className="text-gray-500 text-sm pt-4">{dateFormat(form.createdAt, 'HH:MM tt, dS mmmm, yy')}</h4>
 											</div>
 

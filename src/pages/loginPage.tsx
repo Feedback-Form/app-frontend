@@ -140,7 +140,7 @@ const LoginPage: FC = (): ReactElement => {
 					</div>
 					<div className="py-5">
 						<div className="grid grid-cols-1 grid-rows-2 gap-6">
-							<div className="flex flex-col md:flex-row ">
+							{/* <div className="flex flex-col md:flex-row ">
 								<div className="text-center whitespace-nowrap">
 									<NavLink to="/password/reset/initiate">
 										<button className="transition-all duration-200 ease-in-out mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
@@ -183,7 +183,7 @@ const LoginPage: FC = (): ReactElement => {
 										</button>
 									</NavLink>
 								</div>
-							</div>
+							</div> */}
 
 							<div className="text-center  whitespace-nowrap">
 								<span className="inline-block ml-1 text-wrap text-sm text-gray-500">
