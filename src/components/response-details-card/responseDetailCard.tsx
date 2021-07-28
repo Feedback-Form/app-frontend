@@ -25,6 +25,7 @@ const ResponseDetailsCard = ({
 		}
 		return stars;
 	}
+
 	return (
 		<section className="absolute min-h-screen w-full ">
 			<div className="absolute w-full h-full z-50">
@@ -61,7 +62,7 @@ const ResponseDetailsCard = ({
 								<div
 									className={`text-center ${
 										allowPublishing ? 'text-green-700 bg-green-300' : 'text-red-700 bg-red-300'
-									} tracking-wide uppercase font-medium text-xs py-1 rounded-lg w-full `}
+									} tracking-wide uppercase font-medium text-xs py-1 px-2 rounded-lg w-full `}
 								>
 									{allowPublishing ? 'publishing allowed' : 'publishing forbidden'}
 								</div>
@@ -69,7 +70,7 @@ const ResponseDetailsCard = ({
 								<div
 									className={`text-center ${
 										aiSuggestions ? 'text-green-700 bg-green-300' : 'text-gray-700 bg-gray-300'
-									} tracking-wide uppercase font-medium text-xs py-1 rounded-lg w-full`}
+									} tracking-wide uppercase font-medium text-xs py-1 px-2 rounded-lg w-full`}
 								>
 									{aiSuggestions ? 'AI enabled' : 'AI disabled'}
 								</div>
@@ -85,16 +86,18 @@ const ResponseDetailsCard = ({
 										</h3>
 										<div className="flex space-x-1">
 											{maxStars(response.maxRating).map((star, index) => {
-												<svg
-													key={index}
-													xmlns="http://www.w3.org/2000/svg"
-													className={`flex w-7 h-7 transition-all
+												return (
+													<svg
+														key={index}
+														xmlns="http://www.w3.org/2000/svg"
+														className={`flex w-7 h-7 transition-all
 									${response.rating <= star ? 'text-gray-300' : 'text-gray-700'} `}
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-												</svg>;
+														viewBox="0 0 20 20"
+														fill="currentColor"
+													>
+														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+													</svg>
+												);
 											})}
 										</div>
 										<p className="tracking-wide text-gray-700 break-words italic">{`"${response.response}"`}</p>
